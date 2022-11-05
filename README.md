@@ -1,2 +1,8 @@
-# AppliedEconometricsMSU
- Course of Causal Inference at the Faculty of Economics of Lomonosov Moscow State University
+# Практическая эконометрика 
+## Applied Econometrics MSU: Course of Causal Inference at the Faculty of Economics of Lomonosov Moscow State University
+
+Привет! 
+
+Это страница с материалами курса, который я вела в бакалавриате экономического факультета МГУ в 2022-23 учебном году. На текущий момент страница находится в разработке. 
+
+В случае обнаружения неточностей, для дополнения информации или просто для того, чтобы поделиться идеями или задать вопрос, можно написать мне письмо на почту annastavnychuk@gmail.com или в телеграм t.me/AnnaStavniychuk Буду рада обратной связи! :)
