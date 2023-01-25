@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Прикладная эконометрика - 3&nbsp; Плохой контроль</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./prestratification.html" rel="next">
+<link href="./multiple_testing.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="site_libs/viz-1.8.2/viz.js"></script>
+<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<script src="site_libs/grViz-binding-1.0.9/grViz.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Плохой контроль</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Прикладная эконометрика</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/annastavniychuk" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="https://t.me/AnnaStavniychuk" title="" class="sidebar-tool px-1"><i class="bi bi-telegram"></i></a>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Предисловие</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./experiments.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Эксперименты</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple_testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Множественное тестирование гипотез</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bad_control.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Плохой контроль</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prestratification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./subclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./event_study.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Ссылки</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#устройство-данных.-плохой-контроль." id="toc-устройство-данных.-плохой-контроль." class="nav-link active" data-scroll-target="#устройство-данных.-плохой-контроль."><span class="toc-section-number">3.1</span>  Устройство данных. Плохой контроль.</a></li>
+  <li><a href="#пример-из-angrist-pischke-2009" id="toc-пример-из-angrist-pischke-2009" class="nav-link" data-scroll-target="#пример-из-angrist-pischke-2009"><span class="toc-section-number">3.2</span>  Пример из (Angrist, Pischke, 2009)</a>
+  <ul class="collapse">
+  <li><a href="#генерация-данных" id="toc-генерация-данных" class="nav-link" data-scroll-target="#генерация-данных"><span class="toc-section-number">3.2.1</span>  Генерация данных</a></li>
+  <li><a href="#оценка-эффекта" id="toc-оценка-эффекта" class="nav-link" data-scroll-target="#оценка-эффекта"><span class="toc-section-number">3.2.2</span>  Оценка эффекта</a></li>
+  <li><a href="#бонус" id="toc-бонус" class="nav-link" data-scroll-target="#бонус"><span class="toc-section-number">3.2.3</span>  Бонус</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Плохой контроль</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="устройство-данных.-плохой-контроль." class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="устройство-данных.-плохой-контроль."><span class="header-section-number">3.1</span> Устройство данных. Плохой контроль.</h2>
+<p><strong>Главная мысль семинара:</strong> контрольные переменные – это не всегда хорошо! Нужно выбирать их вдумчиво, а не закидывать в регрессию всё то, что удалось скачать.</p>
+<p>Существует 3 основных варианта устройства данных, когда мы хотим оценить эффект от воздействия <span class="math inline">\(T\)</span>:</p>
+<ol type="1">
+<li>Идеальный эксперимент</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-86d79e4be357c4d3c027" style="width:100%;height:145px;" class="grViz html-widget "></div>
+<script type="application/json" data-for="htmlwidget-86d79e4be357c4d3c027">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = LR]\n  \n  node [shape = circle]        \n  rec1 [label = \"T\"]\n  rec2 [label = \"X\"]\n  rec3 [label =  \"e\"]\n  rec4 [label =  \"Y\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec4 \n  rec2 -> rec4 \n  rec3 -> rec4 \n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Пропуск существенной переменной</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-7bf961a18ad25398348b" style="width:100%;height:145px;" class="grViz html-widget "></div>
+<script type="application/json" data-for="htmlwidget-7bf961a18ad25398348b">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = LR]\n  \n  node [shape = circle]        \n  rec1 [label = \"T\"]\n  rec2 [label = \"X\"]\n  rec3 [label =  \"e\"]\n  rec4 [label =  \"Y\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec4 \n  rec2 -> rec4 \n  rec3 -> rec4 \n  rec2 -> rec1\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Плохой контроль</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-d4301561e36201705522" style="width:100%;height:145px;" class="grViz html-widget "></div>
+<script type="application/json" data-for="htmlwidget-d4301561e36201705522">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = LR]\n  \n  node [shape = circle]        \n  rec1 [label = \"T\"]\n  rec2 [label = \"X\"]\n  rec3 [label =  \"e\"]\n  rec4 [label =  \"Y\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec4 \n  rec2 -> rec4 \n  rec3 -> rec4 \n  rec1 -> rec2\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="пример-из-angrist-pischke-2009" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="пример-из-angrist-pischke-2009"><span class="header-section-number">3.2</span> Пример из (Angrist, Pischke, 2009)</h2>
+<p>Дальше разберем проблему плохого контроля на <a href="http://economics.ozier.com/econ626/ps/econ626-ps2.pdf">примере</a> 3.2.3 из книги Энгриста и Пишке “Mostly harmless econometrics”. Тут я перевела условия заданий, оригинал задачки лежит на on.econ в разделе “Неделя 2” под названием “Ozier Bad control exercise”.</p>
+<p>Ниже общая схема задачи:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c35973322f5a2052ba5a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-c35973322f5a2052ba5a">{"x":{"diagram":"digraph {\n  graph [layout = dot, overlap = true]\n  \n  node [shape = box, fontname = Helvetica,  fontsize = 20]     \n  \n  rec1 [label = \"Система образования\"]\n  \n  rec2 [label = \"Сценарий 1. Помогать отстающим\"]\n  rec3 [label =  \"Природа\"]\n  rec4 [label =  \"epsilon_1 >0\"]\n  rec5 [label =  \"epsilon_1 <0\"]\n  rec6 [label =  \"w_o =1\"]\n  rec7 [label =  \"w_o =0\"]\n  \n  rec8 [label =  \"college=1\"]\n  rec9 [label =  \"ability>0\"]\n  rec10 [label =  \"w_1v_1=0\"]\n  rec11 [label =  \"wv_1=1\"]\n  rec12 [label =  \"ability<0\"]\n  rec13 [label =  \"w_1v_1=1\"]\n  rec14 [label =  \"wv_1=1\"]\n  rec15 [label =  \"college=0\"]\n  rec16 [label =  \"w_o =1\"]\n  rec17 [label =  \"wv_1 =1\"]\n  \n  rec18 [label =  \"college=1\"]\n  rec19 [label =  \"ability>0\"]\n  rec20 [label =  \"w_1v_1=0\"]\n  rec21 [label =  \"wv_1=0\"]\n  rec22 [label =  \"ability<0\"]\n  rec23 [label =  \"w_1v_1=1\"]\n  rec24 [label =  \"wv_1=1\"]\n  rec25 [label =  \"college=0\"]\n  rec26 [label =  \"w_o =1\"]\n  rec27 [label =  \"wv_1 =0\"]\n  \n  rec28 [label = \"Сценарий 2. Помогать умным\"]\n  rec29 [label =  \"Природа\"]\n  rec30 [label =  \"epsilon_1 >0\"]\n  rec31 [label =  \"epsilon_1 <0\"]\n  rec32 [label =  \"w_o =1\"]\n  rec33 [label =  \"w_o =0\"]\n  \n  rec34 [label =  \"college=1\"]\n  rec35 [label =  \"ability>0\"]\n  rec36 [label =  \"w_1v_2=1\"]\n  rec37 [label =  \"wv_1=1\"]\n  rec38 [label =  \"ability<0\"]\n  rec39 [label =  \"w_1v_2=0\"]\n  rec40 [label =  \"wv_2=1\"]\n  rec41 [label =  \"college=0\"]\n  rec42 [label =  \"w_o =1\"]\n  rec43 [label =  \"wv_2 =1\"]\n  \n  rec44 [label =  \"college=1\"]\n  rec45 [label =  \"ability>0\"]\n  rec46 [label =  \"w_1v_2=1\"]\n  rec47 [label =  \"wv_2=0\"]\n  rec48 [label =  \"ability<0\"]\n  rec49 [label =  \"w_1v_2=0\"]\n  rec50 [label =  \"wv_2=1\"]\n  rec51 [label =  \"college=0\"]\n  rec52 [label =  \"w_o =1\"]\n  rec53 [label =  \"wv_2 =0\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 \n  rec2 -> rec3 \n  rec3 -> rec4 \n  rec3 -> rec5 \n  rec4 -> rec6\n  rec5 -> rec7 \n  rec6 -> rec15\n  rec6 -> rec8\n  rec7 -> rec25\n  rec7 -> rec18 \n  rec8 -> rec9\n  rec9 -> rec10\n  rec10 -> rec11\n  rec8 -> rec12\n  rec12 -> rec13\n  rec13 -> rec14\n  rec15 -> rec16\n  rec16 -> rec17\n  rec18 -> rec19\n  rec18 -> rec22\n  rec19 -> rec20\n  rec20 -> rec21\n  rec22 -> rec23\n  rec23 -> rec24\n  rec25 -> rec26\n  rec26 -> rec27\n  rec1 -> rec28\n  rec28 -> rec29\n  rec29 -> rec30\n  rec29 -> rec31\n  rec30 -> rec32\n  rec31 -> rec33\n  rec32 -> rec34\n  rec32 -> rec41\n  rec33 -> rec44\n  rec33 -> rec51\n  rec34 -> rec35\n  rec34 -> rec38\n  rec35 -> rec36\n  rec36 -> rec37\n  rec38 -> rec39\n  rec39 -> rec40\n  rec41 -> rec42\n  rec42 -> rec43\n  rec44 -> rec45\n  rec45 -> rec46\n  rec46 -> rec47\n  rec44 -> rec48\n  rec48 -> rec49\n  rec49 -> rec50\n  rec51 -> rec52\n  rec52 -> rec53\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<section id="генерация-данных" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="генерация-данных"><span class="header-section-number">3.2.1</span> Генерация данных</h3>
+<p><strong>a)</strong> Сгенерируйте набор данных из 10 000 наблюдений. Обязательно установите начальное число, чтобы ваш код давал идентичные результаты при повтороном запуске. Все четыре перечисленные переменные не должны зависеть друг от друга.</p>
+<ul>
+<li>Сгенерируйте переменную способности равномерно распределенную между -1 и 1;</li>
+<li>Сгенерируйте индикаторную переменную колледжа, равную единице для случайной половины наблюдений;</li>
+<li>Сгенерируйте <span class="math inline">\(\varepsilon_1\)</span> и <span class="math inline">\(\varepsilon_2\)</span> так, чтобы каждая из них имела стандартное нормальное распределение.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ability <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">max=</span><span class="dv">1</span>) <span class="co"># способности людей</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>college <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,n<span class="sc">/</span><span class="dv">2</span>), <span class="fu">rep</span>(<span class="dv">1</span>,n<span class="sc">/</span><span class="dv">2</span>)) <span class="co"># факт обучения в колледже</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>epsilon1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,<span class="at">sd=</span><span class="dv">1</span>) <span class="co"># врожденная склонность быть белым воротничком</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>epsilon2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,<span class="at">sd=</span><span class="dv">1</span>) <span class="co"># случайный шок дохода</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">data.frame</span>(ability, college, epsilon1, epsilon2)) <span class="co"># все переменные получились независимыми</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               ability      college     epsilon1     epsilon2
+ability   1.0000000000 0.0003448777 -0.011632887 -0.011652074
+college   0.0003448777 1.0000000000  0.006161457  0.008334883
+epsilon1 -0.0116328869 0.0061614570  1.000000000  0.011595971
+epsilon2 -0.0116520742 0.0083348828  0.011595971  1.000000000</code></pre>
+</div>
+</div>
+<p><strong>b)</strong> Сгенерируйте <span class="math inline">\(w_0\)</span> – переменную, указывающую, будет ли кто-то белым воротничком независимо от факта обучения в колледже. Интерпретируйте <span class="math inline">\(\varepsilon_1\)</span> как склонность быть белым воротничком, тогда <span class="math inline">\(w_0\)</span> должен быть равен 1, когда <span class="math inline">\(\varepsilon_1\)</span> больше нуля, и должен быть равен нулю в противном случае.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>w0 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(epsilon1<span class="sc">&gt;</span><span class="dv">0</span>) <span class="co"># Индикатор белого воротничка</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>c)</strong> Затем сгенерируйте две версии переменной-индикатора быть белым воротничком при условии обучения в колледже для двух сценариев:</p>
+<ul>
+<li><strong>В первом сценарии</strong> колледж превращает всех работников с низкими способностями (<span class="math inline">\(ability&lt;0\)</span>) в белых воротничков, но это не влияет на работников с высокими способностями. Создайте индикатор <span class="math inline">\(w_1v_1\)</span> для этого сценария.</li>
+<li><strong>Во втором сценарии</strong> колледж приводит к тому, что все высококвалифицированные работники (<span class="math inline">\(ability \geq 0\)</span>) становятся белыми воротничками, но при этом не влияет на поведение работников с низкими способностями. Создайте индикатор <span class="math inline">\(w_1v_2\)</span> для этого второго сценария.</li>
+</ul>
+<p>Обратите внимание, что это всего лишь потенциальные исходы, поэтому они еще не зависят от того, действительно ли человек поступил в колледж, они просто зависят от <span class="math inline">\(ability\)</span> и <span class="math inline">\(w_0\)</span>.</p>
+<p><strong>Сценарий v1:</strong> система образования помогает отстающим.</p>
+<p>Колледж помогает отстающим устроиться на хорошую работу, а на умных никак не влияет:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>w1v1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ability<span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">|</span> w0<span class="sc">&gt;</span><span class="dv">0</span>) </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(w1v1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  1.0000  1.0000  0.7504  1.0000  1.0000 </code></pre>
+</div>
+</div>
+<p><strong>Сценарий v2:</strong> система образования помогает умным.</p>
+<p>Колледж помогает умным устроиться на хорошую работу, а на отстающих никак не влияет:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>w1v2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ability<span class="sc">&gt;=</span><span class="dv">0</span> <span class="sc">|</span> w0<span class="sc">&gt;</span><span class="dv">0</span>)  </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(w1v2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  0.0000  1.0000  0.7483  1.0000  1.0000 </code></pre>
+</div>
+</div>
+<p><strong>d)</strong> Затем сгенерируйте две версии фактического индикатора белого воротничка. Сгенерируйте <span class="math inline">\(wv_1\)</span> так, чтобы он был равен <span class="math inline">\(w_0\)</span> для тех, кто не учился в колледже, и <span class="math inline">\(w_1v_1\)</span> для тех, кто учился. Аналогичным образом сгенерируйте <span class="math inline">\(wv_2\)</span> так, чтобы он равнялся <span class="math inline">\(w_0\)</span> для тех, кто не учится в колледже, и <span class="math inline">\(w_1v_2\)</span> для тех, кто его посещает.</p>
+<p>Итого реализовавшееся устройство на работу:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>wv1<span class="ot">&lt;-</span>w0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>college)<span class="sc">+</span>w1v1<span class="sc">*</span>college</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>wv2<span class="ot">&lt;-</span>w0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>college)<span class="sc">+</span>w1v2<span class="sc">*</span>college</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>e)</strong> Затем сгенерируйте потенциальный исход для дохода, если человек не оканчивал колледж. Сгенерируйте <span class="math inline">\(y_0\)</span> так, чтобы он был равен утроенным способностям плюс шок дохода <span class="math inline">\(\varepsilon_2\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>y0 <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">*</span>ability <span class="sc">+</span> epsilon2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>f)</strong> Затем сгенерируйте потенциальный исход для дохода, если человек оканчивал колледж. Сгенерируйте <span class="math inline">\(y_1\)</span> так, чтобы он был равен <span class="math inline">\(y_0\)</span> плюс один <em>(то есть наш истинный эффект воздействия <span class="math inline">\(\tau = 1\)</span>)</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> y0 <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>g)</strong> Затем рассчитайте фактический доход. Сгенерируйте <span class="math inline">\(y\)</span> так, чтобы он был равен <span class="math inline">\(y_0\)</span>, когда <span class="math inline">\(сollege = 0\)</span>, и <span class="math inline">\(y_1\)</span>, когда <span class="math inline">\(сollege = 1\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>college) <span class="sc">+</span> y1<span class="sc">*</span>college</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="оценка-эффекта" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="оценка-эффекта"><span class="header-section-number">3.2.2</span> Оценка эффекта</h3>
+<p><strong>h)</strong> Мы готовы гонять регрессию! Оцените регрессию <span class="math inline">\(wv_1\)</span> на <span class="math inline">\(сollege\)</span>, коэффициент должен быть около 0,25. Почему?</p>
+<p>Оценка эффекта от колледжа на устройство на работу (<strong>сценарий v1:</strong>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wv1 <span class="sc">~</span> college)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = wv1 ~ college)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.7548 -0.4942  0.2452  0.2452  0.5058 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 0.494200   0.006596   74.92   &lt;2e-16 ***
+college     0.260600   0.009329   27.93   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4664 on 9998 degrees of freedom
+Multiple R-squared:  0.0724,    Adjusted R-squared:  0.07231 
+F-statistic: 780.4 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Мы получили в нашей регрессии 0.261, что с учетом доверительного интервала соответствует условию задачи.</p>
+<p>Эффект равен 0.25 потому, что в <em>первом</em> сценарии в колледж идет половина, из тех, кто идет, половина обладает <em>низкими</em> способностями (а в первом сценарии колледж помогает найти работу только им), итого эффект <span class="math inline">\(0.5\cdot 0.5=0.25\)</span>.</p>
+<p><strong>i)</strong> Затем оцените регрессию <span class="math inline">\(wv_2\)</span> на <span class="math inline">\(сollege\)</span>, коэффициент тоже должен быть около 0,25. Почему?</p>
+<p>Оценка эффекта от колледжа на устройство на работу (<strong>сценарий v2:</strong>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wv2 <span class="sc">~</span> college)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = wv2 ~ college)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.7484 -0.4942  0.2516  0.2516  0.5058 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 0.494200   0.006621   74.64   &lt;2e-16 ***
+college     0.254200   0.009363   27.15   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4682 on 9998 degrees of freedom
+Multiple R-squared:  0.06866,   Adjusted R-squared:  0.06857 
+F-statistic: 737.1 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Мы получили в нашей регрессии 0.254, что с учетом доверительного интервала соответствует условию задачи.</p>
+<p>Эффект равен 0.25 потому, что во <em>втором</em> сценарии в колледж идет половина, из тех, кто идет, половина обладает <em>высокими</em> способностями (а во втором сценарии колледж помогает найти работу только им), итого эффект <span class="math inline">\(0.5\cdot 0.5=0.25\)</span>.</p>
+<p><strong>j)</strong> Наконец, следуя примеру из «Mostly Harmless Econometrics», оцените регрессию <span class="math inline">\(y\)</span> на <span class="math inline">\(college\)</span>, но только на подвыборке, где <span class="math inline">\(wv_1 = 1\)</span>. Как предлагается в книге, это должна быть сумма причинного эффекта и смещения выборки.</p>
+<p>Оценка эффекта от коллежда на доход среди белых воротничков (<strong>cценарий v1:</strong>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y[wv1<span class="sc">==</span><span class="dv">1</span>] <span class="sc">~</span> college[wv1<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3) <span class="co"># 0.55 = ATE + selection bias</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y[wv1 == 1] ~ college[wv1 == 1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.8386 -1.4852 -0.1235  1.3864  6.1680 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       -0.05897    0.03913  -1.507    0.132    
+college[wv1 == 1]  0.54993    0.05034  10.925   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.945 on 6243 degrees of freedom
+Multiple R-squared:  0.01876,   Adjusted R-squared:  0.0186 
+F-statistic: 119.3 on 1 and 6243 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Мы помним, что истинный эффект колледжа равен 1, смещение возникает из-за дисбаланса системы образования – в первом сценарии колледж помог только отстающим.</p>
+<p>Вопросы, которые остаются вам на подумать и посчитать на дом:</p>
+<ul>
+<li>Каким должен быть ожидаемый причинный эффект? Почему?</li>
+<li>Чему должно равняться ожидаемое смещение выборки? Почему?</li>
+<li>Насколько близок ваш коэффициент к ожидаемому значению? Находится ли причинный эффект как сумма причинного эффекта и смещения выборки в пределах доверительного интервала для оцененного коэффициента?</li>
+</ul>
+<p><strong>k)</strong> Теперь оцените регрессию <span class="math inline">\(y\)</span> на <span class="math inline">\(college\)</span>, но только на выборке, где <span class="math inline">\(wv2 = 1\)</span>. Как предлагается в книге, это должна быть сумма причинно-следственного эффекта и смещения выборки. Как меняются результаты и почему?</p>
+<p>Оценка эффекта от коллежда на доход среди белых воротничков (<strong>cценарий v2:</strong>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>( y[wv2<span class="sc">==</span><span class="dv">1</span>] <span class="sc">~</span> college[wv2<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model4) <span class="co"># 1.51 = ATE + selection bias</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y[wv2 == 1] ~ college[wv2 == 1])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.8386 -1.4519  0.1057  1.4730  6.3340 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       -0.05897    0.03959  -1.489    0.136    
+college[wv2 == 1]  1.51320    0.05101  29.662   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.968 on 6211 degrees of freedom
+Multiple R-squared:  0.1241,    Adjusted R-squared:  0.1239 
+F-statistic: 879.8 on 1 and 6211 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Тут точно так же истинный эффект колледжа равен 1, а смещение возникает из-за тог, что колледж помог только умным.</p>
+<p><strong>l)</strong> Наконец, оцените регрессию <span class="math inline">\(y\)</span> на <span class="math inline">\(college\)</span>, не ограничивая выборку и не включая любой другой контроль. Какой коэффициент вы получаете и почему?</p>
+<p>Оценка эффекта от коллежда на доход без ограничения выборки по “плохой” контрольной переменной:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model5<span class="ot">&lt;-</span><span class="fu">lm</span>(y <span class="sc">~</span> college)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ college)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.8559 -1.5228 -0.0112  1.4784  6.8120 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.04168    0.02804  -1.487    0.137    
+college      1.01795    0.03965  25.673   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.982 on 9998 degrees of freedom
+Multiple R-squared:  0.06185,   Adjusted R-squared:  0.06175 
+F-statistic: 659.1 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Видим, что теперь мы получили практически истинный эффект (1.02) с поправкой на доверительный интрвал.</p>
+<p>Сравните эту схему с теми, что мы рассмотрели в начале семинара:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-a57878c70d73438f7127" style="width:100%;height:193px;" class="grViz html-widget "></div>
+<script type="application/json" data-for="htmlwidget-a57878c70d73438f7127">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = LR]\n  \n  node [shape = circle]        \n  rec1 [label = \"ability\"]\n  rec2 [label = \"wv_i\"]\n  rec3 [label =  \"e_1\"]\n  rec4 [label =  \"e_2\"]\n  rec5 [label =  \"college\"]\n  rec6 [label =  \"Y\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 \n  rec3 -> rec2\n  rec5 -> rec2\n  rec2 -> rec6\n  rec5 -> rec6\n  rec4 -> rec6\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>А теперь снова вернемся к главной мысли семинара. Контрольные переменные в случае оценки тритмент эффекта нужно выбирать очень аккуратно. Если в качестве контроля включить переменную, которая зависит от распределения в тритмент, то в конечном итоге мы получим смещенную оценку. Это тот случай, когда лучше ничего не делать, чем делать плохо.</p>
+</section>
+<section id="бонус" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="бонус"><span class="header-section-number">3.2.3</span> Бонус</h3>
+<p>Возможно эта картинка поможет вам ответить на вопрос с семинара.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(ability, college, epsilon1, epsilon2, y0, y1, w0, w1v1, wv1, w1v2, wv2, y)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>dummy <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">11</span>)])</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'ComplexUpset'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">upset</span>(df, dummy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="bad_control_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./multiple_testing.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Множественное тестирование гипотез</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./prestratification.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
