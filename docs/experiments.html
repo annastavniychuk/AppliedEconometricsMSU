@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Прикладная эконометрика - 1&nbsp; Эксперименты</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./multiple_testing.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Эксперименты</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Прикладная эконометрика</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="mailto:annastavnychuk@gmail.com" title="" class="sidebar-tool px-1"><i class="bi bi-at"></i></a>
+    <a href="https://github.com/annastavniychuk" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Предисловие</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./experiments.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Эксперименты</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple_testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Множественное тестирование гипотез</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bad_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Плохой контроль</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prestratification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./subclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./event_study.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Ссылки</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#короткое-напоминание-теории" id="toc-короткое-напоминание-теории" class="nav-link active" data-scroll-target="#короткое-напоминание-теории"><span class="toc-section-number">1.1</span>  Короткое напоминание теории</a>
+  <ul class="collapse">
+  <li><a href="#потенциальные-исходы" id="toc-потенциальные-исходы" class="nav-link" data-scroll-target="#потенциальные-исходы"><span class="toc-section-number">1.1.1</span>  Потенциальные исходы</a></li>
+  <li><a href="#средние-эффекты" id="toc-средние-эффекты" class="nav-link" data-scroll-target="#средние-эффекты"><span class="toc-section-number">1.1.2</span>  Средние эффекты</a></li>
+  <li><a href="#предпосылки" id="toc-предпосылки" class="nav-link" data-scroll-target="#предпосылки"><span class="toc-section-number">1.1.3</span>  Предпосылки</a></li>
+  </ul></li>
+  <li><a href="#работа-со-случайными-числами-в-r" id="toc-работа-со-случайными-числами-в-r" class="nav-link" data-scroll-target="#работа-со-случайными-числами-в-r"><span class="toc-section-number">1.2</span>  Работа со случайными числами в R</a></li>
+  <li><a href="#мини-симуляция" id="toc-мини-симуляция" class="nav-link" data-scroll-target="#мини-симуляция"><span class="toc-section-number">1.3</span>  Мини-симуляция</a>
+  <ul class="collapse">
+  <li><a href="#подготовка-данных" id="toc-подготовка-данных" class="nav-link" data-scroll-target="#подготовка-данных"><span class="toc-section-number">1.3.1</span>  Подготовка данных</a></li>
+  <li><a href="#рандомизация" id="toc-рандомизация" class="nav-link" data-scroll-target="#рандомизация"><span class="toc-section-number">1.3.2</span>  Рандомизация</a></li>
+  <li><a href="#реализация-исходов" id="toc-реализация-исходов" class="nav-link" data-scroll-target="#реализация-исходов"><span class="toc-section-number">1.3.3</span>  Реализация исходов</a></li>
+  <li><a href="#считаем-эффект" id="toc-считаем-эффект" class="nav-link" data-scroll-target="#считаем-эффект"><span class="toc-section-number">1.3.4</span>  Считаем эффект</a></li>
+  <li><a href="#баланс-ковариатов" id="toc-баланс-ковариатов" class="nav-link" data-scroll-target="#баланс-ковариатов"><span class="toc-section-number">1.3.5</span>  Баланс ковариатов</a></li>
+  </ul></li>
+  <li><a href="#про-важность-предпосылок-гаусса-маркова" id="toc-про-важность-предпосылок-гаусса-маркова" class="nav-link" data-scroll-target="#про-важность-предпосылок-гаусса-маркова"><span class="toc-section-number">1.4</span>  Про важность предпосылок Гаусса-Маркова</a>
+  <ul class="collapse">
+  <li><a href="#предпосылки-гаусса-маркова" id="toc-предпосылки-гаусса-маркова" class="nav-link" data-scroll-target="#предпосылки-гаусса-маркова"><span class="toc-section-number">1.4.1</span>  Предпосылки Гаусса-Маркова</a></li>
+  <li><a href="#пример" id="toc-пример" class="nav-link" data-scroll-target="#пример"><span class="toc-section-number">1.4.2</span>  Пример</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Эксперименты</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="короткое-напоминание-теории" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="короткое-напоминание-теории"><span class="header-section-number">1.1</span> Короткое напоминание теории</h2>
+<section id="потенциальные-исходы" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="потенциальные-исходы"><span class="header-section-number">1.1.1</span> Потенциальные исходы</h3>
+<p><strong>Обозначения:</strong></p>
+<ul>
+<li><p><span class="math inline">\(X_i\)</span> – независимые переменные (covariates)</p></li>
+<li><p><span class="math inline">\(T_i\)</span> – бинарная переменная воздействия (treatment variable): <span class="math display">\[\begin{equation*}
+T_i =
+\begin{cases}
+1, &amp;\text{воздействие на объект i оказано}\\
+0, &amp;\text{воздействие на объект i не оказано}
+\end{cases}
+\end{equation*}\]</span></p></li>
+<li><p><span class="math inline">\(Y_{i1}\)</span>, <span class="math inline">\(Y_{i0}\)</span> – потенциальные исходы (potential outcomes)</p></li>
+</ul>
+<p>Наблюдаемые исходы <span class="math inline">\(Y_i\)</span> отличаются от потенциальных исходов. Потенциальные исходы являются <em>гипотетическими</em> случайными величинами, когда наблюдаемые исходы являются <em>фактическими</em> случайными величинами. Наблюдаемые исходы являются функцией от потенциальных исходов:</p>
+<p><span class="math inline">\(Y_i = T_i \cdot Y_{i1} + (1-T_i) \cdot Y_{i0}\)</span></p>
+<p>Действительно при <span class="math inline">\(T=1\)</span> мы получим <span class="math inline">\(Y_i = Y_{i1}\)</span>, а при <span class="math inline">\(T=0\)</span> получим <span class="math inline">\(Y_i = Y_{i0}\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_1_experiments_plots/photo_2022-09-05 22.42.04.jpeg" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<p>Тогда наш эффект воздействия для конкретного наблюдения равен разнице между двумя состояниями мира для этого наблюдения (потенциальными исходами):</p>
+<p><span class="math inline">\(\tau_i = Y_{i1} - Y_{i0}\)</span></p>
+<p><strong>Фундаментальная проблема причинного вывода (Fundamental problem of causal inference):</strong></p>
+<p>Чтобы оценить эффект воздействия для конкретного индивида, мы должны знать потенциальные исходы сразу для двух его состояний мира, но реально мы наблюдаем только одно из них – либо <span class="math inline">\(Y_{i1}\)</span>, если индивид подвергся воздействию, либо <span class="math inline">\(Y_{i0}\)</span>, если он ему не подвергался. Оценка индивидуального эффекта требует доступа к данным, которых у нас физически не может быть.</p>
+</section>
+<section id="средние-эффекты" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="средние-эффекты"><span class="header-section-number">1.1.2</span> Средние эффекты</h3>
+<p>Если с распределением индивидуального эффекта воздействия (treatment effect) работать не получается, будем довольствоваться средними величинами. Например, попробуем рассчитать <strong>средний эффект воздействия</strong> (average treatment effect):</p>
+<p><span class="math inline">\(ATE = \mathbb{E}[\tau_i] = \mathbb{E}[Y_{i1} - Y_{i0}] = \mathbb{E}[Y_{i1}] - \mathbb{E}[Y_{i0}] \xrightarrow{p} \frac{1}{N_1}\sum \limits_{i=1}^{N_1}Y_{i1} - \frac{1}{N_0}\sum \limits_{i=1}^{N_0}Y_{i0}\)</span></p>
+<p>Следующий шаг, который мы предпримем, попробуем рассчиать величину эффекта только для тритмент группы – <strong>средний эффект воздействия на задействованных</strong> (average treatment effect for the treatment group):</p>
+<p><span class="math inline">\(ATT = \mathbb{E}[\tau_i|T_i=1] = \mathbb{E}[Y_{i1} - Y_{i0}|T_i=1] = \mathbb{E}[Y_{i1}|T_i=1] - \mathbb{E}[Y_{i0}|T_i=1]\)</span></p>
+<p>А теперь то же самое, но для контрольной группы – <strong>средний эффект воздействия на незадействованных</strong> (average treatment on the non-treated):</p>
+<p><span class="math inline">\(ATnT = \mathbb{E}[\tau_i|T_i=0] = \mathbb{E}[Y_{i1} - Y_{i0}|T_i=0] = \mathbb{E}[Y_{i1}|T_i=0] - \mathbb{E}[Y_{i0}|T_i=0]\)</span></p>
+<p>Обратите внимание, как и в случае с определением эффекта воздействия на индивидуальном уровне, различные модификации средних эффектов воздействия снова требуют от нас знания обоих потенциальных исходов для каждого наблюдения. Таким образом, и средние, и индивидуальный эффект воздействия нельзя напрямую рассчиать, но мы будем пробовать их оценить.</p>
+<p>Самая простая идея для оценки ATE, которая всем придет в голову, взять простую разницу в средних: <span class="math inline">\(\mathbb{E}[Y_1|T=1] - \mathbb{E}[Y_0|T=0]\)</span>.</p>
+<p>Но тут всё не так просто, после небольших преобразований, с которыми можно ознакомиться в <a href="https://mixtape.scunning.com/potential-outcomes.html?panelset=r-code&amp;panelset1=r-code2&amp;panelset2=r-code3&amp;panelset3=r-code4&amp;panelset4=r-code5&amp;panelset5=r-code6#simple-difference-in-means-decomposition">части 4.1.3 учебника</a> мы получим следующее:</p>
+<p><span class="math inline">\(\mathbb{E}[Y_1|T=1] - \mathbb{E}[Y_0|T=0] = \underbrace{\mathbb{E}[Y_1] - \mathbb{E}[Y_0]}_{\text{ATE}} + \underbrace{\mathbb{E}[Y_0|T=1] - \mathbb{E}[Y_0|T=0]}_{\text{Selection Bias}} + \underbrace{(1-\pi)(ATT - ATnT)}_{\text{Heterogeneous treatment effect bias}}\)</span></p>
+<ul>
+<li><strong>ATE</strong> – интересующий нас эффект</li>
+<li><strong>Selection Bias</strong> – смещение, возникающее из-за того, что контрольная группа и группа воздействия различались, даже если бы на них не было оказано воздействие, то есть имеет место некоторый дисбаланс</li>
+<li><strong>Heterogeneous treatment effect bias</strong> – различие в интенсивности эффекта для тритмент и контрольной группы, взвешенное на долю выборки <span class="math inline">\((1-\pi)\)</span>, которая попала в контрольную группу</li>
+</ul>
+<p>Далее мы рассмотрим предпосылки, которые позволяют нивелировать влияние этих двух смещений и получить оценку ATE.</p>
+</section>
+<section id="предпосылки" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="предпосылки"><span class="header-section-number">1.1.3</span> Предпосылки</h3>
+<ol type="1">
+<li><strong>Экзогенность воздействия (Independence assumption)</strong></li>
+</ol>
+<p>Экзогенность воздействия (Independence assumption) означает, что распределение объекта в тритмент или контрольную группы осуществляется случайно и независимо от его изначальных характеристик. Данная предпосылка обычно обозначается следующим образом <span class="math inline">\((T_1, Y_0, X)_i \perp T_i\)</span></p>
+<p>Технически для нас это значит следующее:</p>
+<ul>
+<li><span class="math inline">\(\mathbb{E}[Y_0|T=1] - \mathbb{E}[Y_0|T=0] = 0 \Rightarrow \text{Selection Bias}=0\)</span></li>
+<li><span class="math inline">\(\mathbb{E}[Y_1|T=1] - \mathbb{E}[Y_1|T=0] = 0\)</span>
+<ul>
+<li><span class="math inline">\((1-\pi)(ATT - ATnT) = (1-\pi)\left[(\mathbb{E}[Y_1|T=1]-\mathbb{E}[Y_0|T=1])-(\mathbb{E}[Y_1|T=0]-\mathbb{E}[Y_0|T=0])\right] = 0 \Rightarrow \text{Heterogeneous treatment effect bias}=0\)</span></li>
+</ul></li>
+</ul>
+<p>То есть хорошая рандомизация, а следовательно, и выполнение предпосылок, позволяет нам очистить эффект воздействия от двух типов смещения, в этом случае:</p>
+<p><span class="math inline">\(ATE = \mathbb{E}[Y_1] - \mathbb{E}[Y_0] = \mathbb{E}[Y_1|T=1] - \mathbb{E}[Y_0|T=0] \xrightarrow{p} \frac{1}{N_1}\sum \limits_{i=1}^{N_1}Y_{i1} - \frac{1}{N_0}\sum \limits_{i=1}^{N_0}Y_{i0}\)</span></p>
+<ol start="2" type="1">
+<li><strong>Отсутствие “внешних эффектов” воздействия (SUTVA – Stable unit treatment value assumption)</strong></li>
+</ol>
+<p>Эта предпосылка подразумевает выполнение двух вещей. Во-первых, воздействие оказывается только на один объект и внешние эффекты у него отсутствуют. Во-вторых, воздействие гомогенно – существует только один тип тритмента.</p>
+</section>
+</section>
+<section id="работа-со-случайными-числами-в-r" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="работа-со-случайными-числами-в-r"><span class="header-section-number">1.2</span> Работа со случайными числами в R</h2>
+<p>В рамках курса нам неоднократно придется прибегнуть к генерации случайных чисел из какого-нибудь закона распределения, как правило, из нормального. Для работы со случайными числами из нормального распределения в R используется несколько функций: <code>dnorm()</code> для плотности вероятности, <code>pnorm()</code> для функции распределения, <code>qnorm()</code> для квантилей распределения и <code>rnorm()</code> для генерации случайных чисел. Почитать подробнее про них и посмотреть примеры можно <a href="https://seankross.com/notes/dpqr/">тут</a> или <a href="https://bookdown.org/rdpeng/rprogdatascience/simulation.html">тут</a>.</p>
+<p>Если вы не уверены в синтаксисе какой-то функции, вы можете воспользоваться встроенной справкой в RStudio (справочная информация появится во вкладке <code>Help</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>?rnorm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Если вам когда-нибудь понадобятся функции для других распределений, вы можете, конечно, их просто загуглить или ввести в окне <code>Help</code> запрос “Distributions”:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>?Distributions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Теперь, когда мы точно знаем, как устроены аргументы у функции <code>rnorm(n;mean;sd)</code>, давайте попробуем достать 5 чисел из стандартного нормального распределения <span class="math inline">\(\mathcal{N} \sim \left(0;1\right)\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.6124384  0.9778703 -0.9917697 -1.2300650 -0.2760948</code></pre>
+</div>
+</div>
+<p>Если вы повторяли за мной, то у вас, вероятно, получились другие значения. А теперь я тоже попробую ещё раз:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.5967108  1.2388675 -1.0184707  0.4994739 -0.6618038</code></pre>
+</div>
+</div>
+<p>Как и ожидалось, у меня тоже не совпало с предыдущим результатом. Существует по меньшей мере две причины, почему нам хотелось бы получать одинаковые результаты:</p>
+<ul>
+<li>Работа на семинарах, когда нам с вами было бы удобно сверяться</li>
+<li>Воспроизводимые научные исследования, когда любой читатель может реплицировать и проверить на корректность ваш результат</li>
+</ul>
+<p>В R существует несколько алгоритмов, позволящих генерировать случайные числа (Random Number Generator (RNG), подробнее – <code>?RNGkind</code>). По умолчанию используется Mersenne twister (Вихрь Мерсенна), поскольку он работает наиболее быстро. Однако все эти алгоритмы на самом деле детерминированы, поэтому генерируемые ими числа корректнее называть “псевдослучайными”.</p>
+<p>Генератор псевдослучайных чисел начинает свою работу с определенной точки в пространстве возможных чисел. Эту точку приянто называть начальное число или seed. <em>Начальное число</em> – это число (или вектор), используемое для инициализации генератора псевдослучайных чисел. Если вы хотите получить одинаковые результаты с помощью генератора случайных чисел, важно установить начальное число. Для этого в R используется функция <code>set.seed()</code>. По умолчанию начальное число не установлено, если ничего не указать, то создается новое из текущего времени и идентификатора процесса на вашем устройстве. Следовательно, по умолчанию разные сеансы дают разные результаты моделирования.</p>
+<p>Давайте снова попробуем сгенерировать 5 чисел из случайного нормального распределения, но в этот раз зафиксируем seed:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.56047565 -0.23017749  1.55870831  0.07050839  0.12928774</code></pre>
+</div>
+</div>
+<p>И еще разок:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.56047565 -0.23017749  1.55870831  0.07050839  0.12928774</code></pre>
+</div>
+</div>
+<p>Получилось! В качестве seed можно использовать любое число, главное, чтобы при репликации оно каждый раз было одинаковым.</p>
+<p>Почитать про set.seed можно <a href="https://r-analytics.blogspot.com/2012/05/blog-post.html">тут</a> на русском и <a href="https://r-coder.com/set-seed-r/">тут</a> на английском.</p>
+</section>
+<section id="мини-симуляция" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="мини-симуляция"><span class="header-section-number">1.3</span> Мини-симуляция</h2>
+<p>Симуляции – это “игрушечные” примеры, которые позволят нам на протяжении курса разбираться с разными методами. Игрушечные они потому, что за ними не стоят реальные данные. Данные для симуляций мы будем специальным образом заранее моделировать. Это бывает удобно, когда идеально подходящих данных нет, или они не лежат в открытом доступе. К тому же, живые данные часто могут быть зашумлены из-за других факторов, на которые нам не всегда будет удобно отвлекаться на занятиях. Но с живыми данными мы тоже обязательно будем работать! В том числе, они будут доступны вам в домашних заданиях :)</p>
+<p>Теперь смоделируем небольшую симуляцию по мотивам изученного материала.</p>
+<section id="подготовка-данных" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="подготовка-данных"><span class="header-section-number">1.3.1</span> Подготовка данных</h3>
+<p>Давайте смоделируем гипотетическую ситуацию. Мы хотим оценить величину эффекта от использование сайта с расписанием <a href="https://cacs.ws/">cacs.ws</a> на свободное время студента.</p>
+<p>Предположим, что наша экспериментальная выборка состоит из 1000 человек:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Для простоты у них будет всего две характеристики (<span class="math inline">\(X\)</span> – возраст и <span class="math inline">\(Z\)</span> – время в пути от дома до ЭФ), имеющих влияние на потенциальный исход (<span class="math inline">\(Y_0\)</span> и <span class="math inline">\(Y_1\)</span> – свободное время). При этом предположим, что реальный эффект воздействия равен <span class="math inline">\(\tau=15\)</span> минутам. Будем считать, что реальная зависимость потенциального исхода от ковариатов и тритмента выглядит следующим образом:</p>
+<ul>
+<li><span class="math inline">\(Y_0 = 240 - 3 \cdot X - Z + 15 \cdot \underbrace{T}_{= 0} + \varepsilon = 120 - 3 \cdot X - Z + \varepsilon\)</span> – потенциальный исход, если <strong>не</strong> было оказано воздействие</li>
+<li><span class="math inline">\(Y_1 = 240 - 3 \cdot X - Z + 15 \cdot \underbrace{T}_{= 1} + \varepsilon = 120 - 3 \cdot X - Z + 15 + \varepsilon\)</span> – потенциальный исход, если было оказано воздействие</li>
+</ul>
+<p>Сгенерируем <span class="math inline">\(X\)</span> и <span class="math inline">\(Z\)</span> случайным образом:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">18</span>, <span class="dv">25</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">60</span>, <span class="dv">20</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Посмотрим на наши данные, нарисуем сразу 2 графика -- диаграмму разброса и гистограмму</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># читаем буквально как матрицы -- 2 строки и 2 столбца</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(X)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Z)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="experiments_files/figure-html/Генерация ковариат-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Также создадим случайные ошибки для каждого из типов индивидов:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(e, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="experiments_files/figure-html/Генерация ошибок-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Вспомогательно пронумеруем наши наблюдения:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>N</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>И соберем всё в общий датасет:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">number =</span> number, <span class="at">X=</span>X, <span class="at">Z=</span>Z) <span class="co"># сшиваем столбики в data frame</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data, <span class="dv">10</span>) <span class="co"># смотрим только первые несколько строк датасета</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   number        X        Z
+1       1 20.01304 47.96214
+2       2 23.51814 40.12603
+3       3 20.86284 80.53570
+4       4 24.18112 75.02123
+5       5 24.58327 29.81667
+6       6 18.31890 58.09705
+7       7 21.69674 42.08104
+8       8 24.24693 18.58498
+9       9 21.86005 63.00240
+10     10 21.19630 58.41577</code></pre>
+</div>
+</div>
+</section>
+<section id="рандомизация" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="рандомизация"><span class="header-section-number">1.3.2</span> Рандомизация</h3>
+<p>Что касается рандомизации, то наша глобальная задача, используя разные функции придумать способ, как случайным образом разбить выборку на 2 группы. Существует огромное множество вариантов, как это можно сделать. Мы обсудим лишь несколько из них. На практике вы можете пользоваться как этими вариантами, так и придумать что-то своё.</p>
+<section id="использование-порядкового-номера" class="level4" data-number="1.3.2.1">
+<h4 data-number="1.3.2.1" class="anchored" data-anchor-id="использование-порядкового-номера"><span class="header-section-number">1.3.2.1</span> Использование порядкового номера</h4>
+<p>Первый вариант – просто взять половину наблюдений по их порядку расположения в датасете. Пусть воздействие будет оказано только на первую половину нашей выборки.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>T1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,N<span class="sc">/</span><span class="dv">2</span>), <span class="fu">rep</span>(<span class="dv">0</span>,N<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(T1) <span class="co"># проверяем долю тритмента, должна получиться ровно половина</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>T1 <span class="ot">&lt;-</span> T1 <span class="co"># добавляем переменную в датасет</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Тут мы воспользовались функцией <code>c(...)</code>, которая позволяет объединить величины внутри неё в вектор, и функцией <code>rep(x;times)</code> которая повторяет величину <span class="math inline">\(x\)</span> столько раз, сколько указано в величине <span class="math inline">\(times\)</span>.</p>
+<p>Второй вариант, который практически дублирует первый, но немного отличается – мы можем взять каждое второе наблюдение:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>T2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, N<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(T2) <span class="co"># проверяем долю тритмента, должна получиться ровно половина</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>T2 <span class="ot">&lt;-</span> T2 <span class="co"># добавляем переменную в датасет</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="использование-свойств-распределений" class="level4" data-number="1.3.2.2">
+<h4 data-number="1.3.2.2" class="anchored" data-anchor-id="использование-свойств-распределений"><span class="header-section-number">1.3.2.2</span> Использование свойств распределений</h4>
+<p>Логично, что если мы хотим случайным образом присвоить наблюдениям разные группы, то мы можем начать с того, что присвоим им случайные числа, которые мы потом разными способами переведем в бинарный формат, который уже будет соотвествовать конкретной группе. Протестируем этот способ на примере трех распределений – нормального, равномерного и биномиального.</p>
+<section id="равномерное-распределение" class="level5" data-number="1.3.2.2.1">
+<h5 data-number="1.3.2.2.1" class="anchored" data-anchor-id="равномерное-распределение"><span class="header-section-number">1.3.2.2.1</span> Равномерное распределение</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>V1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(N) <span class="co"># генерим вспомогательную переменную из равномерного распределения</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>T3 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(V1 <span class="sc">&lt;</span> <span class="fu">median</span>(V1)) <span class="co">#генерим тритмент, отсекая половину выборки по медиане; as.numeric используется, чтобы перейти от логического типа (true, false) к численному (1 и 0)</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(T3) <span class="co"># проверяем долю тритмента, должна получиться ровно половина</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>T3 <span class="ot">&lt;-</span> T3 <span class="co"># добавляем переменную в датасет</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="нормальное-распределение" class="level5" data-number="1.3.2.2.2">
+<h5 data-number="1.3.2.2.2" class="anchored" data-anchor-id="нормальное-распределение"><span class="header-section-number">1.3.2.2.2</span> Нормальное распределение</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>V2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N) <span class="co"># генерим вспомогательную переменную из нормального распределения</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>T4 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(V2<span class="sc">&gt;</span><span class="dv">0</span>) <span class="co">#генерим тритмент, отсекая половину выборки по знаку вспомогательной переменной; as.numeric используется, чтобы перейти от логического типа (true, false) к численному (1 и 0)</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(T4) <span class="co"># проверяем долю тритмента, должна получиться примерно половина</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.000   0.000   1.000   0.505   1.000   1.000 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>T4 <span class="ot">&lt;-</span> T4 <span class="co"># добавляем переменную в датасет</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="биномиальное-распределение" class="level5" data-number="1.3.2.2.3">
+<h5 data-number="1.3.2.2.3" class="anchored" data-anchor-id="биномиальное-распределение"><span class="header-section-number">1.3.2.2.3</span> Биномиальное распределение</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>T5 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.5</span>) <span class="co">#генерим тритмент, отсекая половину выборки по знаку вспомогательной переменной; as.numeric используется, чтобы перейти от логического типа (true, false) к численному (1 и 0)</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(T5) <span class="co"># проверяем долю тритмента, должна получиться примерно половина</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.000   0.000   0.000   0.493   1.000   1.000 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>T5 <span class="ot">&lt;-</span> T5 <span class="co"># добавляем переменную в датасет</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="использование-готовых-пакетов" class="level4" data-number="1.3.2.3">
+<h4 data-number="1.3.2.3" class="anchored" data-anchor-id="использование-готовых-пакетов"><span class="header-section-number">1.3.2.3</span> Использование готовых пакетов</h4>
+<section id="пакет-experiment" class="level5" data-number="1.3.2.3.1">
+<h5 data-number="1.3.2.3.1" class="anchored" data-anchor-id="пакет-experiment"><span class="header-section-number">1.3.2.3.1</span> Пакет <code>experiment</code></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'experiment'</span>) </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>rand <span class="ot">&lt;-</span> <span class="fu">randomize</span>(data, <span class="at">group=</span> <span class="fu">c</span>(<span class="st">"Treat"</span>, <span class="st">"Control"</span>))</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>T6 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(rand<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">"Treat"</span>) <span class="co"># преобразовываем переменную в численный формат </span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>T6 <span class="ot">&lt;-</span> T6 <span class="co"># добавляем переменную в датасет</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   number        X        Z T1 T2 T3 T4 T5 T6
+1       1 20.01304 47.96214  1  0  1  0  0  1
+2       2 23.51814 40.12603  1  1  0  0  1  1
+3       3 20.86284 80.53570  1  0  1  1  0  1
+4       4 24.18112 75.02123  1  1  0  1  1  0
+5       5 24.58327 29.81667  1  0  0  1  1  1
+6       6 18.31890 58.09705  1  1  1  1  0  0
+7       7 21.69674 42.08104  1  0  0  1  1  0
+8       8 24.24693 18.58498  1  1  0  0  1  1
+9       9 21.86005 63.00240  1  0  0  0  1  1
+10     10 21.19630 58.41577  1  1  1  0  0  1</code></pre>
+</div>
+</div>
+</section>
+<section id="пакет-radomizr" class="level5" data-number="1.3.2.3.2">
+<h5 data-number="1.3.2.3.2" class="anchored" data-anchor-id="пакет-radomizr"><span class="header-section-number">1.3.2.3.2</span> Пакет <code>radomizr</code></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'randomizr'</span>) </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>T7 <span class="ot">&lt;-</span> <span class="fu">complete_ra</span>(<span class="at">N=</span>N, <span class="at">m=</span>N<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>T7 <span class="ot">&lt;-</span> T7 <span class="co"># добавляем переменную в датасет</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   number        X        Z T1 T2 T3 T4 T5 T6 T7
+1       1 20.01304 47.96214  1  0  1  0  0  1  0
+2       2 23.51814 40.12603  1  1  0  0  1  1  0
+3       3 20.86284 80.53570  1  0  1  1  0  1  0
+4       4 24.18112 75.02123  1  1  0  1  1  0  1
+5       5 24.58327 29.81667  1  0  0  1  1  1  0
+6       6 18.31890 58.09705  1  1  1  1  0  0  1
+7       7 21.69674 42.08104  1  0  0  1  1  0  1
+8       8 24.24693 18.58498  1  1  0  0  1  1  0
+9       9 21.86005 63.00240  1  0  0  0  1  1  0
+10     10 21.19630 58.41577  1  1  1  0  0  1  0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="хэш-функции" class="level4" data-number="1.3.2.4">
+<h4 data-number="1.3.2.4" class="anchored" data-anchor-id="хэш-функции"><span class="header-section-number">1.3.2.4</span> Хэш-функции</h4>
+<p>Существует ряд ситуаций, когда подходы к рандомизации, которые мы разобрали выше, работают не очень хорошо. Например, в вашу выборку добавилось несколько наблюдений, которые по какой-то причине добавились не в конец вашего датасета, а может у вас есть какая-то хитрая сортировка датасета. В этом случае рандомизация не будет воспроизводимой, а тритмент и контрольная группы будут различаться. Однако есть способ решить эту сложность.</p>
+<p><strong>Хэш-функция</strong> (hash function) – функция, осуществляющая преобразование массива входных данных произвольной длины в выходную битовую строку установленной длины, выполняемое определённым алгоритмом. Преобразование, производимое хэш-функцией, называется хэшированием.</p>
+<p>Хэш-функции применяются в следующих случаях:</p>
+<ul>
+<li>при построении ассоциативных массивов;</li>
+<li>при поиске дубликатов в последовательностях наборов данных;</li>
+<li>при построении уникальных идентификаторов для наборов данных;</li>
+<li>при вычислении контрольных сумм от данных (сигнала) для последующего обнаружения в них ошибок (возникших случайно или внесённых намеренно), возникающих при хранении и/или передаче данных;</li>
+<li>при сохранении паролей в системах защиты в виде хэш-кода (для восстановления пароля - по хэш-коду требуется функция, являющаяся обратной по отношению к использованной хэш-функции);</li>
+<li>при выработке электронной подписи (на практике часто подписывается не само сообщение, а его “хэш-образ”);</li>
+<li>и др.</li>
+</ul>
+<p>Для нас важно то, что с помощью хэш-функции мы сможем взаимно однозначно переводить данные формата строки в число.</p>
+<p>Пример хэширования с помощью пакета <code>digest</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"digest"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>hash <span class="ot">&lt;-</span> <span class="fu">digest</span>(<span class="st">'econometrics'</span>, <span class="at">algo=</span><span class="st">"murmur32"</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>hash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "24b6de5a"</code></pre>
+</div>
+</div>
+<p>Пакет <code>digest</code> применяет хеш-функцию к произвольным объектам R. В пакете реализовано много разных алгоритмов преобразований, однако мы будем использовать алгоритм “murmur32” (подробнее почитать можно <a href="https://en.wikipedia.org/wiki/MurmurHash">тут</a>). Этот алгоритм совершенно не подходит для криптографических целей, но зато идеально подходит нам, поскольку он 32-битный, что позволяет нам перевести полученный хэш-код в целое число.</p>
+<p>Прежде чем начать разбирать пример, немного отвлечемся на техническую полезную вещь – функцию <code>sapply()</code>.</p>
+<p>Про семейство <code>apply</code> функций рекомендую почитать подробнее на русском <a href="https://r-analytics.blogspot.com/2012/11/r-apply.html">тут</a> или <a href="https://habr.com/ru/company/infopulse/blog/274611/">тут</a>, а на английском <a href="https://www.datacamp.com/community/tutorials/r-tutorial-apply-family?utm_source=adwords_ppc&amp;utm_campaignid=1658343524&amp;utm_adgroupid=63833882055&amp;utm_device=c&amp;utm_keyword=%2Bsapply%20%2Br&amp;utm_matchtype=b&amp;utm_network=g&amp;utm_adpostion=&amp;utm_creative=319558765414&amp;utm_targetid=aud-299261629574:kwd-376025357755&amp;utm_loc_interest_ms=&amp;utm_loc_physical_ms=1011959&amp;gclid=Cj0KCQjwpf2IBhDkARIsAGVo0D2Dejgd7zLNCmHPdijs2FrRlbj7z_ti_UTn_gYCWqCl8NnC98V6HOsaAljMEALw_wcB">тут</a>.</p>
+<p>Прелесть функции <code>sapply()</code> состоит в том, что она позволяет нам избежать громоздких циклов при написании кода и ускорить вычисления благодаря “векторной ориентированности” языка R. Например, функция позволяет нам найти минимальное и максимальное значение для каждой из ковариат:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">list</span>(X,Z), min)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18.003257  3.804506</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">list</span>(X,Z), max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  24.99583 127.80742</code></pre>
+</div>
+</div>
+<p>То есть функция проводит однотипную операцию (по сути вложенную функцию) над каждым элементом списка. Если кто-то хорошо владеет python, то аналогичной функцией там является <code>map()</code>.</p>
+<p>Вернемся к нашей симуляции. Изначально мы это все затеяли, чтобы сделать хорошую рандомизацию. Сначала хэшируем номера наших наблюдений. Так делать не очень хорошо, обычно, для хэширования данных используют ФИО и/или СНИЛС, но мы не будем ради этого громоздить генерацию еще одной переменной. Для иллюстрации просто воспользуемся номерами, это тоже сработает.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>hashes <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data<span class="sc">$</span>number, <span class="cf">function</span>(x) {<span class="fu">digest</span>(x, <span class="at">algo=</span><span class="st">"murmur32"</span>)}) <span class="co"># хэшируем строчки</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>hashes[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "5e6216f3" "8b8b3789" "ad1bf356" "b2df92b2" "1d1b8e3a" "98d09cab"
+ [7] "2e366c5a" "4d110361" "91d6bfe0" "f568e543" "08bd74cd" "e979af4b"
+[13] "a82e5827" "485cbd08" "bc4e5bd8" "95f68430" "7180d744" "da414596"
+[19] "70aa2885" "afd0ffd2"</code></pre>
+</div>
+</div>
+<p>Далее нужно перевести получившиеся строчки в цифровой числовой. Функция <code>strtoi()</code> конвертирует строковое представление числа, которое хранится в строке, в длинное целое.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">strtoi</span>(<span class="fu">substring</span>(hashes, <span class="dv">2</span>), <span class="at">base=</span><span class="dv">16</span>) </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>result[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 241309427 193673097 219935574  48206514 219909690 147889323 238447706
+ [8] 219218785  30851040  90760515 146633933 158969675 137254951 140295432
+[15] 206461912 100041776  25220932 172049814  11151493 265355218</code></pre>
+</div>
+</div>
+<p>Далее, используя эти числа, нужно как-то разбить выборку на тритмент и контроль. Будем смотреть на последнюю цифру, если она меньше 5, то наблюдение попадет в тритмент, если больше – в контроль.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>T8 <span class="ot">&lt;-</span> result <span class="sc">%%</span> <span class="dv">10</span> <span class="sc">&lt;</span> <span class="dv">5</span> <span class="co"># берем остаток от деления на 10 (получится последняя цифра) и сравниваем его с 5</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>T8 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(T8) <span class="co"># переводим из логического типа в числовой и добавляем в датасет</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>T8[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0 0 1 1 1 1 0 0 1 0 1 0 1 1 1 0 1 1 1 0</code></pre>
+</div>
+</div>
+<p>Проверим нашу рандомизацию на сбалансированность:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     number             X               Z                 T1            T2     
+ Min.   :   1.0   Min.   :18.00   Min.   :  3.805   Min.   :0.0   Min.   :0.0  
+ 1st Qu.: 250.8   1st Qu.:19.78   1st Qu.: 46.232   1st Qu.:0.0   1st Qu.:0.0  
+ Median : 500.5   Median :21.43   Median : 60.576   Median :0.5   Median :0.5  
+ Mean   : 500.5   Mean   :21.48   Mean   : 60.239   Mean   :0.5   Mean   :0.5  
+ 3rd Qu.: 750.2   3rd Qu.:23.23   3rd Qu.: 73.101   3rd Qu.:1.0   3rd Qu.:1.0  
+ Max.   :1000.0   Max.   :25.00   Max.   :127.807   Max.   :1.0   Max.   :1.0  
+       T3            T4              T5              T6            T7     
+ Min.   :0.0   Min.   :0.000   Min.   :0.000   Min.   :0.0   Min.   :0.0  
+ 1st Qu.:0.0   1st Qu.:0.000   1st Qu.:0.000   1st Qu.:0.0   1st Qu.:0.0  
+ Median :0.5   Median :1.000   Median :0.000   Median :0.5   Median :0.5  
+ Mean   :0.5   Mean   :0.505   Mean   :0.493   Mean   :0.5   Mean   :0.5  
+ 3rd Qu.:1.0   3rd Qu.:1.000   3rd Qu.:1.000   3rd Qu.:1.0   3rd Qu.:1.0  
+ Max.   :1.0   Max.   :1.000   Max.   :1.000   Max.   :1.0   Max.   :1.0  
+       T8       
+ Min.   :0.000  
+ 1st Qu.:0.000  
+ Median :1.000  
+ Mean   :0.508  
+ 3rd Qu.:1.000  
+ Max.   :1.000  </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="реализация-исходов" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="реализация-исходов"><span class="header-section-number">1.3.3</span> Реализация исходов</h3>
+<p>Посчитаем потенциальные исходы:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>Y0 <span class="ot">&lt;-</span> <span class="dv">240</span> <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>X <span class="sc">-</span> Z <span class="sc">+</span> <span class="dv">15</span><span class="sc">*</span><span class="dv">0</span> <span class="sc">+</span> e <span class="co"># T=0</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>Y1 <span class="ot">&lt;-</span> <span class="dv">240</span> <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>X <span class="sc">-</span> Z <span class="sc">+</span> <span class="dv">15</span><span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> e <span class="co"># T=1</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Y0 <span class="ot">&lt;-</span> Y0 <span class="co"># добавляем переменные в датасет</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Y1 <span class="ot">&lt;-</span> Y1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>А также наблюдаемые исходы:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Y <span class="ot">&lt;-</span> T1<span class="sc">*</span>Y1 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">-</span>T1)<span class="sc">*</span>Y0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Можно ли было бы сделать все то же самое за меньшее число строчек кода и время? Конечно, можно. Более того, если бы похожую процедуру вам пришлось бы по каким-то причинам проводить несколько раз, например, когда у вас несколько экспериментов, функция для вас просто была бы незаменимым помощником. Еще раз генерим данные о нашем умозрительном эксперименте, но на этот раз для общего развития попробуем переписать все то же самое с помощью функций (не пугайтесь, на семинарах мы отдельно еще раз обсудим техническую сторону вопроса про функции):</p>
+<ol type="1">
+<li>Функция для генерации данных</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>generate_data <span class="ot">&lt;-</span> <span class="cf">function</span>(N){</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  N<span class="ot">=</span>N</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">18</span>, <span class="dv">25</span>)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">60</span>, <span class="dv">20</span>)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  e0 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N<span class="sc">/</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  e1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N<span class="sc">/</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  number <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>N</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  Y0 <span class="ot">&lt;-</span> <span class="dv">240</span> <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>X <span class="sc">-</span> Z <span class="sc">+</span> <span class="dv">15</span><span class="sc">*</span><span class="dv">0</span> <span class="sc">+</span> e0 </span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  Y1 <span class="ot">&lt;-</span> <span class="dv">240</span> <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>X <span class="sc">-</span> Z <span class="sc">+</span> <span class="dv">15</span><span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> e1 </span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">number =</span> number, <span class="at">X=</span>X, <span class="at">Z=</span>Z, <span class="at">Y0=</span>Y0, <span class="at">Y1=</span>Y1)</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Функция для рандомизации</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>randomization <span class="ot">&lt;-</span> <span class="cf">function</span>(data, type){</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (type<span class="sc">==</span><span class="st">'in order'</span>){</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    T <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,N<span class="sc">/</span><span class="dv">2</span>), <span class="fu">rep</span>(<span class="dv">0</span>,N<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>T <span class="ot">&lt;-</span> T</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (type<span class="sc">==</span><span class="st">'by turns'</span>){</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>    T <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, N<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>T <span class="ot">&lt;-</span> T</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (type<span class="sc">==</span><span class="st">'unif'</span>){</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    V <span class="ot">&lt;-</span> <span class="fu">runif</span>(N)</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>    T <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(V1 <span class="sc">&lt;</span> <span class="fu">median</span>(V1))</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>T <span class="ot">&lt;-</span> T</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (type<span class="sc">==</span><span class="st">'norm'</span>){</span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>    V <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N) </span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>    T <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(V2<span class="sc">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>T <span class="ot">&lt;-</span> T</span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (type<span class="sc">==</span><span class="st">'binom'</span>){</span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>    T <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data)</span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li>Функция для расчета наблюдаемого исхода</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>outcome <span class="ot">&lt;-</span> <span class="cf">function</span>(data){</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  observed_data <span class="ot">&lt;-</span> data</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  observed_data<span class="sc">$</span>Y <span class="ot">&lt;-</span> data<span class="sc">$</span>T<span class="sc">*</span>observed_data<span class="sc">$</span>Y1 <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> data<span class="sc">$</span>T)<span class="sc">*</span>observed_data<span class="sc">$</span>Y0</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(observed_data)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>А теперь посмотрим, сколько строчек займет наша симуляция с использованием функций:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">generate_data</span>(<span class="dv">1000</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">randomization</span>(<span class="at">data=</span>data, <span class="at">type=</span><span class="st">'in order'</span>)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">outcome</span>(<span class="at">data=</span>data)</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(data,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     number        X         Z        Y0        Y1 T         Y
+991     991 18.61054  75.36015 107.71110 125.93429 0 107.71110
+992     992 19.56646  37.83344 144.39269 158.58181 0 144.39269
+993     993 22.00504  44.27528 129.95640 144.11565 0 129.95640
+994     994 20.80118 105.68233  71.17735  87.99218 0  71.17735
+995     995 21.95826  38.13398 134.71123 149.89166 0 134.71123
+996     996 23.80737  64.28959 104.36495 120.01488 0 104.36495
+997     997 22.49480  77.85142  94.91935 111.10506 0  94.91935
+998     998 20.74049  80.37516  97.68081 112.19320 0  97.68081
+999     999 22.96706  81.78224  89.85344 105.76786 0  89.85344
+1000   1000 18.76177  56.73742 126.51679 142.61883 0 126.51679</code></pre>
+</div>
+</div>
+</section>
+<section id="считаем-эффект" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="считаем-эффект"><span class="header-section-number">1.3.4</span> Считаем эффект</h3>
+<p>Когда данные подготовлены, мы забываем, что что-то о них знали :)</p>
+<p>С данного момента мы действуем согласно предпосылке, что мы знаем только <span class="math inline">\(Y\)</span>, <span class="math inline">\(X\)</span> и <span class="math inline">\(T\)</span>.</p>
+<p>Поскольку мы знаем, что тритмент распределялся среди наблюдений случайно, мы можем сделать вывод, что предпосылка о независимости воздействия выполнена. Также мы знаем, что данные устроены так, что SUTVA тоже выполнена. Следовательно, можем использовать обычную разницу в средних, чтобы оценить эффнект воздействия:</p>
+<p><span class="math inline">\(\widehat{ATE} = \overline{Y_1} - \overline{Y_0}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>ATE_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">1</span>),]<span class="sc">$</span>Y) <span class="sc">-</span> <span class="fu">mean</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">0</span>),]<span class="sc">$</span>Y)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>ATE_hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.53169</code></pre>
+</div>
+</div>
+<p>Из курса ЭКМ-2 помним, что то же самое можно было бы получить, с помощью обычного парного МНК:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> T, <span class="at">data=</span>data)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ T, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-78.525 -14.782  -0.268  14.040  64.919 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 115.0500     0.9369  122.80   &lt;2e-16 ***
+T            15.5317     1.3249   11.72   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 20.95 on 998 degrees of freedom
+Multiple R-squared:  0.121, Adjusted R-squared:  0.1202 
+F-statistic: 137.4 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Если обе предпосылки выполнены, то оценка должна быть несмещенной даже без контрольных переменных (ковариат). Попробуем их добавить и сравним оценки эффекта:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> T <span class="sc">+</span> X <span class="sc">+</span> Z, <span class="at">data=</span>data)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ T + X + Z, data = data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.97985 -0.63057 -0.01498  0.69005  3.04683 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 240.123033   0.347927   690.2   &lt;2e-16 ***
+T            14.874547   0.061883   240.4   &lt;2e-16 ***
+X            -2.988124   0.015384  -194.2   &lt;2e-16 ***
+Z            -1.005280   0.001546  -650.4   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.9783 on 996 degrees of freedom
+Multiple R-squared:  0.9981,    Adjusted R-squared:  0.9981 
+F-statistic: 1.732e+05 on 3 and 996 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Видим, что результаты устойчивы, величина эффекта практически не изменилась, но существенно уменьшилась его стандартная ошибка. Вывод: контрольные переменные хорошо включать для снижения дисперсии оценок.</p>
+<p>Далее в качестве упраженения посчитаем средние эффекты на разных группах:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>ATT <span class="ot">&lt;-</span> <span class="fu">mean</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">1</span>),]<span class="sc">$</span>Y1) <span class="sc">-</span> <span class="fu">mean</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">1</span>),]<span class="sc">$</span>Y0)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>ATT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14.87723</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>ATnT <span class="ot">&lt;-</span> <span class="fu">mean</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">0</span>),]<span class="sc">$</span>Y1) <span class="sc">-</span> <span class="fu">mean</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">0</span>),]<span class="sc">$</span>Y0)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>ATnT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14.87723</code></pre>
+</div>
+</div>
+<p>Получили, то что и должны были получить <span class="math inline">\(ATT = ATnT\)</span>. Если мы вернемся в раздел, где мы подготовливали данные, то увидим, что в двух потенциальных исходах мы “зашифровали” одинаковый эффект:</p>
+<ul>
+<li><span class="math inline">\(Y_0 = 120 - 3 \cdot X - Z + 15 \cdot \underbrace{T}_{= 0} + \varepsilon = 120 - 3 \cdot X - Z + \varepsilon\)</span></li>
+<li><span class="math inline">\(Y_1 = 120 - 3 \cdot X - Z + 15 \cdot \underbrace{T}_{= 1} + \varepsilon = 120 - 3 \cdot X - Z + 15 + \varepsilon\)</span></li>
+</ul>
+<p>Содержательно это иллюстрирует то, что эффект воздействия гомогенен, то есть <span class="math inline">\(\text{Heterogeneous treatment effect bias} = (1-\pi)(ATT - ATnT) = 0\)</span>.</p>
+</section>
+<section id="баланс-ковариатов" class="level3" data-number="1.3.5">
+<h3 data-number="1.3.5" class="anchored" data-anchor-id="баланс-ковариатов"><span class="header-section-number">1.3.5</span> Баланс ковариатов</h3>
+<p>Теперь проверим насколько наша рандомизация оказалась хорошей, то есть проверим контрольную и тритмент группу на “похожесть”. Сравним средние значения ковариат в двух группах.</p>
+<section id="сравнение-средних" class="level4" data-number="1.3.5.1">
+<h4 data-number="1.3.5.1" class="anchored" data-anchor-id="сравнение-средних"><span class="header-section-number">1.3.5.1</span> Сравнение средних</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">1</span>),]<span class="sc">$</span>X) <span class="sc">-</span> <span class="fu">mean</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">0</span>),]<span class="sc">$</span>X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.02791759</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">1</span>),]<span class="sc">$</span>Z) <span class="sc">-</span> <span class="fu">mean</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">0</span>),]<span class="sc">$</span>Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.5707093</code></pre>
+</div>
+</div>
+<p>Это не очень информативный и субъективный способ, но если мы вспомним, что порядок значений ковариат измерялся десятками, то можно сделать вывод, что группы в среднем похожи.</p>
+</section>
+<section id="тест-стьюдента" class="level4" data-number="1.3.5.2">
+<h4 data-number="1.3.5.2" class="anchored" data-anchor-id="тест-стьюдента"><span class="header-section-number">1.3.5.2</span> Тест Стьюдента</h4>
+<p>А теперь проведем тест на разницу в средних с помощью формального t-теста Стьюдента:</p>
+<ul>
+<li><span class="math inline">\(H_0:\)</span> среднее значение параметра в группах одинаковое, группы не различаются</li>
+<li><span class="math inline">\(H_1:\)</span> среднее значение параметра в группах разное, группы различаются</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">1</span>),]<span class="sc">$</span>X, data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">0</span>),]<span class="sc">$</span>X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  data[which(data$T == 1), ]$X and data[which(data$T == 0), ]$X
+t = -0.21924, df = 997.51, p-value = 0.8265
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.2777933  0.2219581
+sample estimates:
+mean of x mean of y 
+ 21.46699  21.49490 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">1</span>),]<span class="sc">$</span>Z, data[<span class="fu">which</span>(data<span class="sc">$</span>T <span class="sc">==</span> <span class="dv">0</span>),]<span class="sc">$</span>Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  data[which(data$T == 1), ]$Z and data[which(data$T == 0), ]$Z
+t = -0.45032, df = 997.68, p-value = 0.6526
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -3.057656  1.916238
+sample estimates:
+mean of x mean of y 
+ 59.95331  60.52402 </code></pre>
+</div>
+</div>
+<p>Согласно значению p-value мы принимаем <span class="math inline">\(H_0\)</span> и делаем вывод, что группы одинаковые.</p>
+</section>
+<section id="использование-готовых-пакетов-1" class="level4" data-number="1.3.5.3">
+<h4 data-number="1.3.5.3" class="anchored" data-anchor-id="использование-готовых-пакетов-1"><span class="header-section-number">1.3.5.3</span> Использование готовых пакетов</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tableone"</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> <span class="fu">CreateTableOne</span>(<span class="at">vars=</span><span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Z"</span>), <span class="at">strata=</span><span class="st">"T"</span>, <span class="at">data=</span>data, <span class="at">test=</span><span class="cn">TRUE</span>)</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Stratified by T
+                0             1             p      test
+  n               500           500                    
+  X (mean (SD)) 21.49 (2.04)  21.47 (1.99)   0.827     
+  Z (mean (SD)) 60.52 (19.86) 59.95 (20.22)  0.653     </code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="про-важность-предпосылок-гаусса-маркова" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="про-важность-предпосылок-гаусса-маркова"><span class="header-section-number">1.4</span> Про важность предпосылок Гаусса-Маркова</h2>
+<section id="предпосылки-гаусса-маркова" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="предпосылки-гаусса-маркова"><span class="header-section-number">1.4.1</span> Предпосылки Гаусса-Маркова</h3>
+<ul>
+<li>Линейная модель: <span class="math inline">\(Y_i=\tau T_i+\beta X_i+\varepsilon_i\)</span></li>
+<li><span class="math inline">\(T_i\)</span> не выражается линейно через <span class="math inline">\(X_i\)</span></li>
+<li><span class="math inline">\(\mathbb{E}\left(\varepsilon_i\right)=0\)</span></li>
+<li>Гомоскедастичность, некоррелированность ошибок <span class="math inline">\(\mathbb{V}\left(\varepsilon_i\right)=\sigma I\)</span></li>
+<li>Экзогенность <span class="math inline">\(\operatorname{Cov}\left(X_i, \varepsilon_i\right)=0\)</span></li>
+<li>Оцениваем методом наименьших квадратов: <span class="math display">\[
+\left(Y_i-\hat{\tau} T_i-\hat{\beta} X_i\right)^2 \rightarrow \min _{\hat{\tau}, \hat{\beta}}
+\]</span></li>
+<li>Свойства оценки (теорема Гаусса-Маркова): несмещенность, эффективность, состоятельность</li>
+</ul>
+</section>
+<section id="пример" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="пример"><span class="header-section-number">1.4.2</span> Пример</h3>
+<p>Мы располагаем данными из 1000 наблюдений, про которые известно:</p>
+<ul>
+<li><span class="math inline">\(X_i \sim U[0,1]\)</span> - контрольная переменная: успехи команды в прошлом году</li>
+<li><span class="math inline">\(T_i \mid X_i \sim \operatorname{Bernoulli}\left(0.1+0.8 X_i\right)\)</span> - бинарная переменная переменная интереса: решение тренера взять команду</li>
+<li><span class="math inline">\(Y_i=f\left(X_i, T_i\right)+\varepsilon_i\)</span> - переменная исхода: успехи команды в этом году</li>
+<li>В соответствии с предпосылками оценим <span class="math inline">\(Y_i \sim T_i+X_i\)</span></li>
+<li>То же ли самое получится, если <span class="math inline">\(T_i \sim \operatorname{Bernoulli}(0.5)\)</span> и оценим <span class="math inline">\(Y_i \sim T_i\)</span>?</li>
+</ul>
+<section id="генерация-данных" class="level4" data-number="1.4.2.1">
+<h4 data-number="1.4.2.1" class="anchored" data-anchor-id="генерация-данных"><span class="header-section-number">1.4.2.1</span> Генерация данных</h4>
+<p>Сгенерим данные согласно условию:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>Y0 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>Y1 <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">*</span> X <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="генерация-тритмента" class="level4" data-number="1.4.2.2">
+<h4 data-number="1.4.2.2" class="anchored" data-anchor-id="генерация-тритмента"><span class="header-section-number">1.4.2.2</span> Генерация тритмента</h4>
+<p>Случай 1: эндогенный тритмент</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>T_one <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="dv">1</span>, <span class="fl">0.1</span> <span class="sc">+</span> <span class="fl">0.8</span><span class="sc">*</span>X)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>Y_one <span class="ot">=</span> Y1 <span class="sc">*</span> T_one <span class="sc">+</span> Y0 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> T_one)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>data_one <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">X=</span>X, <span class="at">Y=</span>Y_one, <span class="at">T=</span>T_one)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Случай 2: экзогенный тритмент</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>T_two <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>Y_two <span class="ot">=</span> Y1 <span class="sc">*</span> T_two <span class="sc">+</span> Y0 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> T_two)</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>data_two <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">X=</span>X, <span class="at">Y=</span>Y_two, <span class="at">T=</span>T_two)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="оценка-эффекта" class="level4" data-number="1.4.2.3">
+<h4 data-number="1.4.2.3" class="anchored" data-anchor-id="оценка-эффекта"><span class="header-section-number">1.4.2.3</span> Оценка эффекта</h4>
+<p>Сравним оценки:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>model_one_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> T, <span class="at">data=</span>data_one)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>model_one_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> T <span class="sc">+</span> X, <span class="at">data=</span>data_one)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>model_two_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> T, <span class="at">data=</span>data_two)</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>model_two_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> T <span class="sc">+</span> X, <span class="at">data=</span>data_two)</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a><span class="co">#stargazer(model_one_1, model_one_2, model_two_1, model_two_2, type = 'text') </span></span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a><span class="co"># В обычной жизни вы просто можете пользоваться старгейзером, как в комментраии выше</span></span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Чтобы конкретно на этой странице влезло 4 регрессии, я воспользуюсь другой функцией msummary</span></span>
+<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a>m_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">endogenous_without_control =</span> model_one_1, </span>
+<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">endogenous_with_control =</span> model_one_2,</span>
+<span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">exogenous_without_control =</span> model_two_1, </span>
+<span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">exogenous_with_control =</span> model_two_2)</span>
+<span id="cb80-14"><a href="#cb80-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'modelsummary'</span>)</span>
+<span id="cb80-15"><a href="#cb80-15" aria-hidden="true" tabindex="-1"></a><span class="fu">msummary</span>(m_list, <span class="at">output =</span> <span class="st">'markdown'</span>, <span class="at">stars =</span> <span class="cn">TRUE</span>, <span class="at">title =</span> <span class="st">'Сравнение моделей'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Сравнение моделей</caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 24%">
+<col style="width: 21%">
+<col style="width: 23%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">endogenous_without_control</th>
+<th style="text-align: center;">endogenous_with_control</th>
+<th style="text-align: center;">exogenous_without_control</th>
+<th style="text-align: center;">exogenous_with_control</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: center;">0.022</td>
+<td style="text-align: center;">-1.847***</td>
+<td style="text-align: center;">0.030</td>
+<td style="text-align: center;">-2.234***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.094)</td>
+<td style="text-align: center;">(0.102)</td>
+<td style="text-align: center;">(0.096)</td>
+<td style="text-align: center;">(0.120)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">T</td>
+<td style="text-align: center;">6.260***</td>
+<td style="text-align: center;">4.859***</td>
+<td style="text-align: center;">5.069***</td>
+<td style="text-align: center;">5.007***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.131)</td>
+<td style="text-align: center;">(0.114)</td>
+<td style="text-align: center;">(0.137)</td>
+<td style="text-align: center;">(0.109)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5.206***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4.612***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">(0.199)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">(0.189)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Num.Obs.</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R2</td>
+<td style="text-align: center;">0.695</td>
+<td style="text-align: center;">0.820</td>
+<td style="text-align: center;">0.577</td>
+<td style="text-align: center;">0.735</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R2 Adj.</td>
+<td style="text-align: center;">0.695</td>
+<td style="text-align: center;">0.819</td>
+<td style="text-align: center;">0.577</td>
+<td style="text-align: center;">0.735</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AIC</td>
+<td style="text-align: center;">4299.4</td>
+<td style="text-align: center;">3778.1</td>
+<td style="text-align: center;">4390.7</td>
+<td style="text-align: center;">3924.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BIC</td>
+<td style="text-align: center;">4314.2</td>
+<td style="text-align: center;">3797.7</td>
+<td style="text-align: center;">4405.4</td>
+<td style="text-align: center;">3944.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Log.Lik.</td>
+<td style="text-align: center;">-2146.714</td>
+<td style="text-align: center;">-1885.056</td>
+<td style="text-align: center;">-2192.343</td>
+<td style="text-align: center;">-1958.311</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F</td>
+<td style="text-align: center;">2279.232</td>
+<td style="text-align: center;">2264.086</td>
+<td style="text-align: center;">1363.774</td>
+<td style="text-align: center;">1385.366</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RMSE</td>
+<td style="text-align: center;">2.07</td>
+<td style="text-align: center;">1.59</td>
+<td style="text-align: center;">2.17</td>
+<td style="text-align: center;">1.71</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> ^^ + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</p>
+</div>
+</div>
+<p><strong>Выводы:</strong></p>
+<ul>
+<li>По теореме Гаусса-Маркова мы должны были получить 2 состоятельные (значит одинаковые) оценки</li>
+<li>Они отличаются, потому что модель нелинейная: тренер решает тренировать только те команды, которые будут успешны, поэтому и эффект высокий</li>
+<li>Если бы эффект тренера всегда был одинаковым, теорема Гаусса-Маркова выполнялась бы и оценки действительно оказались бы одинаковыми.</li>
+</ul>
+</section>
+<section id="баланс-ковариатов-1" class="level4" data-number="1.4.2.4">
+<h4 data-number="1.4.2.4" class="anchored" data-anchor-id="баланс-ковариатов-1"><span class="header-section-number">1.4.2.4</span> Баланс ковариатов</h4>
+<ul>
+<li><span class="math inline">\(H_0:\)</span> среднее значение параметра в группах одинаковое, группы не различаются</li>
+<li><span class="math inline">\(H_1:\)</span> среднее значение параметра в группах разное, группы различаются</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> <span class="fu">CreateTableOne</span>(<span class="at">vars=</span><span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Z"</span>), <span class="at">strata=</span><span class="st">"T"</span>, <span class="at">data=</span>data_one, <span class="at">test=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in ModuleReturnVarsExist(vars, data): The data frame does not have: Z
+Dropped</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(table1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Stratified by T
+                0           1           p      test
+  n              486         514                   
+  X (mean (SD)) 0.36 (0.25) 0.63 (0.26) &lt;0.001     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>table2 <span class="ot">&lt;-</span> <span class="fu">CreateTableOne</span>(<span class="at">vars=</span><span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Z"</span>), <span class="at">strata=</span><span class="st">"T"</span>, <span class="at">data=</span>data_two, <span class="at">test=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in ModuleReturnVarsExist(vars, data): The data frame does not have: Z
+Dropped</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(table2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Stratified by T
+                0           1           p      test
+  n              514         486                   
+  X (mean (SD)) 0.49 (0.29) 0.50 (0.29)  0.463     </code></pre>
+</div>
+</div>
+<p>Согласно значению p-value мы принимаем <span class="math inline">\(H_0\)</span> для второго случая, где тритмент экзогенный, и делаем вывод, что группы одинаковые; для первого случая с эндогенным тритментом баланс ковариатов не выполняется.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Предисловие</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./multiple_testing.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Множественное тестирование гипотез</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

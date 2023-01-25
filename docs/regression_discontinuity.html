@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Прикладная эконометрика - 8&nbsp; Разрывная регрессия</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./spatial_regression_discontinuity.html" rel="next">
+<link href="./heterogenous_treatment_effects.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Прикладная эконометрика</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="mailto:annastavnychuk@gmail.com" title="" class="sidebar-tool px-1"><i class="bi bi-at"></i></a>
+    <a href="https://github.com/annastavniychuk" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Предисловие</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./experiments.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Эксперименты</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple_testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Множественное тестирование гипотез</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bad_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Плохой контроль</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prestratification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./subclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./event_study.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Ссылки</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#четкая-разрывная-регрессия" id="toc-четкая-разрывная-регрессия" class="nav-link active" data-scroll-target="#четкая-разрывная-регрессия"><span class="toc-section-number">8.1</span>  Четкая разрывная регрессия</a></li>
+  <li><a href="#пример" id="toc-пример" class="nav-link" data-scroll-target="#пример"><span class="toc-section-number">8.2</span>  Пример</a></li>
+  <li><a href="#размытая-разрывная-регрессия" id="toc-размытая-разрывная-регрессия" class="nav-link" data-scroll-target="#размытая-разрывная-регрессия"><span class="toc-section-number">8.3</span>  Размытая разрывная регрессия</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="четкая-разрывная-регрессия" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="четкая-разрывная-регрессия"><span class="header-section-number">8.1</span> Четкая разрывная регрессия</h2>
+<p>В нашей жизни есть много правил. Очень часто эти правила регламентированы какими-то критериями. Например, чтобы поступить в университет, нужно набрать определенное количество баллов, чтобы понести наказание за вождение в нетрезвом виде, в крови должно быть обнаружено более определенного числа промилле алкоголя, чтобы получить отличную оценку, нужно набрать критерий по теории на экзамене и так далее… Иными словами мы в своем изучении эконометрических методов столнулись с ситуацией, когда наш тритмент не просто эндогенный, он еще и может зависеть от какой-то другой континуальной переменной. Для того, чтобы решать такие задачи, был придуман дизайн разрывной регрессии.</p>
+<p>Базовая постановка выглядит следующим образом:</p>
+<ul>
+<li><span class="math inline">\(Y_0, Y_1\)</span> – потенциальные исходы</li>
+<li><span class="math inline">\(T\)</span> – тритмент переменная</li>
+<li><span class="math inline">\(R\)</span> – переменная, по которой есть критерий попадания в тритмент (running variable, “бегущая перменная”)</li>
+<li><span class="math inline">\(X\)</span> – прочие контрольные переменные</li>
+</ul>
+<p>Тритмент переменная <span class="math inline">\(T\)</span> является функцией от <span class="math inline">\(R\)</span>, такой что <span class="math inline">\(T = \mathbb{I}(R&gt;c)\)</span>, где <span class="math inline">\(\mathbb{I}(.)\)</span> индикаторная функция, принимающее значение 1, если выражение в скабках истинно, а <span class="math inline">\(c\)</span> – некоторая отсечка (cutoff), после достижения которой наблюдение попадает в группу воздействия. То же самое можно записать в виде системы:</p>
+<p><span class="math display">\[
+T(R)=
+\begin{cases}
+1, R&gt;c\\
+0, R&lt;c\\
+\end{cases}
+\]</span></p>
+<p>На рисунках ниже изображена вероятность попадания в тритмент группу. По оси абсцисс – бегущая переменная, по оси ординат – вероятность попадания в тритмент. В данном примере <span class="math inline">\(c=6\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.42.PNG" class="img-fluid" style="width:50.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.47.42.PNG" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<p>Далее обратимся к потенциальным исходам, которые обозначены ниже пунктирными линиями. Видим, что левее от отсечки по бегущей переменной реализуется <span class="math inline">\(Y_0\)</span>, правее – <span class="math inline">\(Y_1\)</span>. Таким образом, наблюдаемый <span class="math inline">\(Y\)</span> обозначен сплошной линией. Математически это как и раньше описывается формулой <span class="math inline">\(Y = T\cdot Y_1 + (1-T)\cdot Y_0\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.51.PNG" class="img-fluid" style="width:50.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.48.01.PNG" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<p>Вернемся к формальному описанию предпосылок.</p>
+<ul>
+<li>предпосылка об экзогенности <span class="math inline">\((Y_0, Y_1, R) \perp T\)</span> не просто нарушена, назначение <span class="math inline">\(T\)</span> в нашем случае вообще является правилом <span class="math inline">\(T(R)\)</span></li>
+<li>предпосылка о несмешиваемости (unconfoundedness) <span class="math inline">\((Y_0, Y_1) \perp T | R\)</span> выполнена</li>
+<li>предпосылка о перекрытии (overlap) <span class="math inline">\(1&gt;P(T|R)&gt;0\)</span> нарушена</li>
+</ul>
+<p>Заметим, что в такой ситуации мы не можем использовать другие методы, например, мэтчинг. Почему? Как раз из-за нарушения последней предпосылки, у нас просто нет для этого контрольной группы.</p>
+<p>Вместо предпосылки об экзогенности тритмента выше предположим непрерывность функций <span class="math inline">\(E(Y_1|R), E(Y_0|R), E(X|R)\)</span>. Можем ли мы как-то проверить этот факт? Для потенциальных исходов, конечно, нет, мы их вовсе не наблюдаем. В непрерывность <span class="math inline">\(Y\)</span> мы, увы просто верим и можем обосновывать её содержательными соображениями, а вот непрерывность <span class="math inline">\(X\)</span> мы вполне можем проверить. Например, мы можем нарисовать график зависимости <span class="math inline">\(X\)</span> от running variable. Таким образом, мы можем обоснованно заявлять, что разрыв в <span class="math inline">\(Y\)</span> вызван изучаемым эффектом, а не каким-либо структурным сдвигом в <span class="math inline">\(X\)</span>.</p>
+<p>Отдельно, как ниже, стоит проверить распределение количества людей относительно отсечки, чтобы обезопасить себя от проблемы самоотбора, как на картинке справа:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.54.46.PNG" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+<p>Далее перейдём к оценке. Как мы говорили ранее, самая сложная проблема, которая перед нами стоит – это то, что у нас нет контрольной группы. Сравнить среднее значение зависимой переменной слева от отсечки со средним значением справа будет являться плохой оценкой, потому что наблюдения будут несопоставимы и полученная разница может объясняться различиями к контрольных переменных, а не тем эффектом, который мы хотим оценить.</p>
+<p>Эконометристы придумали следующий финт – если мы возьмём наблюдения, которые расположены достаточно близко к отсечке, то они будут похожи друг на друга по величине running variable. Промежуток по running variable, который мы выбираем вокруг отсечки называется окном, размер этого промежутка – шириной окна (bandwidth). Если мы выберем маленькое окно, то получим что-то вроде локальной рандомизации, где наша оценка будет равна обычной разнице в средних.</p>
+<p><span class="math display">\[ \tau_{SRD} = \underset{R \rightarrow c+}{lim} E [Y|R] - \underset{R \rightarrow c-}{lim} E [Y|R]\]</span></p>
+<p><span class="math display">\[ \hat{\tau}_{SRD} = \left.\overline{Y} \right|_{c&lt;R&lt;c+h}-\left.\overline{Y} \right|_{c-h&lt;R&lt;c}\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/regressiondiscontinuity-animation-1.PNG" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+<p>Итак, подведем итог, чтобы оценить эффект, нам сначала нужно выбрать шиину окна (обозначим её <span class="math inline">\(h\)</span>). Затем на данных, которые лежат в пределах нашего окна <span class="math inline">\(R \in [c-h;c+h]\)</span> считаем оценку <span class="math inline">\(\displaystyle{LATE = E(\tau|R=c) = \hat{\tau}_{SRD} = \frac{\sum \limits_{c&lt;R&lt;c+h} Y_i}{\sum (c&lt;R&lt;c+h)} - \frac{\sum \limits_{c-h&lt;R&lt;c} Y_i}{\sum (c-h&lt;R&lt;c)}}\)</span>, как и раньше это эквивалентно регресии <span class="math inline">\(\displaystyle{Y = \beta_1 + \tau \cdot T}\)</span>. Добавлять контрольные переменные можно, это позволит дополнительно снизить дисперсию оценки. Иногда еще добавляют контроль на тренд <span class="math inline">\(\displaystyle{Y = \beta_1 + \tau \cdot T + \beta_2 \cdot R + \beta_3 \cdot T \cdot R}\)</span>.</p>
+<p>Важно отметить, что чем более широкое окно мы возьмём, тем больше наблюдений мы захватим и тем более точную оценку с меньшей дисперисей мы получим (и с более узким доверительным интервалом, что хорошо!), однако если взять слишком широкое окно, то это чревато тем, что мы захватим слишком непохожие друг на друга наблюдения и наша оценка получится смещенной. Верно и обратно, чем меньше окно, тем меньше вероятность нарваться на смещение, однако дисперсия оценки (и доверительный интервал) с маленьким окном будет выше:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/regressiondiscontinuity-fetterbw-1.PNG" class="img-fluid" style="width:70.0%"></p>
+</div>
+</div>
+<p>Существует некоторое дополнение метода, связанное с перевзвешиванием данных. Мы предположили, что наблюдения, которые находятся внутри выбранного нами окна, достаточно похожи друг на друга, чтобы мы могли их сравнивать. Однако чем ближе наблюдения к отсечке, тем больше они похожи друг на друга. Может стоит придавать им больший вес? Для этого были придуманы оценки с помощью ядер (по сути взвешенный МНК). Некоторые из них нарисованы на рисунке ниже.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.53.14.PNG" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<p>Тогда задача МНК примет вид:</p>
+<p><span class="math display">\[ \hat{\mathbb{\beta}} = \underset{\beta_0, \beta_1, \beta_2, \tau}{\operatorname{argmin}} ESS = \underset{\beta_0, \beta_1, \beta_2, \tau}{\operatorname{argmin}} \sum_{i=1}^n\left[\left(y_i-\hat{\beta}_0-\hat{\beta}_1 R_i-\hat{\tau} T_i-\beta_2 T_i R_i\right)^2\right. \cdot \left.K\left(\frac{R_i-c}{h}\right)\right]\]</span></p>
+<p>где <span class="math inline">\(K(.)\)</span> – функция плотности ядерной оценки.</p>
+<p>Например, если мы хотим для всех наблюдений использовать одинаковые веса, то мы используем равномерное распределение, функция плотности которого равна:</p>
+<p><span class="math display">\[K\left(\frac{R_i-c}{h}\right)=\left\{\begin{array}{l}
+\frac{1}{2 h}, \text{внутри окна} \\
+0, \text{вне окна}
+\end{array}\right.\]</span></p>
+</section>
+<section id="пример" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="пример"><span class="header-section-number">8.2</span> Пример</h2>
+<p>Одним из вопросов государственной политики является вопрос о том, каким должен быть минимальный возраст, с которого разрешается продавать алкоголь.В большинстве стран этот возраст установлен на уровне 18 лет, но в США (в большинстве штатов) в настоящее время он составляет 21 год.</p>
+<p>Проявляют ли США чрезмерную осторожность? Можно ли снизить допустимый возраст до 18 лет? Или это тот случай, когда другие страны должны повысить границу минимального возраста употребления алкоголя?</p>
+<p>Один из способов ответить на этот вопрос – оценить ситуацию с точки зрения уровня смертности (Carpenter and Dobkin, 2009). С точки зрения государственной политики можно утверждать, что мы должны максимально снизить уровень смертности. Если потребление алкоголя значительно увеличивает смертность, нам следует избегать снижения минимального возраста употребления алкоголя.</p>
+<p>Чтобы оценить влияние алкоголя на смертность, мы могли бы использовать тот факт, что возраст, в котором разрешено употребление алкоголя, создает разрыв. В США люди младше 21 года не пьют (или пьют гораздо меньше), а те, кому чуть больше 21 года, пьют. Это означает, что вероятность пьянства резко возрастает в возрасте 21 года, и это то, что мы можем исследовать с помощью RDD.</p>
+<p>Для начала импортируем данные из статьи (Carpenter and Dobkin, 2009):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.dta</span>(<span class="st">"AEJfigs.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Имеем следующие переменные:</p>
+<ul>
+<li>agecell – возраст</li>
+<li>количество смертей на 100 000 людей в данной возрастной группе
+<ul>
+<li>all – общее количество смертей</li>
+<li>internal – смерти от внутренних причин (состояние здоровья и т.д.)</li>
+<li>external – смерти от внешних причин (связанные с воздействием окружающей среды, разные травмы и т.д.), в том числе:
+<ul>
+<li>alcohol – смерти, вызванные алкоголем</li>
+<li>homicide – смерти, связанные с убийствами</li>
+<li>suicide – самоубийства</li>
+<li>mva – смерти, вызванные ДТП</li>
+<li>drugs – смерти, вызванные наркотиками</li>
+<li>externalother – другие внешние причины</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(data, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=====================================================
+Statistic           N   Mean  St. Dev.  Min     Max  
+-----------------------------------------------------
+agecell             50 21.000  1.127   19.068 22.932 
+all                 48 95.673  3.831   88.428 105.268
+allfitted           50 95.803  3.286   91.706 102.892
+internal            48 20.285  2.254   15.977 24.373 
+internalfitted      50 20.281  1.995   16.738 24.044 
+external            48 75.387  2.986   71.341 83.331 
+externalfitted      50 75.522  2.270   73.158 81.784 
+alcohol             48 1.257   0.350   0.639   2.519 
+alcoholfitted       50 1.267   0.260   0.794   1.817 
+homicide            48 16.912  0.730   14.948 18.411 
+homicidefitted      50 16.953  0.453   16.261 17.762 
+suicide             48 12.352  1.063   10.889 14.832 
+suicidefitted       50 12.363  0.760   11.592 13.547 
+mva                 48 31.623  2.385   26.855 36.385 
+mvafitted           50 31.680  2.003   27.868 34.818 
+drugs               48 4.250   0.616   3.202   5.565 
+drugsfitted         50 4.255   0.521   3.449   5.130 
+externalother       48 9.599   0.748   7.973  11.483 
+externalotherfitted 50 9.610   0.465   8.388  10.353 
+-----------------------------------------------------</code></pre>
+</div>
+</div>
+<section id="подготовка-данных" class="level4" data-number="8.2.0.1">
+<h4 data-number="8.2.0.1" class="anchored" data-anchor-id="подготовка-данных"><span class="header-section-number">8.2.0.1</span> Подготовка данных</h4>
+<p>Сначала оценим эффект вручную с помощью МНК без использования ядер, затем воспользуемся специальным пакетом.</p>
+<p>Для этого создадим тритмент переменную на основе отсечки и переменную квадрата возраста (наверняка вы уже встречались с примерами, когда зависимость от возраста бывает квадратичной, то есть существует какой-то минимальный или максимальный возраст в зависимости <span class="math inline">\(Y\)</span> от <span class="math inline">\(X\)</span>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>T <span class="ot">&lt;-</span> data<span class="sc">$</span>agecell<span class="sc">&gt;=</span><span class="dv">21</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>age2 <span class="ot">&lt;-</span> data<span class="sc">$</span>agecell<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Далее нам нужно ограничить данные окном. Предположительно выберем окно шириной в один год. Далее пакет нам посчитает оптимальную ширину окна, а пока сделаем пробный вариант. Для этого отфильтруем наши данные по окну:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data_h <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(agecell<span class="sc">&gt;</span><span class="dv">20</span> <span class="sc">&amp;</span> agecell<span class="sc">&lt;</span><span class="dv">22</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="вручную-с-помощью-регрессии" class="level4" data-number="8.2.0.2">
+<h4 data-number="8.2.0.2" class="anchored" data-anchor-id="вручную-с-помощью-регрессии"><span class="header-section-number">8.2.0.2</span> Вручную с помощью регрессии</h4>
+<section id="оценка-разрыва-в-общей-смертности" class="level5" data-number="8.2.0.2.1">
+<h5 data-number="8.2.0.2.1" class="anchored" data-anchor-id="оценка-разрыва-в-общей-смертности"><span class="header-section-number">8.2.0.2.1</span> Оценка разрыва в общей смертности</h5>
+<p>Теперь непосредственно регрессия:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod_ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(all <span class="sc">~</span> agecell <span class="sc">+</span> T, <span class="at">data =</span> data_h)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_ols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = all ~ agecell + T, data = data_h)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.2577 -1.1736  0.0033  1.2509  3.9358 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  160.094     34.860   4.592 0.000158 ***
+agecell       -3.256      1.700  -1.916 0.069094 .  
+TTRUE          9.753      1.934   5.043 5.41e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.362 on 21 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.7029,    Adjusted R-squared:  0.6746 
+F-statistic: 24.84 on 2 and 21 DF,  p-value: 2.924e-06</code></pre>
+</div>
+</div>
+<p>Получили, что смертность людей старше 21 года на 9.8 выше, чем среди людей моложе 21.</p>
+<p>Тот же результат, но графически:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_h, <span class="fu">aes</span>(<span class="at">x =</span> agecell, <span class="at">y =</span> all, <span class="at">color =</span> T)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mortality rate (per 100.000)"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Посмотрим то же самое, но теперь еще добавим квадрат возраста:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mod_ols2<span class="ot">&lt;-</span><span class="fu">lm</span>(all <span class="sc">~</span> agecell <span class="sc">+</span> age2 <span class="sc">+</span> T, <span class="at">data =</span> data_h)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_ols2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = all ~ agecell + age2 + T, data = data_h)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.2063 -1.0465 -0.1178  1.0289  4.1069 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -242.2799   749.5323  -0.323    0.750    
+agecell       35.0933    71.3774   0.492    0.628    
+age2          -0.9131     1.6990  -0.537    0.597    
+TTRUE          9.7533     1.9676   4.957 7.59e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.403 on 20 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.7071,    Adjusted R-squared:  0.6632 
+F-statistic: 16.09 on 3 and 20 DF,  p-value: 1.473e-05</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_h, <span class="fu">aes</span>(<span class="at">x =</span> agecell, <span class="at">y =</span> all, <span class="at">color =</span> T)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">formula =</span> y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x <span class="sc">^</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mortality rate (per 100.000)"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Мы поняли, что разрыв точно есть и он значим. Поробуем разобраться за счет каких причин он происходит.</p>
+</section>
+<section id="разбивка-на-внутренние-и-внешние-причины" class="level5" data-number="8.2.0.2.2">
+<h5 data-number="8.2.0.2.2" class="anchored" data-anchor-id="разбивка-на-внутренние-и-внешние-причины"><span class="header-section-number">8.2.0.2.2</span> Разбивка на внутренние и внешние причины</h5>
+<section id="внутренние" class="level6" data-number="8.2.0.2.2.1">
+<h6 data-number="8.2.0.2.2.1" class="anchored" data-anchor-id="внутренние"><span class="header-section-number">8.2.0.2.2.1</span> Внутренние</h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mod_internal<span class="ot">&lt;-</span><span class="fu">lm</span>(internal <span class="sc">~</span> agecell <span class="sc">+</span> T, <span class="at">data =</span> data_h)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_internal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = internal ~ agecell + T, data = data_h)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.92574 -0.62316  0.07478  0.72291  1.38703 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept) 19.686485  13.438734   1.465   0.1578  
+agecell     -0.009418   0.655204  -0.014   0.9887  
+TTRUE        1.692263   0.745552   2.270   0.0339 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.9107 on 21 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.4938,    Adjusted R-squared:  0.4456 
+F-statistic: 10.24 on 2 and 21 DF,  p-value: 0.0007851</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_h, <span class="fu">aes</span>(<span class="at">x =</span> agecell, <span class="at">y =</span> internal, <span class="at">color =</span> T)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mortality rate (per 100.000)"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Разыв маленький (гораздо меньше общего) и значим только на 5% уровне.</p>
+</section>
+<section id="внешние" class="level6 tabset tabset-fade tabset-pills" data-number="8.2.0.2.2.2">
+<h6 class="tabset tabset-fade tabset-pills anchored" data-number="8.2.0.2.2.2" data-anchor-id="внешние"><span class="header-section-number">8.2.0.2.2.2</span> Внешние</h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mod_external <span class="ot">&lt;-</span> <span class="fu">lm</span>(external <span class="sc">~</span> agecell <span class="sc">+</span> T, <span class="at">data =</span> data_h)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_external)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = external ~ agecell + T, data = data_h)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.1759 -1.3786 -0.1486  1.7247  4.2633 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  140.408     33.698   4.167 0.000436 ***
+agecell       -3.247      1.643  -1.976 0.061409 .  
+TTRUE          8.061      1.869   4.312 0.000308 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.284 on 21 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.5967,    Adjusted R-squared:  0.5582 
+F-statistic: 15.53 on 2 and 21 DF,  p-value: 7.236e-05</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_h, <span class="fu">aes</span>(<span class="at">x =</span> agecell, <span class="at">y =</span> external, <span class="at">color =</span> T)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mortality rate (per 100.000)"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Видим, что общая смертность преимущественно объясняется разрывом в смертности от внешних причин, то есть гипотеза про последствия от снижения минимального возраста продажи алкоголя пока не отвергается. Рассмотрим за счет каких причин возникает разрыв в смертности от внешних причин.</p>
+<p>Преимущественно это алкоголь и ДТП.</p>
+<section id="алкоголь" class="level7">
+<p class="heading">Алкоголь</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mod_alcohol <span class="ot">&lt;-</span> <span class="fu">lm</span>(alcohol <span class="sc">~</span> agecell <span class="sc">+</span> T, <span class="at">data =</span> data_h)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_alcohol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = alcohol ~ agecell + T, data = data_h)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.4320 -0.1958 -0.0712  0.1912  0.8790 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)   7.7760     4.2741   1.819  0.08315 . 
+agecell      -0.3268     0.2084  -1.568  0.13177   
+TTRUE         0.7405     0.2371   3.123  0.00515 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2897 on 21 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.4161,    Adjusted R-squared:  0.3605 
+F-statistic: 7.481 on 2 and 21 DF,  p-value: 0.003522</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_h, <span class="fu">aes</span>(<span class="at">x =</span> agecell, <span class="at">y =</span> alcohol, <span class="at">color =</span> T)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mortality rate (per 100.000)"</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="убийства" class="level7">
+<p class="heading">Убийства</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mod_homicide <span class="ot">&lt;-</span> <span class="fu">lm</span>(homicide <span class="sc">~</span> agecell <span class="sc">+</span> T, <span class="at">data =</span> data_h)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_homicide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = homicide ~ agecell + T, data = data_h)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.13706 -0.35555  0.03508  0.35236  1.08442 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  12.4593     9.8133   1.270    0.218
+agecell       0.2211     0.4784   0.462    0.649
+TTRUE         0.1638     0.5444   0.301    0.766
+
+Residual standard error: 0.665 on 21 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.09453,   Adjusted R-squared:  0.008298 
+F-statistic: 1.096 on 2 and 21 DF,  p-value: 0.3525</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_h, <span class="fu">aes</span>(<span class="at">x =</span> agecell, <span class="at">y =</span> homicide, <span class="at">color =</span> T)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mortality rate (per 100.000)"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="самоубийства" class="level7">
+<p class="heading">Самоубийства</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mod_suicide <span class="ot">&lt;-</span> <span class="fu">lm</span>(suicide <span class="sc">~</span> agecell <span class="sc">+</span> T, <span class="at">data =</span> data_h)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_suicide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = suicide ~ agecell + T, data = data_h)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.54946 -0.57179  0.09345  0.56743  1.46789 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept) 11.754110  12.491886   0.941   0.3574  
+agecell     -0.005422   0.609040  -0.009   0.9930  
+TTRUE        1.724426   0.693023   2.488   0.0213 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8466 on 21 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.5409,    Adjusted R-squared:  0.4972 
+F-statistic: 12.37 on 2 and 21 DF,  p-value: 0.0002819</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_h, <span class="fu">aes</span>(<span class="at">x =</span> agecell, <span class="at">y =</span> suicide, <span class="at">color =</span> T)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mortality rate (per 100.000)"</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="дтп" class="level7">
+<p class="heading">ДТП</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mod_mva <span class="ot">&lt;-</span> <span class="fu">lm</span>(mva <span class="sc">~</span> agecell <span class="sc">+</span> T, <span class="at">data =</span> data_h)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_mva)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mva ~ agecell + T, data = data_h)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1088 -0.8810 -0.3918  0.7157  3.1297 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 102.4206    19.7941   5.174 3.98e-05 ***
+agecell      -3.4683     0.9651  -3.594 0.001708 ** 
+TTRUE         4.7593     1.0981   4.334 0.000292 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.341 on 21 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.4736,    Adjusted R-squared:  0.4234 
+F-statistic: 9.445 on 2 and 21 DF,  p-value: 0.001186</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_h, <span class="fu">aes</span>(<span class="at">x =</span> agecell, <span class="at">y =</span> mva, <span class="at">color =</span> T)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mortality rate (per 100.000)"</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="наркотики" class="level7">
+<p class="heading">Наркотики</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mod_drugs <span class="ot">&lt;-</span> <span class="fu">lm</span>(drugs <span class="sc">~</span> agecell <span class="sc">+</span> T, <span class="at">data =</span> data_h)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_drugs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = drugs ~ agecell + T, data = data_h)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.62926 -0.27343  0.02269  0.29434  0.42476 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  -4.9942     4.9216  -1.015   0.3218  
+agecell       0.4355     0.2400   1.815   0.0838 .
+TTRUE         0.2065     0.2730   0.756   0.4578  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3335 on 21 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.5446,    Adjusted R-squared:  0.5013 
+F-statistic: 12.56 on 2 and 21 DF,  p-value: 0.0002587</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_h, <span class="fu">aes</span>(<span class="at">x =</span> agecell, <span class="at">y =</span> drugs, <span class="at">color =</span> T)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mortality rate (per 100.000)"</span>,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="прочие-внешние-причины" class="level7">
+<p class="heading">Прочие внешние причины</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mod_externalother <span class="ot">&lt;-</span> <span class="fu">lm</span>(externalother <span class="sc">~</span> agecell <span class="sc">+</span> T, <span class="at">data =</span> data_h)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_externalother)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = externalother ~ agecell + T, data = data_h)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.14575 -0.38546 -0.00161  0.35788  0.85794 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  13.1630     7.8140   1.685    0.107  
+agecell      -0.1856     0.3810  -0.487    0.631  
+TTRUE         0.8308     0.4335   1.917    0.069 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5295 on 21 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.305, Adjusted R-squared:  0.2388 
+F-statistic: 4.608 on 2 and 21 DF,  p-value: 0.02192</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_h, <span class="fu">aes</span>(<span class="at">x =</span> agecell, <span class="at">y =</span> externalother, <span class="at">color =</span> T)) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mortality rate (per 100.000)"</span>,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="с-помощью-пакета-rdd" class="level4" data-number="8.2.0.3">
+<h4 data-number="8.2.0.3" class="anchored" data-anchor-id="с-помощью-пакета-rdd"><span class="header-section-number">8.2.0.3</span> С помощью пакета rdd</h4>
+<p>Теперь та же оценка, но с помощью специального пакета, где можно выбрать ядра и ширину окна.</p>
+<section id="выбор-окна" class="level5" data-number="8.2.0.3.1">
+<h5 data-number="8.2.0.3.1" class="anchored" data-anchor-id="выбор-окна"><span class="header-section-number">8.2.0.3.1</span> Выбор окна</h5>
+<p>Мы можем установить любое окно вручную, используя аргумент <code>bw</code>, а также ядро с помощью аргумента <code>kernel</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdd)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>mod_rdd <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data=</span>data, <span class="at">cutpoint =</span> <span class="dv">21</span>, <span class="at">bw =</span> <span class="dv">1</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_rdd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+RDestimate(formula = all ~ agecell, data = data, cutpoint = 21, 
+    bw = 1)
+
+Type:
+sharp 
+
+Estimates:
+           Bandwidth  Observations  Estimate  Std. Error  z value  Pr(&gt;|z|) 
+LATE       1.0        24            9.700     1.932       5.022    5.112e-07
+Half-BW    0.5        12            9.567     2.118       4.517    6.283e-06
+Double-BW  2.0        48            8.381     1.345       6.232    4.603e-10
+              
+LATE       ***
+Half-BW    ***
+Double-BW  ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+F-statistics:
+           F      Num. DoF  Denom. DoF  p        
+LATE       26.74  3         20          6.711e-07
+Half-BW    15.27  3          8          2.257e-03
+Double-BW  36.57  3         44          1.024e-11</code></pre>
+</div>
+</div>
+<ul>
+<li>Bandwidth – ширина окна</li>
+<li>Observations – количество наблюдений, которые попали в окно</li>
+<li>Estimate – оценка эффекта</li>
+<li>Std. Error стандартная ошибка</li>
+<li>Pr(&gt;|z|) – p-value</li>
+</ul>
+<p>В строке LATE указано оптимально окно, Half-BW в 2 раза меньшего оптимального, а Double-BW в 2 раза больше.</p>
+<p>Видим, что оценка совпала практически в точности с той, что мы получили вручную (в п. 2.2 получили эффект 9.753).</p>
+<p>Далее воспользуемся встренной опцией расчета оптимальной ширины окна:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mod_rdd1 <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data=</span>data, <span class="at">cutpoint =</span> <span class="dv">21</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_rdd1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+RDestimate(formula = all ~ agecell, data = data, cutpoint = 21)
+
+Type:
+sharp 
+
+Estimates:
+           Bandwidth  Observations  Estimate  Std. Error  z value  Pr(&gt;|z|) 
+LATE       1.6561     40            9.001     1.480       6.080    1.199e-09
+Half-BW    0.8281     20            9.579     1.914       5.004    5.609e-07
+Double-BW  3.3123     48            7.953     1.278       6.223    4.882e-10
+              
+LATE       ***
+Half-BW    ***
+Double-BW  ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+F-statistics:
+           F      Num. DoF  Denom. DoF  p        
+LATE       33.08  3         36          3.799e-10
+Half-BW    29.05  3         16          2.078e-06
+Double-BW  32.54  3         44          6.129e-11</code></pre>
+</div>
+</div>
+<p>Оказалось, что оптимальное окно шире того, что мы использовали и равно 1.65.</p>
+</section>
+<section id="выбор-ядер" class="level5 tabset tabset-fade tabset-pills" data-number="8.2.0.3.2">
+<h5 class="tabset tabset-fade tabset-pills anchored" data-number="8.2.0.3.2" data-anchor-id="выбор-ядер"><span class="header-section-number">8.2.0.3.2</span> Выбор ядер</h5>
+<p>Проверим на робастность с разными ядрами.</p>
+<p>Веса из равномерного распределения одинаковые всех наблюдений, поэтму оценка почти совпадает с МНК, в остальных случаях оценка получилась выше и примерно равна 9.</p>
+<p>Аналогичным образом мы можем проверить разрыв по всем видам причин.</p>
+<section id="прямоугольное-равномерное" class="level6" data-number="8.2.0.3.2.1">
+<h6 data-number="8.2.0.3.2.1" class="anchored" data-anchor-id="прямоугольное-равномерное"><span class="header-section-number">8.2.0.3.2.1</span> Прямоугольное (равномерное)</h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mod_kernel1 <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data =</span> data, <span class="at">cutpoint =</span> <span class="dv">21</span>, <span class="at">kernel =</span> <span class="st">"rectangular"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_kernel1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+RDestimate(formula = all ~ agecell, data = data, cutpoint = 21, 
+    kernel = "rectangular")
+
+Type:
+sharp 
+
+Estimates:
+           Bandwidth  Observations  Estimate  Std. Error  z value  Pr(&gt;|z|) 
+LATE       2.603      48            7.663     1.273       6.017    1.776e-09
+Half-BW    1.302      32            9.094     1.498       6.072    1.267e-09
+Double-BW  5.207      48            7.663     1.273       6.017    1.776e-09
+              
+LATE       ***
+Half-BW    ***
+Double-BW  ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+F-statistics:
+           F      Num. DoF  Denom. DoF  p        
+LATE       29.47  3         44          2.651e-10
+Half-BW    21.81  3         28          3.470e-07
+Double-BW  29.47  3         44          2.651e-10</code></pre>
+</div>
+</div>
+</section>
+<section id="треугольное" class="level6" data-number="8.2.0.3.2.2">
+<h6 data-number="8.2.0.3.2.2" class="anchored" data-anchor-id="треугольное"><span class="header-section-number">8.2.0.3.2.2</span> Треугольное</h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mod_kernel2 <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data=</span>data, <span class="at">cutpoint =</span> <span class="dv">21</span>, <span class="at">kernel =</span> <span class="st">"triangular"</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_kernel2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+RDestimate(formula = all ~ agecell, data = data, cutpoint = 21, 
+    kernel = "triangular")
+
+Type:
+sharp 
+
+Estimates:
+           Bandwidth  Observations  Estimate  Std. Error  z value  Pr(&gt;|z|) 
+LATE       1.6561     40            9.001     1.480       6.080    1.199e-09
+Half-BW    0.8281     20            9.579     1.914       5.004    5.609e-07
+Double-BW  3.3123     48            7.953     1.278       6.223    4.882e-10
+              
+LATE       ***
+Half-BW    ***
+Double-BW  ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+F-statistics:
+           F      Num. DoF  Denom. DoF  p        
+LATE       33.08  3         36          3.799e-10
+Half-BW    29.05  3         16          2.078e-06
+Double-BW  32.54  3         44          6.129e-11</code></pre>
+</div>
+</div>
+</section>
+<section id="епанечникова" class="level6" data-number="8.2.0.3.2.3">
+<h6 data-number="8.2.0.3.2.3" class="anchored" data-anchor-id="епанечникова"><span class="header-section-number">8.2.0.3.2.3</span> Епанечникова</h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>mod_kernel3 <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data=</span>data, <span class="at">cutpoint =</span> <span class="dv">21</span>, <span class="at">kernel =</span> <span class="st">"epanechnikov"</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_kernel3) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+RDestimate(formula = all ~ agecell, data = data, cutpoint = 21, 
+    kernel = "epanechnikov")
+
+Type:
+sharp 
+
+Estimates:
+           Bandwidth  Observations  Estimate  Std. Error  z value  Pr(&gt;|z|) 
+LATE       1.5417     38            9.079     1.480       6.135    8.502e-10
+Half-BW    0.7708     18            9.450     1.998       4.730    2.242e-06
+Double-BW  3.0833     48            7.779     1.271       6.121    9.298e-10
+              
+LATE       ***
+Half-BW    ***
+Double-BW  ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+F-statistics:
+           F      Num. DoF  Denom. DoF  p        
+LATE       29.18  3         34          3.205e-09
+Half-BW    26.01  3         14          1.104e-05
+Double-BW  30.70  3         44          1.457e-10</code></pre>
+</div>
+</div>
+</section>
+<section id="квадратное" class="level6" data-number="8.2.0.3.2.4">
+<h6 data-number="8.2.0.3.2.4" class="anchored" data-anchor-id="квадратное"><span class="header-section-number">8.2.0.3.2.4</span> Квадратное</h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>mod_kernel4 <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data=</span>data, <span class="at">cutpoint =</span> <span class="dv">21</span>, <span class="at">kernel =</span> <span class="st">"quartic"</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_kernel4) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+RDestimate(formula = all ~ agecell, data = data, cutpoint = 21, 
+    kernel = "quartic")
+
+Type:
+sharp 
+
+Estimates:
+           Bandwidth  Observations  Estimate  Std. Error  z value  Pr(&gt;|z|) 
+LATE       1.7603     42            9.046     1.469       6.157    7.415e-10
+Half-BW    0.8801     22            9.445     1.950       4.845    1.269e-06
+Double-BW  3.5205     48            7.842     1.271       6.168    6.904e-10
+              
+LATE       ***
+Half-BW    ***
+Double-BW  ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+F-statistics:
+           F      Num. DoF  Denom. DoF  p        
+LATE       34.26  3         38          1.350e-10
+Half-BW    32.25  3         18          3.759e-07
+Double-BW  31.29  3         44          1.100e-10</code></pre>
+</div>
+</div>
+</section>
+<section id="гауссиан" class="level6" data-number="8.2.0.3.2.5">
+<h6 data-number="8.2.0.3.2.5" class="anchored" data-anchor-id="гауссиан"><span class="header-section-number">8.2.0.3.2.5</span> Гауссиан</h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>mod_kernel5 <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data=</span>data, <span class="at">cutpoint =</span> <span class="dv">21</span>, <span class="at">kernel =</span> <span class="st">"gaussian"</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_kernel5) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+RDestimate(formula = all ~ agecell, data = data, cutpoint = 21, 
+    kernel = "gaussian")
+
+Type:
+sharp 
+
+Estimates:
+           Bandwidth  Observations  Estimate  Std. Error  z value  Pr(&gt;|z|) 
+LATE       0.6064     48            9.068     1.490       6.084    1.172e-09
+Half-BW    0.3032     48            9.431     1.838       5.132    2.869e-07
+Double-BW  1.2128     48            8.027     1.279       6.279    3.418e-10
+              
+LATE       ***
+Half-BW    ***
+Double-BW  ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+F-statistics:
+           F      Num. DoF  Denom. DoF  p        
+LATE       44.94  3         44          3.770e-13
+Half-BW    73.65  3         44          0.000e+00
+Double-BW  33.02  3         44          4.915e-11</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="bias-variance-tradeoff" class="level4" data-number="8.2.0.4">
+<h4 data-number="8.2.0.4" class="anchored" data-anchor-id="bias-variance-tradeoff"><span class="header-section-number">8.2.0.4</span> Bias-variance tradeoff</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>est<span class="ot">&lt;-</span><span class="fu">c</span>()</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>){</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  reg_rdd <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data =</span> data, <span class="at">cutpoint =</span> <span class="dv">21</span>, <span class="at">bw=</span>i, <span class="at">kernel =</span> <span class="st">"triangular"</span>)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  est[i]<span class="ot">&lt;-</span>reg_rdd<span class="sc">$</span>est[<span class="dv">1</span>]</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>se<span class="ot">&lt;-</span><span class="fu">c</span>()</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>){</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  reg_rdd <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data =</span> data, <span class="at">cutpoint =</span> <span class="dv">21</span>, <span class="at">bw=</span>i, <span class="at">kernel =</span> <span class="st">"triangular"</span>)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  se[i]<span class="ot">&lt;-</span>reg_rdd<span class="sc">$</span>se[<span class="dv">1</span>]</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>CIlow <span class="ot">&lt;-</span> est <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>se</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>CIup <span class="ot">&lt;-</span> est <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">errbar</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">y =</span> est, <span class="at">yplus =</span> CIup, <span class="at">yminus =</span> CIlow, <span class="at">type =</span> <span class="st">'b'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="regression_discontinuity_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="плацебо-тест" class="level4" data-number="8.2.0.5">
+<h4 data-number="8.2.0.5" class="anchored" data-anchor-id="плацебо-тест"><span class="header-section-number">8.2.0.5</span> Плацебо тест</h4>
+<p>Отсечка 20</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>data_new <span class="ot">&lt;-</span> data[data<span class="sc">$</span>agecell <span class="sc">&lt;</span> <span class="dv">21</span>,]</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>mod_rdd_20 <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data =</span> data_new, <span class="at">cutpoint =</span> <span class="dv">20</span>, <span class="at">kernel =</span> <span class="st">"triangular"</span>)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_rdd_20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+RDestimate(formula = all ~ agecell, data = data_new, cutpoint = 20, 
+    kernel = "triangular")
+
+Type:
+sharp 
+
+Estimates:
+           Bandwidth  Observations  Estimate  Std. Error  z value  Pr(&gt;|z|)   
+LATE       0.5553     14             0.7998   3.209        0.2493  0.8032     
+Half-BW    0.2777      7            -3.4455   2.663       -1.2940  0.1956     
+Double-BW  1.1107     24             0.7401   2.088        0.3544  0.7230     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+F-statistics:
+           F       Num. DoF  Denom. DoF  p     
+LATE       0.5695  3         10          0.7047
+Half-BW    0.5823  3          3          0.6678
+Double-BW  1.4173  3         20          0.5342</code></pre>
+</div>
+</div>
+<p>Отсечка 20.5</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>data_new <span class="ot">&lt;-</span> data[data<span class="sc">$</span>agecell <span class="sc">&lt;</span> <span class="dv">21</span>,]</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>mod_rdd_20<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data =</span> data_new, <span class="at">cutpoint =</span> <span class="fl">20.5</span>, <span class="at">kernel =</span> <span class="st">"triangular"</span>)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_rdd_20<span class="fl">.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+RDestimate(formula = all ~ agecell, data = data_new, cutpoint = 20.5, 
+    kernel = "triangular")
+
+Type:
+sharp 
+
+Estimates:
+           Bandwidth  Observations  Estimate  Std. Error  z value  Pr(&gt;|z|)   
+LATE       0.4051     10            2.3938    1.7961      1.3328   0.1826     
+Half-BW    0.2025      5            0.9779    0.7401      1.3212   0.1864     
+Double-BW  0.8101     16            0.4816    1.3249      0.3635   0.7162     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+F-statistics:
+           F       Num. DoF  Denom. DoF  p     
+LATE       1.4778  3          6          0.6246
+Half-BW    1.6303  3          1          0.9813
+Double-BW  0.9465  3         12          0.8978</code></pre>
+</div>
+</div>
+<p>Отсечка 22</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>data_new2 <span class="ot">&lt;-</span> data[data<span class="sc">$</span>agecell <span class="sc">&gt;</span> <span class="dv">21</span>,]</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>mod_rdd_22 <span class="ot">&lt;-</span> <span class="fu">RDestimate</span>(all <span class="sc">~</span> agecell, <span class="at">data =</span> data_new2, <span class="at">cutpoint =</span> <span class="dv">22</span>, <span class="at">kernel =</span> <span class="st">"triangular"</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_rdd_22)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+RDestimate(formula = all ~ agecell, data = data_new2, cutpoint = 22, 
+    kernel = "triangular")
+
+Type:
+sharp 
+
+Estimates:
+           Bandwidth  Observations  Estimate  Std. Error  z value  Pr(&gt;|z|)   
+LATE       0.8808     22            -0.2917   2.125       -0.1373  0.8908     
+Half-BW    0.4404     11            -0.6552   3.344       -0.1959  0.8447     
+Double-BW  1.7616     24             0.2413   1.894        0.1274  0.8986     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+F-statistics:
+           F       Num. DoF  Denom. DoF  p      
+LATE       1.1277  3         18          0.72852
+Half-BW    0.2613  3          7          0.29760
+Double-BW  3.4606  3         20          0.07151</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="размытая-разрывная-регрессия" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="размытая-разрывная-регрессия"><span class="header-section-number">8.3</span> Размытая разрывная регрессия</h2>
+<p>Как известно, строгость правил смягчается необязательностью их исполнения, именно под этим слоганом работает метод размытой разрывной регрессии. В прошлом пукте мы предполагали, что все, у кого running variable больше cutoff, попадают в группу воздействия. Однако это не всегда бывает так. Бывает, что несмотря на предписание оказаться в группе воздействия, человек отказывается в этой опции или несмотря на то, что человеку предписано быть в контрольной группе, он находит возможность оказаться в группе воздействия. То есть мы снова столкнулись с ситуацией эндогенного тритмента.</p>
+<p>Как устроен мир: <span class="math inline">\(Z-&gt;T-&gt;Y\)</span></p>
+<ul>
+<li>Reduced form (Intention to treat): <span class="math inline">\(Z \rightarrow Y\)</span> -First stage: <span class="math inline">\(Z \rightarrow T\)</span></li>
+<li>Second stage: <span class="math inline">\(T-&gt;Y\)</span></li>
+</ul>
+<p>Обозначения:</p>
+<ul>
+<li><span class="math inline">\(Y(00), Y(10), Y(01), Y(11)-\)</span> Зависимая переменная (potential outcomes)</li>
+<li><span class="math inline">\(T(1), T(0)\)</span> - Переменная интереса (теперь тоже с потенциальными исходами)</li>
+<li>Z - Инструментальная переменная (instrumental variable)</li>
+<li><span class="math inline">\(X\)</span> - Независимые переменные (Covariates)</li>
+<li>Мы наблюдаем только <span class="math inline">\((Y, Z, T, X)\)</span>, где <span class="math inline">\(T=Z T(1)+(1-Z) T(0)\)</span> - observed treatment <span class="math inline">\(Y=\)</span> длинная формула - observed outcomes</li>
+</ul>
+<p>Предпосылки:</p>
+<ul>
+<li><span class="math inline">\(\left(Y_{i j}, T_i, X\right) \perp Z\)</span> – рандомизация</li>
+<li><span class="math inline">\(Y(T, Z=1)=Y(T, Z=0)\)</span> – exclusion restriction: напрямую <span class="math inline">\(\mathrm{T}\)</span> влияет на <span class="math inline">\(\mathrm{Y}\)</span>, а не <span class="math inline">\(Z\)</span> напрямую не влияет на <span class="math inline">\(Y\)</span></li>
+<li>SUTVA</li>
+<li><span class="math inline">\(T|Z=1&gt;=T| Z=0\)</span> – монотонность
+<ul>
+<li>Мы хотим, чтобы никогда не было <span class="math inline">\(T_1&lt;T_0\)</span>, но бывало такое, что <span class="math inline">\(T_1&gt;T_0\)</span></li>
+<li>Бывает одностороннее неповиновение тритменту (one-sided noncompliance)</li>
+<li>Бывает двустороннее неповиновение тритменту (two-sided noncompliance)</li>
+</ul></li>
+</ul>
+<p>Когда выполнены все эти предпосылки, мы говорим, что эффект идентифицирован.</p>
+<p>Если вы вспомните изученный ранее курс эконометрики, то с подобным вы уже встречались в теме LATE.</p>
+<p>Пусть <span class="math inline">\(Z\)</span> обозначает предписание исследователей о том, в какой группе длжно оказаться наблюдение, а <span class="math inline">\(T\)</span> – в какой группе оно реально оказалось.</p>
+<p>Подробнее про предпосылки:</p>
+<ul>
+<li><span class="math inline">\(P\left(T_1 \geq T_0\right)=1-\)</span> монотонность. На самом деле возможных случает в только 4</li>
+<li>Always takers: <span class="math inline">\(T_1=1, T_0=1\)</span></li>
+<li>Compliers: <span class="math inline">\(T_1=1, T_0=0\)</span></li>
+<li>Never takers: <span class="math inline">\(T_1=0, T_0=0\)</span> Defiers: <span class="math inline">\(T_1=0, T_0=1\)</span></li>
+<li>Two-sided noncompliance: no Defiers</li>
+<li>One-sided noncompliance: no Defiers and no Always takers</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/RD_sharp_fuzzy.PNG" class="img-fluid" style="width:70.0%"></p>
+</div>
+</div>
+<p>Формула:</p>
+<p><span class="math inline">\(\mathrm{ITT}_T=\bar{T}_{Z=1}-\bar{T}_{Z=0}=P \text { (compliers) }\)</span> (оценка первого шага), физический смысл – доля комплаеров в выборке</p>
+<p><span class="math inline">\(\mathrm{ITT}_Y=\bar{Y}_{Z=1}-\bar{Y}_{Z=0}\)</span> (оценка второго шага), физический смысл – “оценка эффекта от намерения”, Intention to treat</p>
+<p><span class="math inline">\(\mathrm{TE}=\frac{\mathrm{ITT}_Y}{\mathrm{ITT}_T}=E(\tau \mid \text { Compliers })=\text { LATE }\)</span> – тритмент эффект для комплаеров, численно совпадает с оценкой с помощью метода инструментальных переменных</p>
+<p><span class="math inline">\(\tau_{FRD} = \frac{\underset{R \rightarrow c+}{lim} E [Y|R] - \underset{R \rightarrow c-}{lim} E [Y|R]}{\underset{R \rightarrow c+}{lim} E [T|R] - \underset{R \rightarrow c-}{lim} E [T|R]}\)</span></p>
+<ul>
+<li>Что у нас инстументальная переменная? <span class="math inline">\(Z=\{R&gt;c\}\)</span></li>
+<li>Что у нас переменная интереса? <span class="math inline">\(T\)</span></li>
+<li>Главное предположение разрывной регрессии – предположим непрерывность всего: <span class="math inline">\(E\left(Y_{00} \mid R\right), E\left(Y_{01} \mid R\right), E\left(Y_{10} \mid R\right), E\left(Y_{11} \mid R\right)\)</span>, <span class="math inline">\(E\left(T_0 \mid R\right), E\left(T_1 \mid R\right), E(X \mid R)\)</span></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.42.PNG" class="img-fluid" style="width:50.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.51.PNG" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.46.20.PNG" class="img-fluid" style="width:50.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.46.32.PNG" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<p><em>Если у вас возникли какие-то вопросы, или вы нашли неточности в тексте, напишите мне об этом на почту annastavnychuk@gmail.com</em></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./heterogenous_treatment_effects.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./spatial_regression_discontinuity.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

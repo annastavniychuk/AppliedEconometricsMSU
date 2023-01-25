@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Прикладная эконометрика - 6&nbsp; Регуляризация и большая размерность</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./heterogenous_treatment_effects.html" rel="next">
+<link href="./subclassification.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Прикладная эконометрика</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="mailto:annastavnychuk@gmail.com" title="" class="sidebar-tool px-1"><i class="bi bi-at"></i></a>
+    <a href="https://github.com/annastavniychuk" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Предисловие</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./experiments.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Эксперименты</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple_testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Множественное тестирование гипотез</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bad_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Плохой контроль</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prestratification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./subclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./event_study.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Ссылки</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#что-такое-регуляризация" id="toc-что-такое-регуляризация" class="nav-link active" data-scroll-target="#что-такое-регуляризация"><span class="toc-section-number">6.1</span>  Что такое регуляризация?</a>
+  <ul class="collapse">
+  <li><a href="#ридж-регрессия-ridge" id="toc-ридж-регрессия-ridge" class="nav-link" data-scroll-target="#ридж-регрессия-ridge"><span class="toc-section-number">6.1.1</span>  Ридж-регрессия (ridge)</a></li>
+  <li><a href="#lasso-регрессия" id="toc-lasso-регрессия" class="nav-link" data-scroll-target="#lasso-регрессия"><span class="toc-section-number">6.1.2</span>  LASSO регрессия</a></li>
+  <li><a href="#метод-эластичной-сети-elastic-net" id="toc-метод-эластичной-сети-elastic-net" class="nav-link" data-scroll-target="#метод-эластичной-сети-elastic-net"><span class="toc-section-number">6.1.3</span>  Метод эластичной сети (Elastic Net)</a></li>
+  </ul></li>
+  <li><a href="#как-выбрать-коэффициент-регуляризации" id="toc-как-выбрать-коэффициент-регуляризации" class="nav-link" data-scroll-target="#как-выбрать-коэффициент-регуляризации"><span class="toc-section-number">6.2</span>  Как выбрать коэффициент регуляризации?</a>
+  <ul class="collapse">
+  <li><a href="#k-fold" id="toc-k-fold" class="nav-link" data-scroll-target="#k-fold"><span class="toc-section-number">6.2.1</span>  k-Fold</a></li>
+  <li><a href="#кросс-валидация-временных-рядов" id="toc-кросс-валидация-временных-рядов" class="nav-link" data-scroll-target="#кросс-валидация-временных-рядов"><span class="toc-section-number">6.2.2</span>  Кросс-валидация временных рядов</a></li>
+  </ul></li>
+  <li><a href="#фильтр-ходрика-прескота" id="toc-фильтр-ходрика-прескота" class="nav-link" data-scroll-target="#фильтр-ходрика-прескота"><span class="toc-section-number">6.3</span>  Фильтр Ходрика-Прескота</a></li>
+  <li><a href="#double-lasso" id="toc-double-lasso" class="nav-link" data-scroll-target="#double-lasso"><span class="toc-section-number">7</span>  Double LASSO</a>
+  <ul class="collapse">
+  <li><a href="#double-selection" id="toc-double-selection" class="nav-link" data-scroll-target="#double-selection"><span class="toc-section-number">7.1</span>  Double selection</a></li>
+  <li><a href="#partialling-out" id="toc-partialling-out" class="nav-link" data-scroll-target="#partialling-out"><span class="toc-section-number">7.2</span>  Partialling-out</a></li>
+  </ul></li>
+  <li><a href="#пример" id="toc-пример" class="nav-link" data-scroll-target="#пример"><span class="toc-section-number">8</span>  Пример</a>
+  <ul class="collapse">
+  <li><a href="#lasso" id="toc-lasso" class="nav-link" data-scroll-target="#lasso"><span class="toc-section-number">8.1</span>  LASSO</a>
+  <ul class="collapse">
+  <li><a href="#подготовка" id="toc-подготовка" class="nav-link" data-scroll-target="#подготовка"><span class="toc-section-number">8.1.1</span>  Подготовка</a></li>
+  <li><a href="#оценивание" id="toc-оценивание" class="nav-link" data-scroll-target="#оценивание"><span class="toc-section-number">8.1.2</span>  Оценивание</a></li>
+  <li><a href="#диагностика" id="toc-диагностика" class="nav-link" data-scroll-target="#диагностика"><span class="toc-section-number">8.1.3</span>  Диагностика</a></li>
+  <li><a href="#кросс-валидация" id="toc-кросс-валидация" class="nav-link" data-scroll-target="#кросс-валидация"><span class="toc-section-number">8.1.4</span>  Кросс-валидация</a></li>
+  </ul></li>
+  <li><a href="#ridge" id="toc-ridge" class="nav-link" data-scroll-target="#ridge"><span class="toc-section-number">8.2</span>  Ridge</a>
+  <ul class="collapse">
+  <li><a href="#оценивание-1" id="toc-оценивание-1" class="nav-link" data-scroll-target="#оценивание-1"><span class="toc-section-number">8.2.1</span>  Оценивание</a></li>
+  <li><a href="#диагностика-1" id="toc-диагностика-1" class="nav-link" data-scroll-target="#диагностика-1"><span class="toc-section-number">8.2.2</span>  Диагностика</a></li>
+  <li><a href="#кросс-валидация-1" id="toc-кросс-валидация-1" class="nav-link" data-scroll-target="#кросс-валидация-1"><span class="toc-section-number">8.2.3</span>  Кросс-валидация</a></li>
+  </ul></li>
+  <li><a href="#double-lasso-1" id="toc-double-lasso-1" class="nav-link" data-scroll-target="#double-lasso-1"><span class="toc-section-number">8.3</span>  Double LASSO</a>
+  <ul class="collapse">
+  <li><a href="#способ-1-с-помощью-пакета" id="toc-способ-1-с-помощью-пакета" class="nav-link" data-scroll-target="#способ-1-с-помощью-пакета"><span class="toc-section-number">8.3.1</span>  Способ 1 (с помощью пакета)</a></li>
+  <li><a href="#способ-2-double-selection-руками" id="toc-способ-2-double-selection-руками" class="nav-link" data-scroll-target="#способ-2-double-selection-руками"><span class="toc-section-number">8.3.2</span>  Способ 2 (Double selection руками)</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="что-такое-регуляризация" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="что-такое-регуляризация"><span class="header-section-number">6.1</span> Что такое регуляризация?</h2>
+<p><strong>Зачем нужна регуляризация?</strong></p>
+<ul>
+<li>очень много ковариат, которые нужно как-то отобрать, а другие способы не подходят</li>
+<li>проблема мультиколинеарности</li>
+<li>снижение размерности</li>
+<li>переобучение</li>
+<li>фильтры</li>
+<li>информационные критерии Акаике и Шварца</li>
+</ul>
+<p>Предположим, что мы находимся в ситуации мультиколинеарности.</p>
+<ul>
+<li>Строгая мультиколинеарность создает проблему неедиснтвенности МНК-оценок.</li>
+<li>При нестрогой мультиколинеарности оценки все еще являются несмещенными и асимптотически нормальными, однако стандартные ошибки в такой модели будут больше. Это приводит к широким доверительным интервалам и незначимым оценкам.</li>
+</ul>
+<p>Тогда у нас есть 2 варианта, как с ней бороться. Первый – выбросить часть регрессоров, снизив дисперсию оценок и пожертвовав несмещенностью. Второй – использовать регуляризацию (МНК со штрафной функцией) – включение штрафа в сумму наименьших квадратов.</p>
+<p>Исходная постановка МНК:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\min _{\hat{\beta}_j} ESS = \min _{\hat{\beta}_j} \sum_{i=1}^{n} e_i^2 = \min _{\hat{\beta}_j} \sum_{i=1}^{n} \left(y_{i}-\hat{y}_{i}\right)^{2} =  \min _{\hat{\beta}_j} \sum_{i=1}^{n} \left(y_{i}-\hat{\beta}_1 - \hat{\beta_2}\cdot x_i - ...\right)^{2}
+\end{aligned}
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_10-11_high_dimension_regularization_plots/1_kxgDRZwes0v2HQrvBh-c3A.png" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+<p>Регуляризация фактически является задачей Лагранжа, которую вы много раз решали. В исходную оптимизационную задачу мы добавляем дополнительное ограничение, чтобы оценки были не очень большими. Тогда <span class="math inline">\(\lambda\)</span> является множителем Лагранжа (но в этот раз для нас более важно, что это коэффициент регуляризации).</p>
+<p>В общем виде постановка задачи регуляризации выглядит следующим образом:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\min _{\hat{\beta}_j} ESS + \text{штраф}
+\end{aligned}
+\]</span></p>
+<p>В зависимости от того, какую штрафную функцию мы используем, выделяют несколько основных видов регуляризации:</p>
+<ul>
+<li>Ридж-регрессия</li>
+<li>Регрессия лассо</li>
+<li>Метод эластичной сети</li>
+</ul>
+<section id="ридж-регрессия-ridge" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="ридж-регрессия-ridge"><span class="header-section-number">6.1.1</span> Ридж-регрессия (ridge)</h3>
+<p>Иногда еще называют L2 или регуляризация Тихонова (почему именно L2 можно почитать <a href="https://habr.com/ru/company/ods/blog/322076/">тут</a>). В качестве функции штрафа используется сумма квадратов оценок коэффициентов:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\min _{\hat{\beta}_j} \sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2}+\lambda\left(\hat{\beta}_{1}^{2}+\hat{\beta}_{2}^{2}+\ldots+\hat{\beta}_{k}^{2}\right)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\begin{cases}
+&amp;\sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2} \rightarrow \underset{\hat{\beta}_j}{\min} \\
+&amp;\hat{\beta}_{1}^{2}+\hat{\beta}_{2}^{2}+\ldots+\hat{\beta}_{k}^{2} \leq t
+\end{cases}
+\end{aligned}
+\]</span> А такую задачу мы умеем решать графически!</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_10-11_high_dimension_regularization_plots/image_2021-01-28_02-30-20.png" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+<section id="lasso-регрессия" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="lasso-регрессия"><span class="header-section-number">6.1.2</span> LASSO регрессия</h3>
+<p>Иногда еще называют L1 или регуляризация через манхэттенское расстояние. В качестве функции штрафа используется сумма модулей оценок коэффициентов:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\min _{\hat{\beta}_j} \sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2}+\lambda\left(\left|\hat{\beta}_{1}\right|+\left|\hat{\beta}_{2}\right|+\ldots+\left|\hat{\beta}_{k}\right|\right)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\begin{cases}
+&amp;\sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2} \rightarrow \underset{\hat{\beta}_j}{\min} \\
+&amp;\left|\hat{\beta}_{1}\right|+\left|\hat{\beta}_{2}\right|+\ldots+\left|\hat{\beta}_{k}\right| \leq t
+\end{cases}
+\end{aligned}
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_10-11_high_dimension_regularization_plots/main-qimg-cd536c849f93739a27ae763d7ee31c20-lq.jpeg" class="img-fluid" style="width:80.0%"></p>
+</div>
+</div>
+</section>
+<section id="метод-эластичной-сети-elastic-net" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="метод-эластичной-сети-elastic-net"><span class="header-section-number">6.1.3</span> Метод эластичной сети (Elastic Net)</h3>
+<p>Комбинацией лассо и ридж регрессий является метод эластичной сети.</p>
+<p><span class="math display">\[
+\min _{\hat{\beta}_j} \sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2}+\lambda_{1} \sum_{j=1}^{k}\left|\hat{\beta}_{j}\right|+\lambda_{2} \sum_{j=1}^{k} \hat{\beta}_{j}^{2}
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_10-11_high_dimension_regularization_plots/1_Ri5Jj6mFqeHpeJXiFnwUgA.png" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="как-выбрать-коэффициент-регуляризации" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="как-выбрать-коэффициент-регуляризации"><span class="header-section-number">6.2</span> Как выбрать коэффициент регуляризации?</h2>
+<p>Это делают с помощью кросс валидации (cross validation). Как правило, почти всегда, когда говорят о кросс-валидации, имеют в виду метод k-Fold.</p>
+<section id="k-fold" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="k-fold"><span class="header-section-number">6.2.1</span> k-Fold</h3>
+<ul>
+<li>Выбираем <span class="math inline">\(m\)</span> штук <span class="math inline">\(\lambda\)</span>, которые будем проверять;</li>
+<li>Фиксируем одну из <span class="math inline">\(\lambda\)</span>;</li>
+<li>Вся выборка разделяется на k частей (k - произвольное число, часто от 5 до 10, на картинке внизу как раз 10). В машинке эти части называют фолдами;</li>
+<li>Далее происходит k итераций, во время каждой из которых один фолд выступает в роли тестового множества, а объединение остальных — в роли обучающего. Модель оценивается на k−1 фолде и тестируется на оставшемся. На каждом шаге итерации на тестовом фолде считается метрика качества подгонки, например, MSE (mean squared error);</li>
+<li>Далее k получившихся метрик агрегируются в финальный общий показатель качества модели для зафиксированной <span class="math inline">\(\lambda\)</span>, например считается средняя MSE из k штук;</li>
+<li>Повторяем процедуру для всех <span class="math inline">\(m\)</span> штук <span class="math inline">\(\lambda\)</span>;</li>
+<li>Выбираем <span class="math inline">\(\lambda\)</span> с минимальным финальным общим показателем <span class="math inline">\(\overline{MSE}\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+MSE_j = \frac{1}{n_j}\sum \left(y_i - \hat{m}^{(-j)}(x_i)\right)^2
+\]</span></p>
+<p><span class="math display">\[
+\overline{MSE}_{\lambda_m} = \frac{1}{k}\sum_{j=1}^k MSE_j
+\]</span> <span class="math display">\[
+\lambda^* = \underset{\lambda_m}{argmin}\{\overline{MSE}_{\lambda_1}, ... , \overline{MSE}_{\lambda_m}\}
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_10-11_high_dimension_regularization_plots/Cross-validation-k-fold.jpg" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_10-11_high_dimension_regularization_plots/ii3.png" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+<section id="кросс-валидация-временных-рядов" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="кросс-валидация-временных-рядов"><span class="header-section-number">6.2.2</span> Кросс-валидация временных рядов</h3>
+<p>Кросс-валидация моделей для временных рдов осложняется тем, что данные не должны пересекаться по времени: обучающие данные должны идти до тестовых. С учётом этих особенностей фолды в кросс-валидации для временных рядов располагаются вдоль временной оси так, как показано на следующей картинке:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_10-11_high_dimension_regularization_plots/time_series_cv.png" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="фильтр-ходрика-прескота" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="фильтр-ходрика-прескота"><span class="header-section-number">6.3</span> Фильтр Ходрика-Прескота</h2>
+<p>По сути формазизация задачи выделения тренда с помощью фильтра Ходрика-Прескота является регуляризацией. Мы ищем компромисс между точностью описания временного ряда и его гладкостью (тренд предыдущего периода должен быть похож на тренд текущего):</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\min_{g} \underbrace{\sum_{t=1}^{T}\left(y_{t}-g_{t}\right)^{2}}_{\text{точность описания}}+ \lambda\underbrace{\sum_{t=2}^{T-1} \left[\left(g_{t+1}-g_t\right)-(g_t-g_{t-1})\right]^2}_{\text{гладкость тренда}}
+\end{aligned}
+\]</span> где <span class="math inline">\(y_t\)</span> – изучаемый временной ряд, <span class="math inline">\(g_t\)</span> – выделяемый тренд.</p>
+<ul>
+<li>если <span class="math inline">\(\lambda=0\)</span>, то <span class="math inline">\(y_t=g_t\)</span>;</li>
+<li>если <span class="math inline">\(\lambda=\infty\)</span>, то <span class="math inline">\(g_{t+1}=g_t=g_{t-1}\)</span>, то есть получим линейный тренд.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Seminar_10-11_high_dimension_regularization_plots/SetSmoothingParameterExample_02.png" class="img-fluid" style="width:80.0%"></p>
+</div>
+</div>
+</section>
+<section id="double-lasso" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Double LASSO</h1>
+<p>Живем в ситуации unconfoundedness <span class="math inline">\(T_i \perp Y_{i1}, Y_{i0} | X_i\)</span></p>
+<section id="double-selection" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="double-selection"><span class="header-section-number">7.1</span> Double selection</h2>
+<ul>
+<li>Выбираем набор переменных с помощью LASSO
+<ul>
+<li><span class="math inline">\(Y\sim X\)</span>, получаем <span class="math inline">\(\hat{\beta}_j^Y \neq 0\)</span>, оставляем эти иксы;</li>
+</ul></li>
+<li>Выбираем набор переменных с помощью LASSO
+<ul>
+<li><span class="math inline">\(T\sim X\)</span>, получаем <span class="math inline">\(\hat{\beta}_j^T \neq 0\)</span>, оставляем эти иксы;</li>
+</ul></li>
+<li>Финальная регрессия (иногда называют post LASSO OLS)
+<ul>
+<li><span class="math inline">\(Y \sim T + \text{отобранные на прошлых шагах } X\)</span>, получаем <span class="math inline">\(\hat{\tau}^{DL}=\hat{ATE}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="partialling-out" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="partialling-out"><span class="header-section-number">7.2</span> Partialling-out</h2>
+<p>По теореме Фриша-Ву-Ловелла то же самое можно сделать с помощью другой процедуры.</p>
+<ul>
+<li>Выбираем набор переменных с помощью LASSO
+<ul>
+<li><span class="math inline">\(Y\sim X\)</span>, получаем <span class="math inline">\(\hat{\beta}_j^Y \neq 0\)</span>, оставляем эти иксы;</li>
+</ul></li>
+<li>Оцениваем регрессию <span class="math inline">\(Y\sim X\)</span> только на те <span class="math inline">\(X\)</span>, которые отобрали на прошлом шаге, где <span class="math inline">\(\hat{\beta}_j^Y \neq 0\)</span>. Получаем остатки модели <span class="math inline">\(e_i^Y\)</span>;</li>
+<li>Выбираем набор переменных с помощью LASSO
+<ul>
+<li><span class="math inline">\(T\sim X\)</span>, получаем <span class="math inline">\(\hat{\beta}_j^T \neq 0\)</span>, оставляем эти иксы;</li>
+</ul></li>
+<li>Оцениваем регрессию <span class="math inline">\(T\sim X\)</span> только на те <span class="math inline">\(X\)</span>, которые отобрали на прошлом шаге, где <span class="math inline">\(\hat{\beta}_j^T \neq 0\)</span>. Получаем остатки модели <span class="math inline">\(e_i^T\)</span>;</li>
+<li>Финальная регрессия остатков на остатки
+<ul>
+<li><span class="math inline">\(e_i^Y \sim e_i^T\)</span>, получаем <span class="math inline">\(\hat{\tau}^{DL}=\hat{ATE}\)</span></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="пример" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Пример</h1>
+<p>В качестве примера использования регуляризации мы воспользуется работой <a href="http://dx.doi.org/10.2139/ssrn.3249624">(Veterinarov, Ivanov, 2018)</a>, которые изучали цену этнической дискриминации для арендодателей на рынке жилья. Авторы пытались оценить эффект наличия в объявлении дискриминирующих по этническому признаку формулировак на стоимость аренды квартир. Оказалось, что этническая дискриминация связана со значительным снижением цены.</p>
+<p>Импортируем данные:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Seminar_10-11_high_dimension_regularization_data/table_cian_mos_ecm.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Набор данных включает следующие переменные:</p>
+<ul>
+<li><code>price</code> – цена аренды квартиры в рублях;</li>
+<li><code>total_area</code> – общая площадь квартиры в квадратных метрах;<br>
+</li>
+<li><code>discrim_proxy</code> – наличие дискриминирующего текста в описании объявления;</li>
+<li><code>*_rajon</code> – набор бинарных переменных, соотвествующих районам Москвы, где расположена квартира;</li>
+<li><code>first_floor</code> – бинарная переменная, равная единице, если квартира расположена на первом этаже;</li>
+<li><code>*_rooms</code> – набор бинарных переменных, соотвествующих количеству комнат в квартире;</li>
+<li><code>starii_fond</code> – бинарная переменная, равная единице, если квартира принадлежит к старому жилому фонду;</li>
+<li><code>blochnii</code> – бинарная переменная, равная единице, если квартира находится в блочном доме;</li>
+<li><code>derevjannii</code> – бинарная переменная, равная единице, если квартира находится в деревянном доме;</li>
+<li><code>kirpichnii</code> – бинарная переменная, равная единице, если квартира находится в кирпичном доме;</li>
+<li><code>monolitnii</code> – бинарная переменная, равная единице, если квартира находится в монолитном доме;</li>
+<li><code>panelnii</code> – бинарная переменная, равная единице, если квартира находится в кирпичном доме;</li>
+<li><code>stalinskii</code> – бинарная переменная, равная единице, если квартира находится в сталинском доме;</li>
+<li><code>repair</code> – бинарная переменная, равная единице, если в квартире сделан ремонт;</li>
+<li><code>four_and_over_rooms</code> – бинарная переменная, равная единице, если в квартире четыре и более комнат.</li>
+</ul>
+<p>Создадим логарифмы площади и цены:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>log_total_area <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">$</span>total_area)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>log_price <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">$</span>price)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="lasso" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="lasso"><span class="header-section-number">8.1</span> LASSO</h2>
+<section id="подготовка" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="подготовка"><span class="header-section-number">8.1.1</span> Подготовка</h3>
+<p>Синтаксис функции, которую мы будем далее использовать, предполагает, что мы должны передавать ей зависимую переменную, контрольные переменные и формулу модели отдельными объектами. Поэтому нам нужно их заранее заготовить.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>formula <span class="ot">&lt;-</span> log_price <span class="sc">~</span> log_total_area <span class="sc">+</span> discrim_proxy <span class="sc">+</span> Mos_center <span class="sc">+</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  Akimanka_rajon <span class="sc">+</span> Hamovniki_rajon <span class="sc">+</span> Tverskoj_rajon <span class="sc">+</span> Taganskij_rajon <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  Krasnoselskij_rajon <span class="sc">+</span> Mesanskij_rajon <span class="sc">+</span> Zamoskvorece_rajon <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  Basmannyj_rajon <span class="sc">+</span> Arbat_rajon <span class="sc">+</span> first_floor <span class="sc">+</span> one_room <span class="sc">+</span> two_rooms <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  three_rooms <span class="sc">+</span> four_and_over_rooms <span class="sc">+</span> starii_fond <span class="sc">+</span> blochnii <span class="sc">+</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  derevjannii <span class="sc">+</span> kirpichnii <span class="sc">+</span> monolitnii <span class="sc">+</span> panelnii <span class="sc">+</span> stalinskii <span class="sc">+</span> repair <span class="co"># формула для регресии</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="at">data=</span>data,formula) <span class="co"># матрица для оценки модели</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Следующий шаг, который нам нужно выполнить, это решить, какую <span class="math inline">\(\lambda\)</span> мы будем использовать. Мы можем захотеть проверить сразу несколько, для этого создадим вектор, в который поместим все значения <span class="math inline">\(\lambda\)</span>, которые мы хотим перебрать:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lambdas <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">length=</span><span class="dv">10</span>) <span class="co"># 10 штук от 0 до 1 с равными интервалами</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lambdas </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.0000000 0.1111111 0.2222222 0.3333333 0.4444444 0.5555556 0.6666667
+ [8] 0.7777778 0.8888889 1.0000000</code></pre>
+</div>
+</div>
+</section>
+<section id="оценивание" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="оценивание"><span class="header-section-number">8.1.2</span> Оценивание</h3>
+<p>Регуляризация в <code>R</code> реализована в библиотеке <code>glmnet</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model_lasso <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x=</span>X, <span class="co"># матрица иксов</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y=</span>data<span class="sc">$</span>log_price, <span class="co"># зависимая переменная</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">alpha =</span> <span class="dv">1</span>, <span class="co"># 1 лассо, 0 ридж</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">lambda =</span> lambdas) <span class="co"># вектор лямбд</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="диагностика" class="level3 tabset tabset-fade tabset-pills" data-number="8.1.3">
+<h3 class="tabset tabset-fade tabset-pills anchored" data-number="8.1.3" data-anchor-id="диагностика"><span class="header-section-number">8.1.3</span> Диагностика</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_lasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:  glmnet(x = X, y = data$log_price, alpha = 1, lambda = lambdas) 
+
+   Df  %Dev Lambda
+1   0  0.00 1.0000
+2   0  0.00 0.8889
+3   0  0.00 0.7778
+4   0  0.00 0.6667
+5   1  7.16 0.5556
+6   1 27.63 0.4444
+7   1 43.56 0.3333
+8   2 57.68 0.2222
+9   2 67.88 0.1111
+10 25 73.15 0.0000</code></pre>
+</div>
+</div>
+<ul>
+<li>Df – количество ненулевых коэффициентов</li>
+<li>%Dev – процент (нулевого) объясненного отклонения</li>
+<li>Lambda – значение параметра регуляризации</li>
+</ul>
+<p>Также мы можем получить коэффициенты модели для одной или нескольких лямбд в диапазоне задаваемой нами ранее последовательности. Посмотрим, например, какие коэффициенту соотвествуют второй лямде из нашего вектора лямд:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(model_lasso, lambdas[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>27 x 1 sparse Matrix of class "dgCMatrix"
+                           s1
+(Intercept)         6.9558971
+(Intercept)         .        
+log_total_area      0.9409370
+discrim_proxy       .        
+Mos_center          0.3420123
+Akimanka_rajon      .        
+Hamovniki_rajon     .        
+Tverskoj_rajon      .        
+Taganskij_rajon     .        
+Krasnoselskij_rajon .        
+Mesanskij_rajon     .        
+Zamoskvorece_rajon  .        
+Basmannyj_rajon     .        
+Arbat_rajon         .        
+first_floor         .        
+one_room            .        
+two_rooms           .        
+three_rooms         .        
+four_and_over_rooms .        
+starii_fond         .        
+blochnii            .        
+derevjannii         .        
+kirpichnii          .        
+monolitnii          .        
+panelnii            .        
+stalinskii          .        
+repair              .        </code></pre>
+</div>
+</div>
+<section id="изменение-коэффициентов-в-зависимости-от-размера-штрафов-lambda" class="level4" data-number="8.1.3.1">
+<h4 data-number="8.1.3.1" class="anchored" data-anchor-id="изменение-коэффициентов-в-зависимости-от-размера-штрафов-lambda"><span class="header-section-number">8.1.3.1</span> Изменение коэффициентов в зависимости от размера штрафов (lambda)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_lasso, <span class="at">xvar =</span> <span class="st">'lambda'</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="high_dimension_regularization_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="изменение-коэффициентов-в-зависимости-от-величины-доли-объясненной-дисперсии" class="level4" data-number="8.1.3.2">
+<h4 data-number="8.1.3.2" class="anchored" data-anchor-id="изменение-коэффициентов-в-зависимости-от-величины-доли-объясненной-дисперсии"><span class="header-section-number">8.1.3.2</span> Изменение коэффициентов в зависимости от величины доли объясненной дисперсии</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_lasso, <span class="at">xvar =</span> <span class="st">'dev'</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm):
+collapsing to unique 'x' values</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="high_dimension_regularization_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="изменение-коэффициентов-в-зависимости-от-суммарного-штрафа-сумма-моделей" class="level4" data-number="8.1.3.3">
+<h4 data-number="8.1.3.3" class="anchored" data-anchor-id="изменение-коэффициентов-в-зависимости-от-суммарного-штрафа-сумма-моделей"><span class="header-section-number">8.1.3.3</span> Изменение коэффициентов в зависимости от суммарного штрафа (сумма моделей)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_lasso, <span class="at">xvar =</span> <span class="st">'norm'</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm):
+collapsing to unique 'x' values</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="high_dimension_regularization_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="кросс-валидация" class="level3" data-number="8.1.4">
+<h3 data-number="8.1.4" class="anchored" data-anchor-id="кросс-валидация"><span class="header-section-number">8.1.4</span> Кросс-валидация</h3>
+<p>Найдем лямду, которая минимизирует MSE:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model_cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, <span class="co"># матрица иксов</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                      data<span class="sc">$</span>log_price, <span class="co"># зависимая переменная</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">alpha=</span><span class="dv">1</span>, <span class="co"># 1 лассо, 0 ридж</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type.measure =</span><span class="st">"mse"</span>) <span class="co"># метрика качества</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>График зависимости MSE в кросс-валидации в зависимости от лямд:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_cv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="high_dimension_regularization_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Функция <code>cv.glmnet</code> расчитывает две лямды:</p>
+<ul>
+<li>лямда, которая минимизирует MSE</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model_cv<span class="sc">$</span>lambda.min</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0009607159</code></pre>
+</div>
+</div>
+<ul>
+<li>лямда, которая на одно стандартное отклонение больше, чем та, которая минимизирует MSE</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03295706</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="ridge" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="ridge"><span class="header-section-number">8.2</span> Ridge</h2>
+<p>С ридж всё аналогично, набор переменных и лямбд будем использовать те же, поэтому шаг с подготовкой можем пропустить.</p>
+<section id="оценивание-1" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="оценивание-1"><span class="header-section-number">8.2.1</span> Оценивание</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>model_ridge <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x=</span>X, <span class="co"># матрица иксов</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y=</span>data<span class="sc">$</span>log_price, <span class="co"># зависимая переменная</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">alpha =</span> <span class="dv">0</span>, <span class="co"># 1 лассо, 0 ридж</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">lambda =</span> lambdas) <span class="co"># вектор лямбд</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="диагностика-1" class="level3 tabset tabset-fade tabset-pills" data-number="8.2.2">
+<h3 class="tabset tabset-fade tabset-pills anchored" data-number="8.2.2" data-anchor-id="диагностика-1"><span class="header-section-number">8.2.2</span> Диагностика</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_ridge)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:  glmnet(x = X, y = data$log_price, alpha = 0, lambda = lambdas) 
+
+   Df  %Dev Lambda
+1  25 63.20 1.0000
+2  25 64.33 0.8889
+3  25 65.46 0.7778
+4  25 66.59 0.6667
+5  25 67.72 0.5556
+6  25 68.83 0.4444
+7  25 69.93 0.3333
+8  25 71.04 0.2222
+9  25 72.18 0.1111
+10 25 73.15 0.0000</code></pre>
+</div>
+</div>
+<ul>
+<li>Df – количество ненулевых коэффициентов</li>
+<li>%Dev – процент (нулевого) объясненного отклонения</li>
+<li>Lambda – значение параметра регуляризации</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(model_ridge, lambdas[<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>27 x 1 sparse Matrix of class "dgCMatrix"
+                             s1
+(Intercept)          8.38517885
+(Intercept)          .         
+log_total_area       0.58836764
+discrim_proxy       -0.09137422
+Mos_center           0.27578976
+Akimanka_rajon       0.27391031
+Hamovniki_rajon      0.25436802
+Tverskoj_rajon       0.28278370
+Taganskij_rajon     -0.01813180
+Krasnoselskij_rajon  0.06609075
+Mesanskij_rajon      0.21742173
+Zamoskvorece_rajon   0.20567341
+Basmannyj_rajon      0.05976730
+Arbat_rajon          0.26650326
+first_floor         -0.09193410
+one_room            -0.17011716
+two_rooms           -0.04049721
+three_rooms          0.13482484
+four_and_over_rooms  0.24528087
+starii_fond          0.13430146
+blochnii            -0.07072746
+derevjannii         -0.48947157
+kirpichnii          -0.05080074
+monolitnii           0.03244421
+panelnii            -0.13642449
+stalinskii           0.06640182
+repair               0.14574420</code></pre>
+</div>
+</div>
+<section id="изменение-коэффициентов-в-зависимости-от-размера-штрафов-lambda-1" class="level4" data-number="8.2.2.1">
+<h4 data-number="8.2.2.1" class="anchored" data-anchor-id="изменение-коэффициентов-в-зависимости-от-размера-штрафов-lambda-1"><span class="header-section-number">8.2.2.1</span> Изменение коэффициентов в зависимости от размера штрафов (lambda)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_ridge, <span class="at">xvar =</span> <span class="st">'lambda'</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="high_dimension_regularization_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="изменение-коэффициентов-в-зависимости-от-величины-доли-объясненной-дисперсии-1" class="level4" data-number="8.2.2.2">
+<h4 data-number="8.2.2.2" class="anchored" data-anchor-id="изменение-коэффициентов-в-зависимости-от-величины-доли-объясненной-дисперсии-1"><span class="header-section-number">8.2.2.2</span> Изменение коэффициентов в зависимости от величины доли объясненной дисперсии</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_ridge, <span class="at">xvar =</span> <span class="st">'dev'</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="high_dimension_regularization_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="изменение-коэффициентов-в-зависимости-от-суммарного-штрафа-сумма-моделей-1" class="level4" data-number="8.2.2.3">
+<h4 data-number="8.2.2.3" class="anchored" data-anchor-id="изменение-коэффициентов-в-зависимости-от-суммарного-штрафа-сумма-моделей-1"><span class="header-section-number">8.2.2.3</span> Изменение коэффициентов в зависимости от суммарного штрафа (сумма моделей)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_ridge, <span class="at">xvar =</span> <span class="st">'norm'</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="high_dimension_regularization_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="кросс-валидация-1" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="кросс-валидация-1"><span class="header-section-number">8.2.3</span> Кросс-валидация</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>model_cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, <span class="co"># матрица иксов</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                      data<span class="sc">$</span>log_price, <span class="co"># зависимая переменная</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">alpha=</span><span class="dv">1</span>, <span class="co"># 1 лассо, 0 ридж</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type.measure =</span><span class="st">"mse"</span>) <span class="co"># метрика качества</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>График зависимости MSE в кросс-валидации в зависимости от лямд:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_cv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="high_dimension_regularization_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Оптимальные лямды:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>model_cv<span class="sc">$</span>lambda.min</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0009607159</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03617034</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="double-lasso-1" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="double-lasso-1"><span class="header-section-number">8.3</span> Double LASSO</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hdm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="способ-1-с-помощью-пакета" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="способ-1-с-помощью-пакета"><span class="header-section-number">8.3.1</span> Способ 1 (с помощью пакета)</h3>
+<p>Готовим аргументы:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>formula2 <span class="ot">&lt;-</span> log_price <span class="sc">~</span> log_total_area <span class="sc">+</span> Mos_center <span class="sc">+</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  Akimanka_rajon <span class="sc">+</span> Hamovniki_rajon <span class="sc">+</span> Tverskoj_rajon <span class="sc">+</span> Taganskij_rajon <span class="sc">+</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  Krasnoselskij_rajon <span class="sc">+</span> Mesanskij_rajon <span class="sc">+</span> Zamoskvorece_rajon <span class="sc">+</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  Basmannyj_rajon <span class="sc">+</span> Arbat_rajon <span class="sc">+</span> first_floor <span class="sc">+</span> one_room <span class="sc">+</span> two_rooms <span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  three_rooms <span class="sc">+</span> four_and_over_rooms <span class="sc">+</span> starii_fond <span class="sc">+</span> blochnii <span class="sc">+</span> </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  derevjannii <span class="sc">+</span> kirpichnii <span class="sc">+</span> monolitnii <span class="sc">+</span> panelnii <span class="sc">+</span> stalinskii <span class="sc">+</span> repair <span class="co"># формула для регресии без тритмента</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="at">data=</span>data, formula2) <span class="co"># матрица для оценки модели</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> data<span class="sc">$</span>log_price <span class="co"># зависимая переменная</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Оцениваем double lasso модель:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model_DR <span class="ot">&lt;-</span> <span class="fu">rlassoEffect</span>(X, <span class="co"># матрица иксов</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                         y, <span class="co"># зависимая переменная</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                         data<span class="sc">$</span>discrim_proxy, <span class="co"># тритмент</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">'double selection'</span>) <span class="co"># по умолчанию 'partialling out', но можно и 'double selection'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Таким образом, эффект от дискриминации равен -0.067:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_DR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Estimates and significance testing of the effect of target variables"
+   Estimate. Std. Error t value Pr(&gt;|t|)    
+d1  -0.06736    0.00564  -11.94   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Можем посмотреть, какие переменные процедура выкинула, а какие оставила:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>model_DR<span class="sc">$</span>selection.index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        (Intercept)      log_total_area          Mos_center      Akimanka_rajon 
+              FALSE                TRUE                TRUE               FALSE 
+    Hamovniki_rajon      Tverskoj_rajon     Taganskij_rajon Krasnoselskij_rajon 
+               TRUE                TRUE                TRUE                TRUE 
+    Mesanskij_rajon  Zamoskvorece_rajon     Basmannyj_rajon         Arbat_rajon 
+              FALSE               FALSE                TRUE               FALSE 
+        first_floor            one_room           two_rooms         three_rooms 
+               TRUE               FALSE               FALSE               FALSE 
+four_and_over_rooms         starii_fond            blochnii         derevjannii 
+               TRUE               FALSE                TRUE                TRUE 
+         kirpichnii          monolitnii            panelnii          stalinskii 
+               TRUE                TRUE                TRUE                TRUE 
+             repair 
+               TRUE </code></pre>
+</div>
+</div>
+</section>
+<section id="способ-2-double-selection-руками" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="способ-2-double-selection-руками"><span class="header-section-number">8.3.2</span> Способ 2 (Double selection руками)</h3>
+<p><strong>Шаг 1</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>step_1 <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>                    data<span class="sc">$</span>log_price, </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">alpha=</span><span class="dv">1</span>, </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type.measure =</span><span class="st">"mse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Посмотрим, какие коэффициенты остались после шага 1:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(step_1, <span class="at">s=</span><span class="st">"lambda.1se"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>26 x 1 sparse Matrix of class "dgCMatrix"
+                              s1
+(Intercept)          6.526393754
+(Intercept)          .          
+log_total_area       1.031714061
+Mos_center           0.482685397
+Akimanka_rajon       .          
+Hamovniki_rajon      .          
+Tverskoj_rajon       0.004636456
+Taganskij_rajon      .          
+Krasnoselskij_rajon  .          
+Mesanskij_rajon      .          
+Zamoskvorece_rajon   .          
+Basmannyj_rajon      .          
+Arbat_rajon          .          
+first_floor          .          
+one_room             .          
+two_rooms            .          
+three_rooms          .          
+four_and_over_rooms  .          
+starii_fond          .          
+blochnii             .          
+derevjannii          .          
+kirpichnii           .          
+monolitnii           .          
+panelnii            -0.067437936
+stalinskii           .          
+repair               0.110509428</code></pre>
+</div>
+</div>
+<p>Остались log_total_area, Mos_center, panelnii, repair</p>
+<p><strong>Шаг 2</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>step_2 <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>                    data<span class="sc">$</span>discrim_proxy, </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">alpha=</span><span class="dv">1</span>, </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">type.measure =</span><span class="st">"mse"</span>,</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">family=</span><span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Посмотрим, какие коэффициенты остались после шага 2:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(step_2, <span class="at">s=</span><span class="st">"lambda.1se"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>26 x 1 sparse Matrix of class "dgCMatrix"
+                            s1
+(Intercept)          2.3565711
+(Intercept)          .        
+log_total_area      -0.9414984
+Mos_center          -0.4838275
+Akimanka_rajon       .        
+Hamovniki_rajon      .        
+Tverskoj_rajon       .        
+Taganskij_rajon      .        
+Krasnoselskij_rajon  .        
+Mesanskij_rajon      .        
+Zamoskvorece_rajon   .        
+Basmannyj_rajon      .        
+Arbat_rajon          .        
+first_floor          .        
+one_room             .        
+two_rooms            .        
+three_rooms          .        
+four_and_over_rooms  .        
+starii_fond          .        
+blochnii             .        
+derevjannii          .        
+kirpichnii           .        
+monolitnii           .        
+panelnii             0.1713420
+stalinskii           .        
+repair              -0.1091615</code></pre>
+</div>
+</div>
+<p>Остались log_total_area, Mos_center, panelnii, repair</p>
+<p><strong>Шаг 3</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>step_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(data<span class="sc">$</span>log_price <span class="sc">~</span> discrim_proxy <span class="sc">+</span> log_total_area <span class="sc">+</span> Mos_center <span class="sc">+</span> panelnii <span class="sc">+</span> repair,</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data=</span>data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Посмотрим оценку эффекта:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(step_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = data$log_price ~ discrim_proxy + log_total_area + 
+    Mos_center + panelnii + repair, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.6650 -0.2068  0.0192  0.2200  1.9787 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     6.458639   0.023902  270.22   &lt;2e-16 ***
+discrim_proxy  -0.067855   0.006365  -10.66   &lt;2e-16 ***
+log_total_area  1.048082   0.005808  180.47   &lt;2e-16 ***
+Mos_center      0.521361   0.006913   75.42   &lt;2e-16 ***
+panelnii       -0.100640   0.005454  -18.45   &lt;2e-16 ***
+repair          0.145571   0.004981   29.23   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3842 on 26035 degrees of freedom
+Multiple R-squared:  0.7281,    Adjusted R-squared:  0.728 
+F-statistic: 1.394e+04 on 5 and 26035 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Таким образом, эффект от дискриминации равен -0.067.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./subclassification.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./heterogenous_treatment_effects.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
