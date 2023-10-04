@@ -78,11 +78,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -321,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \]</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_10-11_high_dimension_regularization_plots/1_kxgDRZwes0v2HQrvBh-c3A.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="high_dimension_regularization_plots/1_kxgDRZwes0v2HQrvBh-c3A.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 <p>Регуляризация фактически является задачей Лагранжа, которую вы много раз решали. В исходную оптимизационную задачу мы добавляем дополнительное ограничение, чтобы оценки были не очень большими. Тогда <span class="math inline">\(\lambda\)</span> является множителем Лагранжа (но в этот раз для нас более важно, что это коэффициент регуляризации).</p>
@@ -355,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \]</span> А такую задачу мы умеем решать графически!</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_10-11_high_dimension_regularization_plots/image_2021-01-28_02-30-20.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="high_dimension_regularization_plots/image_2021-01-28_02-30-20.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
@@ -377,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \]</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_10-11_high_dimension_regularization_plots/main-qimg-cd536c849f93739a27ae763d7ee31c20-lq.jpeg" class="img-fluid" style="width:80.0%"></p>
+<p><img src="high_dimension_regularization_plots/main-qimg-cd536c849f93739a27ae763d7ee31c20-lq.jpeg" class="img-fluid" style="width:80.0%"></p>
 </div>
 </div>
 </section>
@@ -389,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \]</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_10-11_high_dimension_regularization_plots/1_Ri5Jj6mFqeHpeJXiFnwUgA.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="high_dimension_regularization_plots/1_Ri5Jj6mFqeHpeJXiFnwUgA.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
@@ -418,12 +418,12 @@ MSE_j = \frac{1}{n_j}\sum \left(y_i - \hat{m}^{(-j)}(x_i)\right)^2
 \]</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_10-11_high_dimension_regularization_plots/Cross-validation-k-fold.jpg" class="img-fluid" style="width:100.0%"></p>
+<p><img src="high_dimension_regularization_plots/Cross-validation-k-fold.jpg" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_10-11_high_dimension_regularization_plots/ii3.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="high_dimension_regularization_plots/ii3.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
@@ -432,7 +432,7 @@ MSE_j = \frac{1}{n_j}\sum \left(y_i - \hat{m}^{(-j)}(x_i)\right)^2
 <p>Кросс-валидация моделей для временных рдов осложняется тем, что данные не должны пересекаться по времени: обучающие данные должны идти до тестовых. С учётом этих особенностей фолды в кросс-валидации для временных рядов располагаются вдоль временной оси так, как показано на следующей картинке:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_10-11_high_dimension_regularization_plots/time_series_cv.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="high_dimension_regularization_plots/time_series_cv.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
@@ -451,7 +451,7 @@ MSE_j = \frac{1}{n_j}\sum \left(y_i - \hat{m}^{(-j)}(x_i)\right)^2
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_10-11_high_dimension_regularization_plots/SetSmoothingParameterExample_02.png" class="img-fluid" style="width:80.0%"></p>
+<p><img src="high_dimension_regularization_plots/SetSmoothingParameterExample_02.png" class="img-fluid" style="width:80.0%"></p>
 </div>
 </div>
 </section>
@@ -501,7 +501,7 @@ MSE_j = \frac{1}{n_j}\sum \left(y_i - \hat{m}^{(-j)}(x_i)\right)^2
 <p>В качестве примера использования регуляризации мы воспользуется работой <a href="http://dx.doi.org/10.2139/ssrn.3249624">(Veterinarov, Ivanov, 2018)</a>, которые изучали цену этнической дискриминации для арендодателей на рынке жилья. Авторы пытались оценить эффект наличия в объявлении дискриминирующих по этническому признаку формулировак на стоимость аренды квартир. Оказалось, что этническая дискриминация связана со значительным снижением цены.</p>
 <p>Импортируем данные:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Seminar_10-11_high_dimension_regularization_data/table_cian_mos_ecm.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"high_dimension_regularization_data/table_cian_mos_ecm.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Набор данных включает следующие переменные:</p>
 <ul>
@@ -694,7 +694,7 @@ collapsing to unique 'x' values</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.03295706</code></pre>
+<pre><code>[1] 0.01885924</code></pre>
 </div>
 </div>
 </section>
@@ -822,7 +822,7 @@ repair               0.14574420</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.03617034</code></pre>
+<pre><code>[1] 0.03295706</code></pre>
 </div>
 </div>
 </section>
@@ -899,33 +899,33 @@ four_and_over_rooms         starii_fond            blochnii         derevjannii
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(step_1, <span class="at">s=</span><span class="st">"lambda.1se"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>26 x 1 sparse Matrix of class "dgCMatrix"
-                              s1
-(Intercept)          6.526393754
-(Intercept)          .          
-log_total_area       1.031714061
-Mos_center           0.482685397
-Akimanka_rajon       .          
-Hamovniki_rajon      .          
-Tverskoj_rajon       0.004636456
-Taganskij_rajon      .          
-Krasnoselskij_rajon  .          
-Mesanskij_rajon      .          
-Zamoskvorece_rajon   .          
-Basmannyj_rajon      .          
-Arbat_rajon          .          
-first_floor          .          
-one_room             .          
-two_rooms            .          
-three_rooms          .          
-four_and_over_rooms  .          
-starii_fond          .          
-blochnii             .          
-derevjannii          .          
-kirpichnii           .          
-monolitnii           .          
-panelnii            -0.067437936
-stalinskii           .          
-repair               0.110509428</code></pre>
+                             s1
+(Intercept)          6.56494699
+(Intercept)          .         
+log_total_area       1.02345818
+Mos_center           0.47023822
+Akimanka_rajon       .         
+Hamovniki_rajon      .         
+Tverskoj_rajon       .         
+Taganskij_rajon      .         
+Krasnoselskij_rajon  .         
+Mesanskij_rajon      .         
+Zamoskvorece_rajon   .         
+Basmannyj_rajon      .         
+Arbat_rajon          .         
+first_floor          .         
+one_room             .         
+two_rooms            .         
+three_rooms          .         
+four_and_over_rooms  .         
+starii_fond          .         
+blochnii             .         
+derevjannii          .         
+kirpichnii           .         
+monolitnii           .         
+panelnii            -0.05561435
+stalinskii           .         
+repair               0.09817914</code></pre>
 </div>
 </div>
 <p>Остались log_total_area, Mos_center, panelnii, repair</p>
@@ -942,33 +942,33 @@ repair               0.110509428</code></pre>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(step_2, <span class="at">s=</span><span class="st">"lambda.1se"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>26 x 1 sparse Matrix of class "dgCMatrix"
-                            s1
-(Intercept)          2.3565711
-(Intercept)          .        
-log_total_area      -0.9414984
-Mos_center          -0.4838275
-Akimanka_rajon       .        
-Hamovniki_rajon      .        
-Tverskoj_rajon       .        
-Taganskij_rajon      .        
-Krasnoselskij_rajon  .        
-Mesanskij_rajon      .        
-Zamoskvorece_rajon   .        
-Basmannyj_rajon      .        
-Arbat_rajon          .        
-first_floor          .        
-one_room             .        
-two_rooms            .        
-three_rooms          .        
-four_and_over_rooms  .        
-starii_fond          .        
-blochnii             .        
-derevjannii          .        
-kirpichnii           .        
-monolitnii           .        
-panelnii             0.1713420
-stalinskii           .        
-repair              -0.1091615</code></pre>
+                             s1
+(Intercept)          2.67458408
+(Intercept)          .         
+log_total_area      -1.02414526
+Mos_center          -0.65966662
+Akimanka_rajon       .         
+Hamovniki_rajon      .         
+Tverskoj_rajon       .         
+Taganskij_rajon      .         
+Krasnoselskij_rajon  .         
+Mesanskij_rajon      .         
+Zamoskvorece_rajon   .         
+Basmannyj_rajon      .         
+Arbat_rajon          .         
+first_floor          .         
+one_room             .         
+two_rooms            0.05145721
+three_rooms          .         
+four_and_over_rooms  .         
+starii_fond          .         
+blochnii             0.06622548
+derevjannii          .         
+kirpichnii           .         
+monolitnii           .         
+panelnii             0.23936155
+stalinskii           .         
+repair              -0.17415634</code></pre>
 </div>
 </div>
 <p>Остались log_total_area, Mos_center, panelnii, repair</p>

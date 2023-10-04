@@ -78,11 +78,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -96,10 +96,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script src="site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
-<script src="site_libs/viz-1.8.2/viz.js"></script>
-<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="site_libs/grViz-binding-1.0.9/grViz.js"></script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -283,8 +282,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Рассмотрим это на примере. Предположим, что у нас есть 3 группы (A, B и С), в которых мы хотим сравнить среднее значение переменной интереса. Как и ранее, мы будем использовать t-тест Стьюдента. Если мы получили достаточно большое значение t-статистики такое, что p-value &lt; 0.05, то мы отклоняем нулевую гипотезу и заключаем, что группы статистически различаются по переменной интереса. Отсечка p-value &lt; 0.05 значит, что вероятность ошибочного вывода о различии между групповыми средними не превышает 0.05. Это будет работать именно так, когда у нас всего две группы, но в случае множественного тестирования вероятность будет больше 5%.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="htmlwidget-1b1205d473c53e0960d6" style="width:100%;height:145px;" class="grViz html-widget "></div>
-<script type="application/json" data-for="htmlwidget-1b1205d473c53e0960d6">{"x":{"diagram":"digraph {\n  graph [layout = neato, rankdir = LR]\n  \n  node [shape = circle]        \n  rec1 [label = \"A\"]\n  rec2 [label = \"B\"]\n  rec3 [label =  \"C\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 #[label = \"5%\"]\n  rec2 -> rec3 #[label = \"5%\"]\n  rec3 -> rec1 #[label = \"5%\"]\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A(A) --&gt;|5%| B(B)
+  B(B) --&gt;|5%| C(C)
+  C(C) --&gt;|5%| A(A)
+</pre>
+</div>
+</div>
 </div>
 </div>
 <p>Выполняя тест Стьюдента, исследователь проверяет нулевую гипотезу об отсутствии разницы между двумя группами. Сравнивая группы A и В, он может ошибиться с вероятностью 5%, В и С – 5%, А и С – тоже 5%. Соответственно, вероятность ошибиться хотя бы в одном из этих трех сравнений составит:</p>
@@ -487,7 +493,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="2.3" class="anchored" data-anchor-id="обобщающий-алгоритм-для-разных-процедур"><span class="header-section-number">2.3</span> Обобщающий алгоритм для разных процедур</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_3_multiple_testing_plots/alg.png" class="img-fluid" style="width:70.0%"></p>
+<p><img src="multiple_testing_plots/alg.png" class="img-fluid" style="width:70.0%"></p>
 </div>
 </div>
 <p><a href="http://kmplot.com/multipletesting/multiple_testing_OH.pdf">Источник</a> – мне не очень нравится сам текст, но схема хорошая.</p>

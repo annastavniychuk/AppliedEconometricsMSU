@@ -78,11 +78,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -96,10 +96,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script src="site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
-<script src="site_libs/viz-1.8.2/viz.js"></script>
-<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="site_libs/grViz-binding-1.0.9/grViz.js"></script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -278,8 +277,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div id="htmlwidget-8ec28f956bd9dde9acbf" style="width:100%;height:145px;" class="grViz html-widget "></div>
-<script type="application/json" data-for="htmlwidget-8ec28f956bd9dde9acbf">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = LR]\n  \n  node [shape = circle]        \n  rec1 [label = \"T\"]\n  rec2 [label = \"X\"]\n  rec3 [label =  \"e\"]\n  rec4 [label =  \"Y\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec4 \n  rec2 -> rec4 \n  rec3 -> rec4 \n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  T(T) --&gt; Y(Y)
+  X(X) --&gt; Y(Y)
+  e(e) --&gt; Y(Y)
+</pre>
+</div>
+</div>
 </div>
 </div>
 <ol start="2" type="1">
@@ -287,8 +293,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div id="htmlwidget-4a18202aa6929fc29a73" style="width:100%;height:145px;" class="grViz html-widget "></div>
-<script type="application/json" data-for="htmlwidget-4a18202aa6929fc29a73">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = LR]\n  \n  node [shape = circle]        \n  rec1 [label = \"T\"]\n  rec2 [label = \"X\"]\n  rec3 [label =  \"e\"]\n  rec4 [label =  \"Y\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec4 \n  rec2 -> rec4 \n  rec3 -> rec4 \n  rec2 -> rec1\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  T(T) --&gt; Y(Y)
+  X(X) --&gt; Y(Y)
+  X(X) --&gt; T(T)
+  e(e) --&gt; Y(Y)
+</pre>
+</div>
+</div>
 </div>
 </div>
 <ol start="3" type="1">
@@ -296,8 +310,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div id="htmlwidget-77df9157686e036fa974" style="width:100%;height:145px;" class="grViz html-widget "></div>
-<script type="application/json" data-for="htmlwidget-77df9157686e036fa974">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = LR]\n  \n  node [shape = circle]        \n  rec1 [label = \"T\"]\n  rec2 [label = \"X\"]\n  rec3 [label =  \"e\"]\n  rec4 [label =  \"Y\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec4 \n  rec2 -> rec4 \n  rec3 -> rec4 \n  rec1 -> rec2\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  T(T) --&gt; Y(Y)
+  X(X) --&gt; Y(Y)
+  T(T) --&gt; X(X)
+  e(e) --&gt; Y(Y)
+</pre>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -307,8 +329,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Ниже общая схема задачи:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-710cff17de5af867c628" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-710cff17de5af867c628">{"x":{"diagram":"digraph {\n  graph [layout = dot, overlap = true]\n  \n  node [shape = box, fontname = Helvetica,  fontsize = 20]     \n  \n  rec1 [label = \"Система образования\"]\n  \n  rec2 [label = \"Сценарий 1. Помогать отстающим\"]\n  rec3 [label =  \"Природа\"]\n  rec4 [label =  \"epsilon_1 >0\"]\n  rec5 [label =  \"epsilon_1 <0\"]\n  rec6 [label =  \"w_o =1\"]\n  rec7 [label =  \"w_o =0\"]\n  \n  rec8 [label =  \"college=1\"]\n  rec9 [label =  \"ability>0\"]\n  rec10 [label =  \"w_1v_1=0\"]\n  rec11 [label =  \"wv_1=1\"]\n  rec12 [label =  \"ability<0\"]\n  rec13 [label =  \"w_1v_1=1\"]\n  rec14 [label =  \"wv_1=1\"]\n  rec15 [label =  \"college=0\"]\n  rec16 [label =  \"w_o =1\"]\n  rec17 [label =  \"wv_1 =1\"]\n  \n  rec18 [label =  \"college=1\"]\n  rec19 [label =  \"ability>0\"]\n  rec20 [label =  \"w_1v_1=0\"]\n  rec21 [label =  \"wv_1=0\"]\n  rec22 [label =  \"ability<0\"]\n  rec23 [label =  \"w_1v_1=1\"]\n  rec24 [label =  \"wv_1=1\"]\n  rec25 [label =  \"college=0\"]\n  rec26 [label =  \"w_o =1\"]\n  rec27 [label =  \"wv_1 =0\"]\n  \n  rec28 [label = \"Сценарий 2. Помогать умным\"]\n  rec29 [label =  \"Природа\"]\n  rec30 [label =  \"epsilon_1 >0\"]\n  rec31 [label =  \"epsilon_1 <0\"]\n  rec32 [label =  \"w_o =1\"]\n  rec33 [label =  \"w_o =0\"]\n  \n  rec34 [label =  \"college=1\"]\n  rec35 [label =  \"ability>0\"]\n  rec36 [label =  \"w_1v_2=1\"]\n  rec37 [label =  \"wv_1=1\"]\n  rec38 [label =  \"ability<0\"]\n  rec39 [label =  \"w_1v_2=0\"]\n  rec40 [label =  \"wv_2=1\"]\n  rec41 [label =  \"college=0\"]\n  rec42 [label =  \"w_o =1\"]\n  rec43 [label =  \"wv_2 =1\"]\n  \n  rec44 [label =  \"college=1\"]\n  rec45 [label =  \"ability>0\"]\n  rec46 [label =  \"w_1v_2=1\"]\n  rec47 [label =  \"wv_2=0\"]\n  rec48 [label =  \"ability<0\"]\n  rec49 [label =  \"w_1v_2=0\"]\n  rec50 [label =  \"wv_2=1\"]\n  rec51 [label =  \"college=0\"]\n  rec52 [label =  \"w_o =1\"]\n  rec53 [label =  \"wv_2 =0\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 \n  rec2 -> rec3 \n  rec3 -> rec4 \n  rec3 -> rec5 \n  rec4 -> rec6\n  rec5 -> rec7 \n  rec6 -> rec15\n  rec6 -> rec8\n  rec7 -> rec25\n  rec7 -> rec18 \n  rec8 -> rec9\n  rec9 -> rec10\n  rec10 -> rec11\n  rec8 -> rec12\n  rec12 -> rec13\n  rec13 -> rec14\n  rec15 -> rec16\n  rec16 -> rec17\n  rec18 -> rec19\n  rec18 -> rec22\n  rec19 -> rec20\n  rec20 -> rec21\n  rec22 -> rec23\n  rec23 -> rec24\n  rec25 -> rec26\n  rec26 -> rec27\n  rec1 -> rec28\n  rec28 -> rec29\n  rec29 -> rec30\n  rec29 -> rec31\n  rec30 -> rec32\n  rec31 -> rec33\n  rec32 -> rec34\n  rec32 -> rec41\n  rec33 -> rec44\n  rec33 -> rec51\n  rec34 -> rec35\n  rec34 -> rec38\n  rec35 -> rec36\n  rec36 -> rec37\n  rec38 -> rec39\n  rec39 -> rec40\n  rec41 -> rec42\n  rec42 -> rec43\n  rec44 -> rec45\n  rec45 -> rec46\n  rec46 -> rec47\n  rec44 -> rec48\n  rec48 -> rec49\n  rec49 -> rec50\n  rec51 -> rec52\n  rec52 -> rec53\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p><img src="bad_control_plots/bad_control_collar.jpg" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 <section id="генерация-данных" class="level3" data-number="3.2.1">
@@ -531,13 +552,6 @@ F-statistic: 659.1 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Видим, что теперь мы получили практически истинный эффект (1.02) с поправкой на доверительный интрвал.</p>
-<p>Сравните эту схему с теми, что мы рассмотрели в начале семинара:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="htmlwidget-e4fd5789b1dea4415df2" style="width:100%;height:193px;" class="grViz html-widget "></div>
-<script type="application/json" data-for="htmlwidget-e4fd5789b1dea4415df2">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = LR]\n  \n  node [shape = circle]        \n  rec1 [label = \"ability\"]\n  rec2 [label = \"wv_i\"]\n  rec3 [label =  \"e_1\"]\n  rec4 [label =  \"e_2\"]\n  rec5 [label =  \"college\"]\n  rec6 [label =  \"Y\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 \n  rec3 -> rec2\n  rec5 -> rec2\n  rec2 -> rec6\n  rec5 -> rec6\n  rec4 -> rec6\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
 <p>А теперь снова вернемся к главной мысли семинара. Контрольные переменные в случае оценки тритмент эффекта нужно выбирать очень аккуратно. Если в качестве контроля включить переменную, которая зависит от распределения в тритмент, то в конечном итоге мы получим смещенную оценку. Это тот случай, когда лучше ничего не делать, чем делать плохо.</p>
 </section>
 <section id="бонус" class="level3" data-number="3.2.3">
@@ -549,7 +563,7 @@ F-statistic: 659.1 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'ComplexUpset'</span>)</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">upset</span>(df, dummy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="bad_control_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<p><img src="bad_control_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

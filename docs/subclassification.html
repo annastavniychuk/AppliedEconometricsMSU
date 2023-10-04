@@ -78,11 +78,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -96,10 +96,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script src="site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
-<script src="site_libs/d3-4.5.0/d3.min.js"></script>
-<script src="site_libs/sankey-1/sankey.js"></script>
-<script src="site_libs/sankeyNetwork-binding-0.4/sankeyNetwork.js"></script>
 
 
 </head>
@@ -520,58 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="subclassification_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="интерактивный-networkd3" class="level4" data-number="5.2.2.2">
-<h4 data-number="5.2.2.2" class="anchored" data-anchor-id="интерактивный-networkd3"><span class="header-section-number">5.2.2.2</span> Интерактивный networkD3</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'networkD3'</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'data.table'</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>data_sankey <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(data_sankey)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># делаем факторные переменные для ggplot</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>data_sankey<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_sankey<span class="sc">$</span>class)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>data_sankey<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_sankey<span class="sc">$</span>age)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>data_sankey<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_sankey<span class="sc">$</span>sex)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>data_sankey<span class="sc">$</span>survived <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_sankey<span class="sc">$</span>survived)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co"># готовим данные</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> data_sankey[,<span class="fu">list</span>(<span class="at">value=</span>.N, <span class="at">source=</span><span class="st">'Все пассажиры'</span>, <span class="at">target=</span>class), by<span class="ot">=</span><span class="st">'class'</span>]</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> links[,<span class="fu">c</span>(<span class="st">'value'</span>, <span class="st">'target'</span>, <span class="st">'source'</span>)]</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>links2 <span class="ot">&lt;-</span> data_sankey[,<span class="fu">list</span>(<span class="at">value=</span>.N, <span class="at">source=</span>class, <span class="at">target=</span>sex), by<span class="ot">=</span><span class="fu">c</span>(<span class="st">'class'</span>, <span class="st">'sex'</span>)]</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>links2 <span class="ot">&lt;-</span> links2[,<span class="fu">c</span>(<span class="st">'value'</span>, <span class="st">'target'</span>, <span class="st">'source'</span>)]</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>links3 <span class="ot">&lt;-</span> data_sankey[,<span class="fu">list</span>(<span class="at">value=</span>.N, <span class="at">source=</span>sex, <span class="at">target=</span>age), by<span class="ot">=</span><span class="fu">c</span>(<span class="st">'sex'</span>, <span class="st">'age'</span>)]</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>links3 <span class="ot">&lt;-</span> links3[,<span class="fu">c</span>(<span class="st">'value'</span>, <span class="st">'target'</span>, <span class="st">'source'</span>)]</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>links4 <span class="ot">&lt;-</span> data_sankey[,<span class="fu">list</span>(<span class="at">value=</span>.N, <span class="at">source=</span>age, <span class="at">target=</span>survived), by<span class="ot">=</span><span class="fu">c</span>(<span class="st">'age'</span>, <span class="st">'survived'</span>)]</span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>links4 <span class="ot">&lt;-</span> links4[,<span class="fu">c</span>(<span class="st">'value'</span>, <span class="st">'target'</span>, <span class="st">'source'</span>)]</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">rbind</span>(links, links2)</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">rbind</span>(links, links3)</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">rbind</span>(links, links4)</span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>nodes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">name=</span><span class="fu">c</span>(<span class="fu">as.character</span>(links<span class="sc">$</span>source), </span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>           <span class="fu">as.character</span>(links<span class="sc">$</span>target)) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>links<span class="sc">$</span>IDsource <span class="ot">&lt;-</span> <span class="fu">match</span>(links<span class="sc">$</span>source, nodes<span class="sc">$</span>name)<span class="sc">-</span><span class="dv">1</span> </span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>links<span class="sc">$</span>IDtarget <span class="ot">&lt;-</span> <span class="fu">match</span>(links<span class="sc">$</span>target, nodes<span class="sc">$</span>name)<span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a><span class="co"># строим график</span></span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>graph <span class="ot">&lt;-</span> <span class="fu">sankeyNetwork</span>(<span class="at">Links =</span> links, <span class="at">Nodes =</span> nodes, </span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Source =</span> <span class="st">'IDsource'</span>, <span class="at">Target =</span> <span class="st">'IDtarget'</span>, </span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Value =</span> <span class="st">'value'</span>, <span class="at">NodeID =</span> <span class="st">'name'</span>, </span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sinksRight =</span> <span class="cn">FALSE</span>, <span class="at">fontSize =</span> <span class="dv">18</span>)</span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="sankeyNetwork html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-707e66c687356fa6ff76" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-707e66c687356fa6ff76">{"x":{"links":{"source":[0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8],"target":[1,2,3,4,5,6,5,6,5,6,5,6,7,8,7,8,9,10,9,10],"value":[18,18,24,12,9,9,9,9,12,12,6,6,24,12,24,12,24,24,18,6]},"nodes":{"name":["Все пассажиры","1 класс","2 класс","3 класс","4 класс","Женщины","Мужчины","Взрослые","Дети","Выжил","Не выжил"],"group":["Все пассажиры","1 класс","2 класс","3 класс","4 класс","Женщины","Мужчины","Взрослые","Дети","Выжил","Не выжил"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":null,"colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":18,"fontFamily":null,"nodeWidth":15,"nodePadding":10,"units":"","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":32,"sinksRight":false}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
+<!-- #### Интерактивный networkD3 -->
 </section>
 </section>
 <section id="считаем-эффект" class="level3" data-number="5.2.3">
@@ -579,9 +524,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>in progress…</p>
 <p>Наивная оценка</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">d =</span> <span class="fu">case_when</span>(class <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">1</span>, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>))</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>data_naive_treatment <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(d) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">tr_hat =</span> <span class="fu">mean</span>(survived))</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ATE_naive <span class="ot">&lt;-</span> data_naive_treatment<span class="sc">$</span>tr_hat[<span class="dv">2</span>]<span class="sc">-</span>data_naive_treatment<span class="sc">$</span>tr_hat[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ATE_naive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3538265</code></pre>
+</div>
 </div>
 <p>Постстратификация</p>
 <div class="cell">
@@ -590,21 +536,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                         sex <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> age <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">2</span>, <span class="co"># девочки</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                         sex <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> age <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">3</span>, <span class="co"># мужчины</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                         sex <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> age <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">4</span>, <span class="co"># мальчики</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                         <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>))</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>conditional_treatment_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(str, d) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">ct =</span> <span class="fu">mean</span>(survived), </span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                                                                      <span class="at">w =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                         <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>conditional_treatment_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(str, d) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">ct =</span> <span class="fu">mean</span>(survived), </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                                                                      <span class="at">w =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'str'. You can override using the `.groups`
 argument.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>conditional_treatment_data <span class="ot">&lt;-</span> conditional_treatment_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(str) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">W =</span> w <span class="sc">+</span> <span class="fu">lag</span>(w),</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                                                                                      <span class="at">W_t =</span> <span class="fu">lead</span>(w),</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                                                                                      <span class="at">W_c =</span> <span class="fu">lag</span>(w),</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                                                                                      <span class="at">diff=</span>ct<span class="sc">-</span><span class="fu">lag</span>(ct))</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>ATE <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">na.omit</span>(conditional_treatment_data<span class="sc">$</span>W<span class="sc">*</span>conditional_treatment_data<span class="sc">$</span>diff))</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>ATT <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">na.omit</span>(conditional_treatment_data<span class="sc">$</span>W_t)<span class="sc">*</span><span class="fu">na.omit</span>(conditional_treatment_data<span class="sc">$</span>diff))</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>ATnT <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">na.omit</span>(conditional_treatment_data<span class="sc">$</span>W_c)<span class="sc">*</span><span class="fu">na.omit</span>(conditional_treatment_data<span class="sc">$</span>diff))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>conditional_treatment_data <span class="ot">&lt;-</span> conditional_treatment_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(str) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">W =</span> w <span class="sc">+</span> <span class="fu">lag</span>(w),</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                                                                                      <span class="at">W_t =</span> <span class="fu">lead</span>(w),</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                                                                                      <span class="at">W_c =</span> <span class="fu">lag</span>(w),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                                                                                      <span class="at">diff=</span>ct<span class="sc">-</span><span class="fu">lag</span>(ct))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ATE <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">na.omit</span>(conditional_treatment_data<span class="sc">$</span>W<span class="sc">*</span>conditional_treatment_data<span class="sc">$</span>diff))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>ATT <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">na.omit</span>(conditional_treatment_data<span class="sc">$</span>W_t)<span class="sc">*</span><span class="fu">na.omit</span>(conditional_treatment_data<span class="sc">$</span>diff))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>ATnT <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">na.omit</span>(conditional_treatment_data<span class="sc">$</span>W_c)<span class="sc">*</span><span class="fu">na.omit</span>(conditional_treatment_data<span class="sc">$</span>diff))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ATE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1959843</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ATT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0350755</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ATnT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1609087</code></pre>
+</div>
 </div>
 
 

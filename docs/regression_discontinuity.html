@@ -78,11 +78,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -282,19 +282,19 @@ T(R)=
 <p>На рисунках ниже изображена вероятность попадания в тритмент группу. По оси абсцисс – бегущая переменная, по оси ординат – вероятность попадания в тритмент. В данном примере <span class="math inline">\(c=6\)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.42.PNG" class="img-fluid" style="width:50.0%"></p>
+<p><img src="regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.42.PNG" class="img-fluid" style="width:50.0%"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.47.42.PNG" class="img-fluid" style="width:50.0%"></p>
+<p><img src="regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.47.42.PNG" class="img-fluid" style="width:50.0%"></p>
 </div>
 </div>
 <p>Далее обратимся к потенциальным исходам, которые обозначены ниже пунктирными линиями. Видим, что левее от отсечки по бегущей переменной реализуется <span class="math inline">\(Y_0\)</span>, правее – <span class="math inline">\(Y_1\)</span>. Таким образом, наблюдаемый <span class="math inline">\(Y\)</span> обозначен сплошной линией. Математически это как и раньше описывается формулой <span class="math inline">\(Y = T\cdot Y_1 + (1-T)\cdot Y_0\)</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.51.PNG" class="img-fluid" style="width:50.0%"></p>
+<p><img src="regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.51.PNG" class="img-fluid" style="width:50.0%"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.48.01.PNG" class="img-fluid" style="width:50.0%"></p>
+<p><img src="regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.48.01.PNG" class="img-fluid" style="width:50.0%"></p>
 </div>
 </div>
 <p>Вернемся к формальному описанию предпосылок.</p>
@@ -308,7 +308,7 @@ T(R)=
 <p>Отдельно, как ниже, стоит проверить распределение количества людей относительно отсечки, чтобы обезопасить себя от проблемы самоотбора, как на картинке справа:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.54.46.PNG" class="img-fluid" style="width:100.0%"></p>
+<p><img src="regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.54.46.PNG" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 <p>Далее перейдём к оценке. Как мы говорили ранее, самая сложная проблема, которая перед нами стоит – это то, что у нас нет контрольной группы. Сравнить среднее значение зависимой переменной слева от отсечки со средним значением справа будет являться плохой оценкой, потому что наблюдения будут несопоставимы и полученная разница может объясняться различиями к контрольных переменных, а не тем эффектом, который мы хотим оценить.</p>
@@ -317,20 +317,20 @@ T(R)=
 <p><span class="math display">\[ \hat{\tau}_{SRD} = \left.\overline{Y} \right|_{c&lt;R&lt;c+h}-\left.\overline{Y} \right|_{c-h&lt;R&lt;c}\]</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/regressiondiscontinuity-animation-1.PNG" class="img-fluid" style="width:100.0%"></p>
+<p><img src="regression_discontinuity_plots/regressiondiscontinuity-animation-1.PNG" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 <p>Итак, подведем итог, чтобы оценить эффект, нам сначала нужно выбрать шиину окна (обозначим её <span class="math inline">\(h\)</span>). Затем на данных, которые лежат в пределах нашего окна <span class="math inline">\(R \in [c-h;c+h]\)</span> считаем оценку <span class="math inline">\(\displaystyle{LATE = E(\tau|R=c) = \hat{\tau}_{SRD} = \frac{\sum \limits_{c&lt;R&lt;c+h} Y_i}{\sum (c&lt;R&lt;c+h)} - \frac{\sum \limits_{c-h&lt;R&lt;c} Y_i}{\sum (c-h&lt;R&lt;c)}}\)</span>, как и раньше это эквивалентно регресии <span class="math inline">\(\displaystyle{Y = \beta_1 + \tau \cdot T}\)</span>. Добавлять контрольные переменные можно, это позволит дополнительно снизить дисперсию оценки. Иногда еще добавляют контроль на тренд <span class="math inline">\(\displaystyle{Y = \beta_1 + \tau \cdot T + \beta_2 \cdot R + \beta_3 \cdot T \cdot R}\)</span>.</p>
 <p>Важно отметить, что чем более широкое окно мы возьмём, тем больше наблюдений мы захватим и тем более точную оценку с меньшей дисперисей мы получим (и с более узким доверительным интервалом, что хорошо!), однако если взять слишком широкое окно, то это чревато тем, что мы захватим слишком непохожие друг на друга наблюдения и наша оценка получится смещенной. Верно и обратно, чем меньше окно, тем меньше вероятность нарваться на смещение, однако дисперсия оценки (и доверительный интервал) с маленьким окном будет выше:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/regressiondiscontinuity-fetterbw-1.PNG" class="img-fluid" style="width:70.0%"></p>
+<p><img src="regression_discontinuity_plots/regressiondiscontinuity-fetterbw-1.PNG" class="img-fluid" style="width:70.0%"></p>
 </div>
 </div>
 <p>Существует некоторое дополнение метода, связанное с перевзвешиванием данных. Мы предположили, что наблюдения, которые находятся внутри выбранного нами окна, достаточно похожи друг на друга, чтобы мы могли их сравнивать. Однако чем ближе наблюдения к отсечке, тем больше они похожи друг на друга. Может стоит придавать им больший вес? Для этого были придуманы оценки с помощью ядер (по сути взвешенный МНК). Некоторые из них нарисованы на рисунке ниже.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.53.14.PNG" class="img-fluid" style="width:50.0%"></p>
+<p><img src="regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.53.14.PNG" class="img-fluid" style="width:50.0%"></p>
 </div>
 </div>
 <p>Тогда задача МНК примет вид:</p>
@@ -1277,7 +1277,7 @@ Double-BW  3.4606  3         20          0.07151</code></pre>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/RD_sharp_fuzzy.PNG" class="img-fluid" style="width:70.0%"></p>
+<p><img src="regression_discontinuity_plots/RD_sharp_fuzzy.PNG" class="img-fluid" style="width:70.0%"></p>
 </div>
 </div>
 <p>Формула:</p>
@@ -1292,21 +1292,20 @@ Double-BW  3.4606  3         20          0.07151</code></pre>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.42.PNG" class="img-fluid" style="width:50.0%"></p>
+<p><img src="regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.42.PNG" class="img-fluid" style="width:70.0%"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.51.PNG" class="img-fluid" style="width:50.0%"></p>
+<p><img src="regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.45.51.PNG" class="img-fluid" style="width:70.0%"></p>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.46.20.PNG" class="img-fluid" style="width:50.0%"></p>
+<p><img src="regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.46.20.PNG" class="img-fluid" style="width:70.0%"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="Seminar_12-13_regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.46.32.PNG" class="img-fluid" style="width:50.0%"></p>
+<p><img src="regression_discontinuity_plots/Снимок экрана 2022-11-20 в 17.46.32.PNG" class="img-fluid" style="width:70.0%"></p>
 </div>
 </div>
-<p><em>Если у вас возникли какие-то вопросы, или вы нашли неточности в тексте, напишите мне об этом на почту annastavnychuk@gmail.com</em></p>
 
 
 </section>
