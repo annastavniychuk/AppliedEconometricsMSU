@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -126,6 +97,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -134,11 +106,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prestratification.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -146,112 +123,127 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Прикладная эконометрика</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="mailto:annastavnychuk@gmail.com" title="" class="sidebar-tool px-1"><i class="bi bi-at"></i></a>
-    <a href="https://github.com/annastavniychuk" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+    <a href="mailto:annastavnychuk@gmail.com" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-at"></i></a>
+    <a href="https://github.com/annastavniychuk" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Предисловие</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Предисловие</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./experiments.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Эксперименты</span></a>
+  <a href="./experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Эксперименты</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple_testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Множественное тестирование гипотез</span></a>
+  <a href="./multiple_testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Множественное тестирование гипотез</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bad_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Плохой контроль</span></a>
+  <a href="./bad_control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Плохой контроль</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prestratification.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></a>
+  <a href="./prestratification.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./subclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></a>
+  <a href="./subclassification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></a>
+  <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></a>
+  <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></a>
+  <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></a>
+  <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></a>
+  <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></a>
+  <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./event_study.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></a>
+  <a href="./event_study.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">Ссылки</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ссылки</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#доказательство-факта-что-престратификация-снижает-дисперсию-оценки" id="toc-доказательство-факта-что-престратификация-снижает-дисперсию-оценки" class="nav-link active" data-scroll-target="#доказательство-факта-что-престратификация-снижает-дисперсию-оценки"><span class="toc-section-number">4.1</span>  Доказательство факта, что престратификация снижает дисперсию оценки</a>
+  <li><a href="#стратификация-stratification-sampling" id="toc-стратификация-stratification-sampling" class="nav-link active" data-scroll-target="#стратификация-stratification-sampling"><span class="header-section-number">4.1</span> Стратификация (stratification sampling)</a></li>
+  <li><a href="#простая-рандомизация-simple-random-sampling" id="toc-простая-рандомизация-simple-random-sampling" class="nav-link" data-scroll-target="#простая-рандомизация-simple-random-sampling"><span class="header-section-number">4.2</span> Простая рандомизация (simple random sampling)</a></li>
+  <li><a href="#total-variance-law" id="toc-total-variance-law" class="nav-link" data-scroll-target="#total-variance-law"><span class="header-section-number">4.3</span> Total variance law</a></li>
+  <li><a href="#приложение" id="toc-приложение" class="nav-link" data-scroll-target="#приложение"><span class="header-section-number">4.4</span> Приложение</a>
   <ul class="collapse">
-  <li><a href="#условные-обозначения" id="toc-условные-обозначения" class="nav-link" data-scroll-target="#условные-обозначения"><span class="toc-section-number">4.1.1</span>  Условные обозначения</a></li>
-  <li><a href="#total-variance-law" id="toc-total-variance-law" class="nav-link" data-scroll-target="#total-variance-law"><span class="toc-section-number">4.1.2</span>  Total variance law</a></li>
-  <li><a href="#стратификация" id="toc-стратификация" class="nav-link" data-scroll-target="#стратификация"><span class="toc-section-number">4.1.3</span>  Стратификация</a></li>
-  <li><a href="#простая-рандомизация" id="toc-простая-рандомизация" class="nav-link" data-scroll-target="#простая-рандомизация"><span class="toc-section-number">4.1.4</span>  Простая рандомизация</a></li>
-  <li><a href="#итого" id="toc-итого" class="nav-link" data-scroll-target="#итого"><span class="toc-section-number">4.1.5</span>  Итого</a></li>
+  <li><a href="#условные-обозначения" id="toc-условные-обозначения" class="nav-link" data-scroll-target="#условные-обозначения"><span class="header-section-number">4.4.1</span> Условные обозначения</a></li>
+  <li><a href="#total-variance-law-1" id="toc-total-variance-law-1" class="nav-link" data-scroll-target="#total-variance-law-1"><span class="header-section-number">4.4.2</span> Total variance law</a></li>
   </ul></li>
-  <li><a href="#симуляция" id="toc-симуляция" class="nav-link" data-scroll-target="#симуляция"><span class="toc-section-number">4.2</span>  Симуляция</a></li>
+  <li><a href="#симуляция" id="toc-симуляция" class="nav-link" data-scroll-target="#симуляция"><span class="header-section-number">4.5</span> Симуляция</a></li>
   </ul>
 </nav>
     </div>
@@ -260,7 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></h1>
 </div>
 
 
@@ -275,10 +267,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="доказательство-факта-что-престратификация-снижает-дисперсию-оценки" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="доказательство-факта-что-престратификация-снижает-дисперсию-оценки"><span class="header-section-number">4.1</span> Доказательство факта, что престратификация снижает дисперсию оценки</h2>
-<section id="условные-обозначения" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="условные-обозначения"><span class="header-section-number">4.1.1</span> Условные обозначения</h3>
+<p>Материал написан на основе статьи <a href="https://www.kdd.org/kdd2016/papers/files/adp0945-xieA.pdf">Xie, H., &amp; Aurisset, J. (2016, August). Improving the sensitivity of online controlled experiments: Case studies at netflix. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp.&nbsp;645-654).</a></p>
+<section id="стратификация-stratification-sampling" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="стратификация-stratification-sampling"><span class="header-section-number">4.1</span> Стратификация (stratification sampling)</h2>
+<p>Мы помним, что снижение дисперсии снижает необходимое число наблюдений.</p>
+<p>Предположим, что мы выбрали переменную, по которой мы можем разбить нашу выборку на группы (страты). Пусть таких групп K штук, а <span class="math inline">\(n_k\)</span> – численность каждой из них, то есть <span class="math inline">\(\displaystyle{\sum_{k=1}^K n_k = N}\)</span>, где <span class="math inline">\(N\)</span> величина генеральной совокупности. Тогда вероятность попасть в одну из групп равняется <span class="math inline">\(p_k = \frac{n_k}{N}\)</span> – доля людей из <span class="math inline">\(k\)</span>-й страты в генеральной совокупности.</p>
+<p>Пусть наша зависимая переменная равна <span class="math inline">\(Y\)</span>, причем <span class="math inline">\(\mathbb{E}(Y)=\mu\)</span> и <span class="math inline">\(var(Y)=\sigma^2\)</span>. Тогда среднее значение зависимой переменной равно:</p>
+<ul>
+<li><p>Обычное среднее по всей выборке:<span class="math inline">\(\displaystyle{\bar{Y}=\frac{1}{N} \sum_{k=1}^K \sum_{j=1}^{n_k} Y_{kj}}\)</span></p></li>
+<li><p>Средневзвешенное при стратификации равно сумме средних в каждой страте, взвешенных по вероятностям попасть в каждую из этих страт: <span class="math inline">\(\displaystyle{\hat{Y}_{\text{strat}}=\sum_{k=1}^K p_k \bar{Y}_k}\)</span>, где <span class="math inline">\(\displaystyle{\bar{Y}_k=\frac{1}{n_k} \sum_{j=1}^{n_k} Y_{kj}}\)</span> среднее значение метрики внутри <span class="math inline">\(k\)</span>-й страты.</p></li>
+</ul>
+<p>Распишем среднее при стратификации подробнее:</p>
+<p><span class="math inline">\(\displaystyle{\underbrace{\sum_{k=1}^K p_k \bar{Y}_k}_{\hat{Y}_{\text{strat}}} = \sum_{k=1}^K \frac{n_k}{N} \frac{1}{n_k} \sum_{j=1}^{n_k} Y_{kj} = \underbrace{\frac{1}{N} \sum_{k=1}^K \sum_{j=1}^{n_k} Y_{kj}}_{\bar{Y}}}\)</span> обе средние равны.</p>
+<p>Найдем среднее и дисперсию зависимой переменной при стратификации.</p>
+<ul>
+<li><strong>Среднее:</strong> <span class="math inline">\(\displaystyle{\mathbb{E}\left(\hat{Y}_{\text{strat }}\right)=\mathbb{E}\left[\sum_{k=1}^K p_k \bar{Y}_k\right]=\sum_{k=1}^K p_k \mathbb{E}\left(\bar{Y}_k\right)=\sum_{k=1}^K p_k \mu_k=\boxed{\mu}}\)</span></li>
+<li><strong>Дисперсия:</strong> <span class="math inline">\(\displaystyle{var\left(\hat{Y}_{\text{strat }}\right)=\operatorname{var}\left[\sum_{k=1}^K p_k \bar{Y}_k\right]=\sum_{k=1}^K p_k^2 var\left(\bar{Y}_k\right)=\sum_{k=1}^K \frac{n_k^2}{N^2} \frac{1}{n_k^2} n_k \sigma_k^2 = \frac{1}{N} \sum_{k=1}^K \frac{n_k}{N} \sigma_k^2 = \boxed{\frac{1}{N} \sum_{k=1}^K p_k \sigma_k^2}}\)</span><strong>(1)</strong></li>
+</ul>
+</section>
+<section id="простая-рандомизация-simple-random-sampling" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="простая-рандомизация-simple-random-sampling"><span class="header-section-number">4.2</span> Простая рандомизация (simple random sampling)</h2>
+<p>Аналогично найдем среднее и дисперсию зависимой переменной при классическом эксперименте.</p>
+<ul>
+<li><strong>Среднее:</strong> <span class="math inline">\(\displaystyle{\mathbb{E}(\bar{Y})=\mathbb{E}\left[\frac{1}{N} \sum_{k=1}^K \sum_{j=1}^{n_k} Y_{k j}\right]=\frac{1}{N} \sum_{k=1}^K \sum_{j=1}^{n_k} \mathbb{E}\left(Y_{k j}\right)=\frac{1}{N} \sum_{k=1}^K \sum_{j=1}^{n_k} \mu = \frac{1}{N} \sum_{k=1}^K n_k \mu = \frac{1}{N} N \mu=\boxed{\mu}}\)</span></li>
+<li><strong>Дисперсия:</strong> <span class="math inline">\(\displaystyle{\operatorname{var}(\bar{Y})=var\left[\frac{1}{N} \sum_{k=1}^K \sum_{j=1}^{n_k} Y_{kj}\right]= \frac{1}{N^2} \sum_{k=1}^K \sum_{j=1}^{n_k} var\left(Y_{kj}\right) = \frac{1}{N^2} \sum_{k=1}^K n_k \sigma^2 = \frac{N \sigma^2}{N^2}=\boxed{\frac{\sigma^2}{N}}}\)</span><strong>(2)</strong></li>
+</ul>
+</section>
+<section id="total-variance-law" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="total-variance-law"><span class="header-section-number">4.3</span> Total variance law</h2>
+<p>Дисперсия зависимой переменной при рандомизированном эксперименте может быть представлена в виде суммы внутригрупповой и межгрупповой дисперсии.</p>
+<p>Для этого нам понадобится <strong>total variance law</strong> (см. доказательство в приложении): <span class="math inline">\(\displaystyle{var(Y)=var[\mathbb{E}(Y \mid X)] + \mathbb{E}[var(Y\mid X)]}\)</span></p>
+<p>Пусть <span class="math inline">\(Z\)</span> – номер страты от 1 до K, тогда: <span class="math inline">\(\displaystyle{var(Y)=\mathbb{E}(var(Y \mid Z))+var(\mathbb{E}(Y \mid Z))=}\)</span></p>
+<p><span class="math inline">\(\displaystyle{=\left\{ I(Z = k) \text{ индикаторная переменная, равная 1, если $Z = k$, и равная нулю иначе} \right\}= }\)</span></p>
+<p><span class="math inline">\(\displaystyle{=\mathbb{E}\left[\sum_{k=1}^K \sigma_k^2 I(Z=k)\right]+ var\left[\sum_{k=1}^K \mu_k I(Z=k)\right]=}\)</span></p>
+<p><span class="math inline">\(\displaystyle{=\sum_{k=1}^K \sigma_k^2 \mathbb{E}[I(Z=k)]+\mathbb{E}\left[\sum_{k=1}^K \mu_k I(Z=k)\right]^2-\left[\mathbb{E}\left[\sum_{k=1}^K \mu_k I(Z=k)\right]\right]^2=}\)</span></p>
+<p><span class="math inline">\(\displaystyle{= \sum_{k=1}^K \sigma_k^2 p_k + \sum_{k=1}^K \mu_k^2 p_k - \mu^2 = \{*\} = \sum_{k=1}^K \sigma_k^2 p_k + \sum_{k=1}^K p_k (\mu_k - \mu)^2}\)</span> <strong>(3)</strong></p>
+<p><span class="math inline">\(\displaystyle{(*): \sum_{k=1}^K p_k(\mu_k - \mu)^2 = \sum_{k=1}^K p_k\left(\mu_k^2 - 2\mu\mu_k + \mu^2\right) =}\)</span></p>
+<p><span class="math inline">\(\displaystyle{= \sum_{k=1}^K p_k \mu_k^2 - 2\mu \sum_{k=1}^K \mu_k p_k+ \mu^2 \sum_{k=1}^K p_k = \sum_{k=1}^K \mu_k^2 p_k - 2\mu^2 + \mu^2 =\sum_{k=1}^K \mu_k^2 p_k - \mu^2}\)</span></p>
+<p>Из <strong>(2)</strong> и <strong>(3)</strong> следует:</p>
+<p><span class="math inline">\(\displaystyle{var(\bar{Y})=\frac{\sigma^2}{N}}\)</span></p>
+<p><span class="math inline">\(\displaystyle{var(Y)=\sum_{k=1}^K \sigma_k^2 p_k+\sum_{k=1}^K p_k\left(\mu_k-\mu\right)^2}\)</span></p>
+<p><span class="math inline">\(\displaystyle{var(\bar{Y})= \underbrace{\frac{1}{N} \sum_{k=1}^K p_k \sigma_k^2}_{\text{внутригрупповая дисперсия}} + \underbrace{\frac{1}{N} \sum_{k=1}^K p_k \left(\mu_k-\mu\right)^2}_{\text{межгрупповая дисперсия}}}\)</span> <strong>(4)</strong></p>
+<p>Из <strong>(1)</strong> и <strong>(4)</strong> следует:</p>
+<p><span class="math inline">\(\displaystyle{var\left(\hat{Y}_{\text{strat}}\right) = \frac{1}{N} \sum_{k=1}^K p_k \sigma_k^2}\)</span></p>
+<p><span class="math inline">\(\displaystyle{var(\bar{Y})= \underbrace{\frac{1}{N} \sum_{k=1}^K p_k \sigma_k^2}_{\text{внутригрупповая дисперсия}} + \underbrace{\frac{1}{N} \sum_{k=1}^K p_k \left(\mu_k-\mu\right)^2}_{\text{межгрупповая дисперсия}}}\)</span></p>
+<p>Дисперсия среднего значения зависимой переменной всегда больше, чем дисперсия среднего значения зависимой переменной в случае стратификации, поскольку межгрупповая дисперсия всегда неотрицательная. Таким образом, <span class="math inline">\(\displaystyle{var(\bar{Y}) \geqslant var\left(\hat{Y}_{\text{strat }}\right)}\)</span></p>
+</section>
+<section id="приложение" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="приложение"><span class="header-section-number">4.4</span> Приложение</h2>
+<section id="условные-обозначения" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="условные-обозначения"><span class="header-section-number">4.4.1</span> Условные обозначения</h3>
 <ul>
 <li><span class="math inline">\(Y\)</span> – зависимая переменная, причем
 <ul>
@@ -304,8 +342,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </section>
-<section id="total-variance-law" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="total-variance-law"><span class="header-section-number">4.1.2</span> Total variance law</h3>
+<section id="total-variance-law-1" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="total-variance-law-1"><span class="header-section-number">4.4.2</span> Total variance law</h3>
 <p>Это вспомогательный факт из математической статистики, который нам понадобится в дальнейших выкладках.</p>
 <p><strong>Доказать:</strong></p>
 <p><span class="math inline">\(\displaystyle{var(Y)=var_X(\mathbb{E}(Y \mid X)) + \mathbb{E}_X(var(yX\mid X))}\)</span></p>
@@ -314,39 +352,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math inline">\(\displaystyle{= \left\{\text{закон повтороного мат. ожидания } \mathbb{E}(Y) = \mathbb{E}(\mathbb{E}(Y \mid X))\right\} =}\)</span></p>
 <p><span class="math inline">\(\displaystyle{=\mathbb{E}\left(\mathbb{E}\left(Y^2 \mid X\right)\right)-\mathbb{E}(\mathbb{E}(Y \mid X))]^2=}\)</span></p>
 <p><span class="math inline">\(\displaystyle{=\left\{\text{добавим и вычтем } \mathbb{E}\left[(\mathbb{E}(Y \mid X))^2 \mid X\right] \right\} =}\)</span></p>
-<p><span class="math inline">\(\displaystyle{=\underbrace{\mathbb{E}\left[\mathbb{E}\left(Y^2 \mid X\right)-(\mathbb{E}(Y \mid X))^2 \mid X\right]}_{\mathbb{E}[var(Y \mid X)]}+\underbrace{ \mathbb{E}\left[(\mathbb{E}(Y \mid X))^2 \mid X\right]-\mathbb{E}[\mathbb{E}(Y \mid X)] \mathbb{E}[\mathbb{E}(Y \mid X)]}_{var[\mathbb{E}(Y \mid X)}=}\)</span></p>
+<p><span class="math inline">\(\displaystyle{=\underbrace{\mathbb{E}\left[\mathbb{E}\left(Y^2 \mid X\right)-(\mathbb{E}(Y \mid X))^2 \mid X\right]}_{\mathbb{E}[var(Y \mid X)]}+\underbrace{ \mathbb{E}\left[(\mathbb{E}(Y \mid X))^2 \mid X\right]-\mathbb{E}[\mathbb{E}(Y \mid X)] \mathbb{E}[\mathbb{E}(Y \mid X)]}_{var[\mathbb{E}(Y \mid X)]}=}\)</span></p>
 <p><span class="math inline">\(\displaystyle{=\mathbb{E}[\operatorname{var}(Y \mid X)]+\operatorname{var}[\mathbb{E}(Y \mid X)]}\)</span></p>
 </section>
-<section id="стратификация" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="стратификация"><span class="header-section-number">4.1.3</span> Стратификация</h3>
-<p><span class="math inline">\(\displaystyle{\mathbb{E}\left(\hat{Y}_{\text{strat }}\right)=\mathbb{E}\left[\sum_{k=1}^K p_k \bar{Y}_k\right]=\sum_{k=1}^K p_k \mathbb{E}\left(\bar{Y}_k\right)=\sum_{k=1}^K p_k \mu_k=\boxed{\mu}}\)</span></p>
-<p><span class="math inline">\(\displaystyle{var\left(\hat{Y}_{\text{strat }}\right)=\operatorname{var}\left[\sum_{k=1}^K p_k \bar{Y}_k\right]=\sum_{k=1}^K p_k^2 var\left(\bar{Y}_k\right)=\sum_{k=1}^K \frac{n_k^2}{N^2} \frac{1}{n_k} \sigma_k^2=\boxed{\frac{1}{N} \sum_{k=1}^K p_k \sigma_k^2}}\)</span> <strong>(1)</strong></p>
 </section>
-<section id="простая-рандомизация" class="level3" data-number="4.1.4">
-<h3 data-number="4.1.4" class="anchored" data-anchor-id="простая-рандомизация"><span class="header-section-number">4.1.4</span> Простая рандомизация</h3>
-<p><span class="math inline">\(\displaystyle{\mathbb{E}(\bar{Y})=\mathbb{E}\left[\frac{1}{N} \sum_{k=1}^K \sum_{j=1}^{n_k} Y_{k j}\right]=\frac{1}{N} \sum_{k=1}^K \sum_{j=1}^{n_k} \mathbb{E}\left(Y_{k j}\right)=\frac{1}{N} \sum_{k=1}^K \sum_{j=1}^{n_k} \mu=\frac{1}{N} N \mu=\boxed{\mu}}\)</span></p>
-<p><span class="math inline">\(\displaystyle{\operatorname{var}(\bar{Y})=var\left[\frac{1}{N} \sum_{k=1}^K \sum_{j=1}^{n_k} Y_{kj}\right]=\frac{1}{N^2} \sum_{k=1}^K \sum_{j=1}^{n_k} var\left(Y_{kj}\right)=\frac{N \sigma^2}{N^2}=\boxed{\frac{\sigma^2}{N}}}\)</span> <strong>(2)</strong></p>
-</section>
-<section id="итого" class="level3" data-number="4.1.5">
-<h3 data-number="4.1.5" class="anchored" data-anchor-id="итого"><span class="header-section-number">4.1.5</span> Итого</h3>
-<p>Пусть <span class="math inline">\(Z\)</span> – номер страты от 1 до K. Используем total variance law, тогда:</p>
-<p><span class="math inline">\(\displaystyle{var(Y)=\mathbb{E}(var(Y \mid Z))+var(\mathbb{E}(Y \mid Z))=}\)</span></p>
-<p><span class="math inline">\(\displaystyle{=\mathbb{E}\left[\sum_{k=1}^K \sigma_k^2 I(Z=k)\right]+ var\left[\sum_{k=1}^K \mu_k I(Z=k)\right]=}\)</span></p>
-<p><span class="math inline">\(\displaystyle{=\sum_{k=1}^K \sigma_k^2 \mathbb{E}[I(Z=k)]+\mathbb{E}\left[\sum_{k=1}^K \mu_k I(Z=k)\right]^2-\left[\mathbb{E}\left[\sum_{k=1}^K \mu_k I(Z=k)\right]\right]^2=}\)</span></p>
-<p><span class="math inline">\(\displaystyle{= \sum_{k=1}^K \sigma_k^2 p_k + \sum_{k=1}^K \mu_k^2 p_k - \mu^2 = \{*\} = \sum_{k=1}^K \sigma_k^2 p_k + \sum_{k=1}^K p_k (\mu_k - \mu)^2}\)</span> <strong>(3)</strong></p>
-<p><span class="math inline">\(\displaystyle{(*): \sum_{k=1}^K p_k(\mu_k - \mu)^2 = \sum_{k=1}^K p_k\left(\mu_k^2 - 2\mu\mu_k + \mu^2\right) =}\)</span></p>
-<p><span class="math inline">\(\displaystyle{= \sum_{k=1}^K p_k \mu_k^2 - 2\mu \sum_{k=1}^K \mu_k p_k+ \mu^2 \sum_{k=1}^K p_k = \sum_{k=1}^K \mu_k^2 p_k - 2\mu^2 + \mu^2 =\sum_{k=1}^K \mu_k^2 p_k - \mu^2}\)</span></p>
-<p>Из (2) и (3) следует:</p>
-<p><span class="math inline">\(\displaystyle{var(\bar{Y})=\frac{\sigma^2}{N}}\)</span></p>
-<p><span class="math inline">\(\displaystyle{var(Y)=\sum_{k=1}^K \sigma_k^2 p_k+\sum_{k=1}^K p_k\left(\mu_k-\mu\right)^2}\)</span></p>
-<p><span class="math inline">\(\displaystyle{var(\bar{Y})= \underbrace{\frac{1}{N} \sum_{k=1}^K p_k \sigma_k^2}_{\text{внутригрупповая дисперсия}} + \underbrace{\frac{1}{N} \sum_{k=1}^K p_k \left(\mu_k-\mu\right)^2}_{\text{межгрупповая дисперсия}}}\)</span></p>
-<p>Из (1) следует:</p>
-<p><span class="math inline">\(\displaystyle{var\left(\hat{Y}_{\text{strat}}\right) = \frac{1}{N} \sum_{k=1}^K p_k \sigma_k^2}\)</span></p>
-<p>Таким образом, <span class="math inline">\(\displaystyle{var(\bar{Y}) \geqslant var\left(\hat{Y}_{\text{strat }}\right)}\)</span></p>
-</section>
-</section>
-<section id="симуляция" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="симуляция"><span class="header-section-number">4.2</span> Симуляция</h2>
+<section id="симуляция" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="симуляция"><span class="header-section-number">4.5</span> Симуляция</h2>
 <p>В данной симуляции мы попробуем эмпирически доказать, что дисперсия оценки, полученной с помощью престратификации, действительно меньше, чем при оценивании с обычной рандомизацией. Чтобы получить распределение оценок, нам нужно осуществить множество реализаций нашего эксперимента. Для этого мы воспользуемся циклами.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'dplyr'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -578,9 +589,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -645,6 +670,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

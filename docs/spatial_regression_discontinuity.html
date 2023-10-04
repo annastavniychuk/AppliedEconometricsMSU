@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -126,6 +97,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -134,11 +106,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./spatial_regression_discontinuity.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -146,125 +123,140 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Прикладная эконометрика</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="mailto:annastavnychuk@gmail.com" title="" class="sidebar-tool px-1"><i class="bi bi-at"></i></a>
-    <a href="https://github.com/annastavniychuk" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+    <a href="mailto:annastavnychuk@gmail.com" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-at"></i></a>
+    <a href="https://github.com/annastavniychuk" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Предисловие</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Предисловие</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./experiments.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Эксперименты</span></a>
+  <a href="./experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Эксперименты</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple_testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Множественное тестирование гипотез</span></a>
+  <a href="./multiple_testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Множественное тестирование гипотез</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bad_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Плохой контроль</span></a>
+  <a href="./bad_control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Плохой контроль</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prestratification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></a>
+  <a href="./prestratification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Престратификация</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./subclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></a>
+  <a href="./subclassification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></a>
+  <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></a>
+  <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></a>
+  <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></a>
+  <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></a>
+  <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></a>
+  <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./event_study.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></a>
+  <a href="./event_study.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">Ссылки</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ссылки</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#введение" id="toc-введение" class="nav-link active" data-scroll-target="#введение"><span class="toc-section-number">9.1</span>  Введение</a></li>
-  <li><a href="#работа-с-картами-и-генерация-данных" id="toc-работа-с-картами-и-генерация-данных" class="nav-link" data-scroll-target="#работа-с-картами-и-генерация-данных"><span class="toc-section-number">9.2</span>  Работа с картами и генерация данных</a></li>
-  <li><a href="#генерация-тритмента" id="toc-генерация-тритмента" class="nav-link" data-scroll-target="#генерация-тритмента"><span class="toc-section-number">9.3</span>  Генерация тритмента</a></li>
-  <li><a href="#расстояние-до-отсечки" id="toc-расстояние-до-отсечки" class="nav-link" data-scroll-target="#расстояние-до-отсечки"><span class="toc-section-number">9.4</span>  Расстояние до отсечки</a></li>
-  <li><a href="#проведение-пространственной-оценки-rdd" id="toc-проведение-пространственной-оценки-rdd" class="nav-link" data-scroll-target="#проведение-пространственной-оценки-rdd"><span class="toc-section-number">9.5</span>  Проведение пространственной оценки RDD</a>
+  <li><a href="#введение" id="toc-введение" class="nav-link active" data-scroll-target="#введение"><span class="header-section-number">9.1</span> Введение</a></li>
+  <li><a href="#работа-с-картами-и-генерация-данных" id="toc-работа-с-картами-и-генерация-данных" class="nav-link" data-scroll-target="#работа-с-картами-и-генерация-данных"><span class="header-section-number">9.2</span> Работа с картами и генерация данных</a></li>
+  <li><a href="#генерация-тритмента" id="toc-генерация-тритмента" class="nav-link" data-scroll-target="#генерация-тритмента"><span class="header-section-number">9.3</span> Генерация тритмента</a></li>
+  <li><a href="#расстояние-до-отсечки" id="toc-расстояние-до-отсечки" class="nav-link" data-scroll-target="#расстояние-до-отсечки"><span class="header-section-number">9.4</span> Расстояние до отсечки</a></li>
+  <li><a href="#проведение-пространственной-оценки-rdd" id="toc-проведение-пространственной-оценки-rdd" class="nav-link" data-scroll-target="#проведение-пространственной-оценки-rdd"><span class="header-section-number">9.5</span> Проведение пространственной оценки RDD</a>
   <ul class="collapse">
-  <li><a href="#наивное-расстояние" id="toc-наивное-расстояние" class="nav-link" data-scroll-target="#наивное-расстояние"><span class="toc-section-number">9.5.1</span>  Наивное расстояние</a></li>
-  <li><a href="#параметрические-характеристики" id="toc-параметрические-характеристики" class="nav-link" data-scroll-target="#параметрические-характеристики"><span class="toc-section-number">9.5.2</span>  Параметрические характеристики</a></li>
-  <li><a href="#geographic-regression-discontinuity-grd" id="toc-geographic-regression-discontinuity-grd" class="nav-link" data-scroll-target="#geographic-regression-discontinuity-grd"><span class="toc-section-number">9.5.3</span>  Geographic Regression Discontinuity (GRD)</a></li>
+  <li><a href="#наивное-расстояние" id="toc-наивное-расстояние" class="nav-link" data-scroll-target="#наивное-расстояние"><span class="header-section-number">9.5.1</span> Наивное расстояние</a></li>
+  <li><a href="#параметрические-характеристики" id="toc-параметрические-характеристики" class="nav-link" data-scroll-target="#параметрические-характеристики"><span class="header-section-number">9.5.2</span> Параметрические характеристики</a></li>
+  <li><a href="#geographic-regression-discontinuity-grd" id="toc-geographic-regression-discontinuity-grd" class="nav-link" data-scroll-target="#geographic-regression-discontinuity-grd"><span class="header-section-number">9.5.3</span> Geographic Regression Discontinuity (GRD)</a></li>
   </ul></li>
-  <li><a href="#робастность" id="toc-робастность" class="nav-link" data-scroll-target="#робастность"><span class="toc-section-number">9.6</span>  Робастность</a>
+  <li><a href="#робастность" id="toc-робастность" class="nav-link" data-scroll-target="#робастность"><span class="header-section-number">9.6</span> Робастность</a>
   <ul class="collapse">
-  <li><a href="#плацебо-граница" id="toc-плацебо-граница" class="nav-link" data-scroll-target="#плацебо-граница"><span class="toc-section-number">9.6.1</span>  Плацебо граница</a></li>
-  <li><a href="#надежность-grd" id="toc-надежность-grd" class="nav-link" data-scroll-target="#надежность-grd"><span class="toc-section-number">9.6.2</span>  Надежность GRD</a></li>
-  <li><a href="#устойчивость-к-спецификации-полинома" id="toc-устойчивость-к-спецификации-полинома" class="nav-link" data-scroll-target="#устойчивость-к-спецификации-полинома"><span class="toc-section-number">9.6.3</span>  Устойчивость к спецификации полинома</a></li>
+  <li><a href="#плацебо-граница" id="toc-плацебо-граница" class="nav-link" data-scroll-target="#плацебо-граница"><span class="header-section-number">9.6.1</span> Плацебо граница</a></li>
+  <li><a href="#надежность-grd" id="toc-надежность-grd" class="nav-link" data-scroll-target="#надежность-grd"><span class="header-section-number">9.6.2</span> Надежность GRD</a></li>
+  <li><a href="#устойчивость-к-спецификации-полинома" id="toc-устойчивость-к-спецификации-полинома" class="nav-link" data-scroll-target="#устойчивость-к-спецификации-полинома"><span class="header-section-number">9.6.3</span> Устойчивость к спецификации полинома</a></li>
   </ul></li>
-  <li><a href="#смещение-границ-создание-полигонов-из-линий" id="toc-смещение-границ-создание-полигонов-из-линий" class="nav-link" data-scroll-target="#смещение-границ-создание-полигонов-из-линий"><span class="toc-section-number">9.7</span>  Смещение границ, создание полигонов из линий</a>
+  <li><a href="#смещение-границ-создание-полигонов-из-линий" id="toc-смещение-границ-создание-полигонов-из-линий" class="nav-link" data-scroll-target="#смещение-границ-создание-полигонов-из-линий"><span class="header-section-number">9.7</span> Смещение границ, создание полигонов из линий</a>
   <ul class="collapse">
-  <li><a href="#повороты" id="toc-повороты" class="nav-link" data-scroll-target="#повороты"><span class="toc-section-number">9.7.1</span>  Повороты</a></li>
-  <li><a href="#масштабирование" id="toc-масштабирование" class="nav-link" data-scroll-target="#масштабирование"><span class="toc-section-number">9.7.2</span>  Масштабирование</a></li>
-  <li><a href="#сдвиг" id="toc-сдвиг" class="nav-link" data-scroll-target="#сдвиг"><span class="toc-section-number">9.7.3</span>  Сдвиг</a></li>
-  <li><a href="#всё-вместе" id="toc-всё-вместе" class="nav-link" data-scroll-target="#всё-вместе"><span class="toc-section-number">9.7.4</span>  Всё вместе</a></li>
+  <li><a href="#повороты" id="toc-повороты" class="nav-link" data-scroll-target="#повороты"><span class="header-section-number">9.7.1</span> Повороты</a></li>
+  <li><a href="#масштабирование" id="toc-масштабирование" class="nav-link" data-scroll-target="#масштабирование"><span class="header-section-number">9.7.2</span> Масштабирование</a></li>
+  <li><a href="#сдвиг" id="toc-сдвиг" class="nav-link" data-scroll-target="#сдвиг"><span class="header-section-number">9.7.3</span> Сдвиг</a></li>
+  <li><a href="#всё-вместе" id="toc-всё-вместе" class="nav-link" data-scroll-target="#всё-вместе"><span class="header-section-number">9.7.4</span> Всё вместе</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -274,7 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></h1>
 </div>
 
 
@@ -725,7 +717,7 @@ Note:                           *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">spatialrd</span>(<span class="at">y =</span> <span class="st">"education"</span>, <span class="at">data =</span> points_samp.sf, <span class="at">cutoff.points =</span> borderpoints.sf, <span class="at">treated =</span> <span class="st">"treated"</span>, <span class="at">minobs =</span> <span class="dv">10</span>, <span class="at">spatial.object =</span> F)</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <colgroup>
 <col style="width: 6%">
 <col style="width: 9%">
@@ -1976,9 +1968,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2043,6 +2049,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
