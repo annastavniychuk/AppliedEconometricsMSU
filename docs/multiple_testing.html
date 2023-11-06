@@ -177,49 +177,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./subclassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Взвешивание (subclassification)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Мэтчинг</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event_study.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Событийный анализ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -353,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="коррекция-бонферрони" class="level4" data-number="2.2.1.1">
 <h4 data-number="2.2.1.1" class="anchored" data-anchor-id="коррекция-бонферрони"><span class="header-section-number">2.2.1.1</span> Коррекция Бонферрони</h4>
 <p>Вернемся к нашему примеру, когда мы сравнили 3 группы A, B и C с помощью t-теста. Предположим, что мы получили следующие Р-значения: 0.001, 0.01 и 0.04.</p>
-<p>Как было сказано выше, мы хотим, чтобы групповая вероятность ошибки была не больше уровня значимости <span class="math inline">\(FWER \leq \alpha\)</span>. Согласно методу Бонферрони, мы должны сравнить каждое из полученных p-значений не с <span class="math inline">\(\alpha\)</span>, а с <span class="math inline">\(\frac{\alpha}{n}\)</span>, где <span class="math inline">\(n\)</span> – число проверяемых гипотез. Деление исходного уровня значимости <span class="math inline">\(\alpha\)</span> на <span class="math inline">\(n\)</span> – это и есть поправка Бонферрони. В рассматриваемом примере каждое из полученных p-значений необходимо было бы сравнить с <span class="math inline">\(\frac{\alpha}{n}\)</span>, например, с <span class="math inline">\(\frac{0.01}{3}\approx 0.017\)</span>.</p>
+<p>Как было сказано выше, мы хотим, чтобы групповая вероятность ошибки была не больше уровня значимости <span class="math inline">\(FWER \leq \alpha\)</span>. Согласно методу Бонферрони, мы должны сравнить каждое из полученных p-значений не с <span class="math inline">\(\alpha\)</span>, а с <span class="math inline">\(\frac{\alpha}{n}\)</span>, где <span class="math inline">\(n\)</span> – число проверяемых гипотез. Деление исходного уровня значимости <span class="math inline">\(\alpha\)</span> на <span class="math inline">\(n\)</span> – это и есть поправка Бонферрони. В рассматриваемом примере каждое из полученных p-значений необходимо было бы сравнить с <span class="math inline">\(\frac{\alpha}{n}\)</span>, например, с <span class="math inline">\(\frac{0.05}{3}\approx 0.017\)</span>.</p>
 <ul>
 <li><span class="math inline">\(p-value_1=0.001 &lt; \alpha_{adjusted}=0.017\)</span> – гипотеза отклонена</li>
 <li><span class="math inline">\(p-value_2=0.01 &lt; \alpha_{adjusted}=0.017\)</span> – гипотеза отклонена</li>
@@ -384,8 +390,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Важно помнить об уязвимости коррекции Бонферрони – с ростом числа гипотез мощность метода уменьшается. Чем больше гипотез мы хотим проверить, тем сложнее нам будет их отвергать (даже если они реально должны быть отвергнуты). Например, для 5 групп (10 гипотез), применение поправки Бонферрони привело бы к снижению исходного уровня значимости до 0.01/10 = 0.001. Соответственно, для отклонения гипотез, соответствующие p-значения должны быть меньше 0.001, а это довольно жесткая отсечка. Из этого делаем вывод, что при большом числе гипотез коррекцию Бонферрони лучше не использовать.</p>
 </section>
-<section id="низходящая-процедура-хольма-хольма-бонферрони" class="level4" data-number="2.2.1.2">
-<h4 data-number="2.2.1.2" class="anchored" data-anchor-id="низходящая-процедура-хольма-хольма-бонферрони"><span class="header-section-number">2.2.1.2</span> Низходящая процедура Хольма (Хольма-Бонферрони)</h4>
+<section id="нисходящая-процедура-хольма-хольма-бонферрони" class="level4" data-number="2.2.1.2">
+<h4 data-number="2.2.1.2" class="anchored" data-anchor-id="нисходящая-процедура-хольма-хольма-бонферрони"><span class="header-section-number">2.2.1.2</span> Нисходящая процедура Хольма (Хольма-Бонферрони)</h4>
 <p>Метод Хольма позволяет побороть недостатки метода Бонферрони. Он устроен следующим образом:</p>
 <ul>
 <li>Сначала p-значения сортируются по возрастанию <span class="math inline">\(\displaystyle{p-value_1 \leq p-value_2 \leq ... \leq p-value_n}\)</span>.</li>
@@ -960,6 +966,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Анна Ставнийчук, Прикладная эконометрика, 2023
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

@@ -78,11 +78,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -174,49 +174,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./subclassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Взвешивание (subclassification)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Мэтчинг</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event_study.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Событийный анализ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -310,7 +316,7 @@ T_i =
 <section id="средние-эффекты" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="средние-эффекты"><span class="header-section-number">1.1.2</span> Средние эффекты</h3>
 <p>Если с распределением индивидуального эффекта воздействия (treatment effect) работать не получается, будем довольствоваться средними величинами. Например, попробуем рассчитать <strong>средний эффект воздействия</strong> (average treatment effect):</p>
-<p><span class="math inline">\(ATE = \mathbb{E}[\tau_i] = \mathbb{E}[Y_{i1} - Y_{i0}] = \mathbb{E}[Y_{i1}] - \mathbb{E}[Y_{i0}] \xrightarrow{p} \frac{1}{N_1}\sum \limits_{i=1}^{N_1}Y_{i1} - \frac{1}{N_0}\sum \limits_{i=1}^{N_0}Y_{i0}\)</span></p>
+<p><span class="math inline">\(ATE = \mathbb{E}[\tau_i] = \mathbb{E}[Y_{i1} - Y_{i0}] = \mathbb{E}[Y_{i1}] - \mathbb{E}[Y_{i0}] = \frac{1}{N_1}\sum \limits_{i=1}^{N_1}Y_{i1} - \frac{1}{N_0}\sum \limits_{i=1}^{N_0}Y_{i0}\)</span></p>
 <p>Следующий шаг, который мы предпримем, попробуем рассчиать величину эффекта только для тритмент группы – <strong>средний эффект воздействия на задействованных</strong> (average treatment effect for the treatment group):</p>
 <p><span class="math inline">\(ATT = \mathbb{E}[\tau_i|T_i=1] = \mathbb{E}[Y_{i1} - Y_{i0}|T_i=1] = \mathbb{E}[Y_{i1}|T_i=1] - \mathbb{E}[Y_{i0}|T_i=1]\)</span></p>
 <p>А теперь то же самое, но для контрольной группы – <strong>средний эффект воздействия на незадействованных</strong> (average treatment on the non-treated):</p>
@@ -331,7 +337,7 @@ T_i =
 <ol type="1">
 <li><strong>Экзогенность воздействия (Independence assumption)</strong></li>
 </ol>
-<p>Экзогенность воздействия (Independence assumption) означает, что распределение объекта в тритмент или контрольную группы осуществляется случайно и независимо от его изначальных характеристик. Данная предпосылка обычно обозначается следующим образом <span class="math inline">\((T_1, Y_0, X)_i \perp T_i\)</span></p>
+<p>Экзогенность воздействия (Independence assumption) означает, что распределение объекта в тритмент или контрольную группы осуществляется случайно и независимо от его изначальных характеристик. Данная предпосылка обычно обозначается следующим образом <span class="math inline">\((Y_1, Y_0, X)_i \perp T_i\)</span></p>
 <p>Технически для нас это значит следующее:</p>
 <ul>
 <li><span class="math inline">\(\mathbb{E}[Y_0|T=1] - \mathbb{E}[Y_0|T=0] = 0 \Rightarrow \text{Selection Bias}=0\)</span></li>
@@ -363,14 +369,14 @@ T_i =
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.3224639 -0.2011391 -0.0907501  0.8292742 -0.7916538</code></pre>
+<pre><code>[1]  0.2145932 -0.1451404  1.0676682  0.2179064 -0.4037959</code></pre>
 </div>
 </div>
 <p>Если вы повторяли за мной, то у вас, вероятно, получились другие значения. А теперь я тоже попробую ещё раз:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.04056367 -0.30999078  0.92897436 -0.89696625 -1.16550258</code></pre>
+<pre><code>[1]  1.2952007  1.5398067 -1.2333194 -1.5992027  0.2232711</code></pre>
 </div>
 </div>
 <p>Как и ожидалось, у меня тоже не совпало с предыдущим результатом. Существует по меньшей мере две причины, почему нам хотелось бы получать одинаковые результаты:</p>
@@ -1536,6 +1542,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Анна Ставнийчук, Прикладная эконометрика, 2023
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 
