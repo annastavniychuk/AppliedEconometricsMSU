@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Прикладная эконометрика - 7&nbsp; Гетерогенные эффекты</title>
+<title>Прикладная эконометрика - 8&nbsp; Гетерогенные эффекты</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -96,7 +96,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="site_libs/viz-1.8.2/viz.js"></script>
+<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<script src="site_libs/grViz-binding-1.0.9/grViz.js"></script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -109,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./heterogenous_treatment_effects.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./heterogenous_treatment_effects.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -172,49 +178,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./subclassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Постстратификация</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Взвешивание (subclassification)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Мэтчинг</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./high_dimension_regularization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./heterogenous_treatment_effects.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./regression_discontinuity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./spatial_regression_discontinuity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Пространственная разрывная регрессия</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./synthetic_control.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Синтетический контроль</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./staggered_adoption.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Ступенчатая разность разностей</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./event_study.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Событийный анализ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Событийный анализ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -233,14 +245,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#теория" id="toc-теория" class="nav-link active" data-scroll-target="#теория"><span class="header-section-number">7.1</span> Теория</a></li>
-  <li><a href="#пример" id="toc-пример" class="nav-link" data-scroll-target="#пример"><span class="header-section-number">7.2</span> Пример</a>
+  <li><a href="#теория" id="toc-теория" class="nav-link active" data-scroll-target="#теория"><span class="header-section-number">8.1</span> Теория</a></li>
+  <li><a href="#пример" id="toc-пример" class="nav-link" data-scroll-target="#пример"><span class="header-section-number">8.2</span> Пример</a>
   <ul class="collapse">
-  <li><a href="#подготовка" id="toc-подготовка" class="nav-link" data-scroll-target="#подготовка"><span class="header-section-number">7.2.1</span> Подготовка</a></li>
-  <li><a href="#причинный-случайный-лес" id="toc-причинный-случайный-лес" class="nav-link" data-scroll-target="#причинный-случайный-лес"><span class="header-section-number">7.2.2</span> Причинный случайный лес</a></li>
-  <li><a href="#важность-факторов" id="toc-важность-факторов" class="nav-link" data-scroll-target="#важность-факторов"><span class="header-section-number">7.2.3</span> Важность факторов</a></li>
-  <li><a href="#гетерогенность-эффекта-по-характеристикам" id="toc-гетерогенность-эффекта-по-характеристикам" class="nav-link" data-scroll-target="#гетерогенность-эффекта-по-характеристикам"><span class="header-section-number">7.2.4</span> Гетерогенность эффекта по характеристикам</a></li>
-  <li><a href="#heatmaps" id="toc-heatmaps" class="nav-link" data-scroll-target="#heatmaps"><span class="header-section-number">7.2.5</span> Heatmaps</a></li>
+  <li><a href="#подготовка" id="toc-подготовка" class="nav-link" data-scroll-target="#подготовка"><span class="header-section-number">8.2.1</span> Подготовка</a></li>
+  <li><a href="#причинный-случайный-лес" id="toc-причинный-случайный-лес" class="nav-link" data-scroll-target="#причинный-случайный-лес"><span class="header-section-number">8.2.2</span> Причинный случайный лес</a></li>
+  <li><a href="#важность-факторов" id="toc-важность-факторов" class="nav-link" data-scroll-target="#важность-факторов"><span class="header-section-number">8.2.3</span> Важность факторов</a></li>
+  <li><a href="#средний-эффект" id="toc-средний-эффект" class="nav-link" data-scroll-target="#средний-эффект"><span class="header-section-number">8.2.4</span> Средний эффект</a></li>
+  <li><a href="#гетерогенность-эффекта-по-характеристикам" id="toc-гетерогенность-эффекта-по-характеристикам" class="nav-link" data-scroll-target="#гетерогенность-эффекта-по-характеристикам"><span class="header-section-number">8.2.5</span> Гетерогенность эффекта по характеристикам</a></li>
+  <li><a href="#heatmaps" id="toc-heatmaps" class="nav-link" data-scroll-target="#heatmaps"><span class="header-section-number">8.2.6</span> Heatmaps</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -250,7 +263,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Гетерогенные эффекты</span></h1>
 </div>
 
 
@@ -265,19 +278,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="теория" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="теория"><span class="header-section-number">7.1</span> Теория</h2>
-<p>in progress…</p>
+<section id="теория" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="теория"><span class="header-section-number">8.1</span> Теория</h2>
+<p>В прошлых темах мы оценивали средние эффекты воздействия. Виной тому была фундаментальная прблема причинного вывода, которая заключается в том, что мы не наблюдаем оба потенциальных исхода для каждого из наблюдений. Те методы, которые мы обсуждали, использовали разные агрегации средних, чтобы преодолеть эту проблему.</p>
+<p>Тем не менее есть много ситуаций, когда нам хотелось бы знать какой эффект получает каждое из наблюдений, которое подверглось воздействию. Или какой эффект будет иметь наблюдение с определенным набором характеристик, если его подвергнуть воздействию. С ответом на эти вопросы помогают методы оценки гетерогенных эффектов.</p>
+<p>Итого:</p>
+<ul>
+<li>Средний эффект <span class="math inline">\(ATE = \mathbb{E}[Y_{i1} - Y_{i0}]\)</span></li>
+<li>Гетерогенный эффект <span class="math inline">\(CATE = \tau(x) = \mathbb{E}[Y_{i1} - Y_{i0}|X=x]\)</span></li>
+</ul>
+<p>Одним из способов решения такой задачи вы уже владеете. Если мы знаем верную спецификацию нашей зависимой переменной, то эту задачу можно решить с помощью обычного МНК:</p>
+<p><span class="math display">\[Y_i = \alpha + \tau T_i + \beta X_i + \gamma T_i X_i + \varepsilon_i\]</span></p>
+<ul>
+<li><span class="math inline">\(T = 0\)</span>: <span class="math inline">\(Y_i = \alpha + \beta X_i + \varepsilon_i\)</span></li>
+<li><span class="math inline">\(T = 1\)</span>: <span class="math inline">\(Y_i = (\alpha + \tau) + (\beta + \gamma) X_i + \varepsilon_i\)</span></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="heterogenous_treatment_effects_plots/str_shift.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption class="figure-caption">Структурный сдвиг</figcaption>
+</figure>
+</div>
+<p>При таком моделировании коэффициент <span class="math inline">\(\gamma\)</span> является гетерогенным эффектом, а <span class="math inline">\(\tau\)</span> средним эффектом. Однако мы не всегда можем применить этот способ, например, у нас может быть слишком много ковариат или мы мало ззнаем о том, какая спецификация является корректной. В этом случае на помощь нам приходят альтернативные подходы к решению данной задачи – непараметрические методы, одним из которых является причинный случайный лес.</p>
+<p><strong>Causal Random Forest (CRF)</strong> – это метод анализа причинно-следственных связей, который объединяет идеи случайного леса с методами для оценки эффектов воздействия.</p>
+<p>Прежде чем описывать алгоритм причинного случайного леса, разберемся, как работает одно дерево решений. <strong>Алгоритм построения отдельного дерева решений</strong> в Causal Random Forest включает в себя несколько этапов:</p>
+<ol type="1">
+<li><p>Выбор случайной подвыборки данных (bootstrap sample). На каждом этапе построения дерева случайным образом выбирается подмножество данных с возвратом из общего набора данных. Это означает, что одни и те же элементы данных могут быть выбраны несколько раз, а другие могут вообще не попасть в выборку.</p></li>
+<li><p>Выбор случайного подмножества признаков. Также на каждом этапе случайным образом выбирается подмножество признаков из всего набора признаков. Это делается для уменьшения корреляции между деревьями в ансамбле и повышения разнообразия моделей.</p></li>
+</ol>
+<p>Предположим, что наша бутстраповская выборка представлена на рисунке ниже. Также предположим, что случайным образом среди всех ковариат мы выбрали признаки <span class="math inline">\(x_1\)</span> и <span class="math inline">\(x_2\)</span>. В рамках процедуры выбираются не обяхательно все признаки. Для простоты визуализации допустим, что их всего 2.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="heterogenous_treatment_effects_plots/dots0.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption class="figure-caption">Бутстраповская выборка для отдельного дерева</figcaption>
+</figure>
+</div>
+<ul>
+<li>Построение дерева решений. Строится дерево решений, начиная с корневого узла (<span class="math inline">\(D\)</span>). На каждом уровне дерева выбирается лучший признак для разделения данных на две подгруппы. Лучший признак определяется на основе критерия разделения <span class="math inline">\([\hat{\tau}_{-}(x) - \hat{\tau}_{+}(x)]^2 \rightarrow \underset{c_j}{max}\)</span>, где <span class="math inline">\(\hat{\tau}_{-}(x) = \bar{Y}_{T=1, x_k &lt; c_j} - \bar{Y}_{T=0, x_k &lt; c_j}\)</span>, <span class="math inline">\(\hat{\tau}_{+}(x) = \bar{Y}_{T=1, x_k &gt; c_j} - \bar{Y}_{T=0, x_k &gt; c_j}\)</span>. На первом шаге данные выражения примут вид:</li>
+</ul>
+<p><span class="math inline">\([\hat{\tau}_{-}(x) - \hat{\tau}_{+}(x)]^2 \rightarrow \underset{c_1}{max}\)</span></p>
+<p><span class="math inline">\(\hat{\tau}_{-}(x) = \bar{Y}_{T=1, x_1 &lt; c_1} - \bar{Y}_{T=0, x_1 &lt; c_1}\)</span></p>
+<p><span class="math inline">\(\hat{\tau}_{+}(x) = \bar{Y}_{T=1, x_1 &gt; c_1} - \bar{Y}_{T=0, x_1 &gt; c_1}\)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="heterogenous_treatment_effects_plots/tree.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption class="figure-caption">Схема работы дерева решений</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="heterogenous_treatment_effects_plots/dots1.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption class="figure-caption">Определение с1</figcaption>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>Рекурсивное построение дерева. После разделения данных на подгруппы, процесс строительства дерева рекурсивно повторяется для каждой подгруппы. Это продолжается до достижения критерия останова, такого как максимальная глубина дерева или минимальное количество образцов в листьях (в каждом листе должно быть не менее одного наблюдения из группы воздействия и не менее одного наблюдения из контрольной группы, чтобы оставалась техническая возможность рассчитать эффект).</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="heterogenous_treatment_effects_plots/dots2.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption class="figure-caption">Определение с2 и c3</figcaption>
+</figure>
+</div>
+<ol start="4" type="1">
+<li>Формирование листьев (терминальных узлов). Когда достигается критерий останова, узел становится листом (терминальным узлом) дерева, и в этом листе присваивается прогнозное значение (<span class="math inline">\(\hat{\tau}(x)\)</span>) – оценка тритмент эффекта для значения харакетристик, которые привели в этот лист.</li>
+</ol>
+<p>Также существует понятие “честности” отдельного дерева. Дерево считается честным, если разделяет свою бутстраповскую выборку на 2 части: на первой части строится дерево (определяются <span class="math inline">\(c_j\)</span>) [sampling], на второй части оценивается эффект <span class="math inline">\(\hat{\tau}(x)\)</span> [labeling].</p>
+<p><strong>Алгоритм работы Causal Random Forest:</strong></p>
+<ol type="1">
+<li><p>Построение ансамбля деревьев решений. Фактически ансамбль – это какая-либо агрегация более простых алгоритмов. В нашем случае среднее из прогнозов отдельных деревьев. При этом каждое дерево отличается от остальных. Каждое дерево решений строится на основе случайной подвыборки данных с возвратом (bootstrap sample) и случайного подмножества признаков на каждом узле (обычно квадратный корень из количества признаков).</p></li>
+<li><p>Повторение процесса. Процесс построения дерева повторяется множество раз (обычно сотни или тысячи раз) с разными подвыборками данных и подмножествами признаков, чтобы создать ансамбль деревьев. Пусть исходный набор данных <span class="math inline">\(D\)</span>, а деревьев <span class="math inline">\(B\)</span> штук, то есть всего нам понадобится <span class="math inline">\(B\)</span> бутстраповских подвыборок размера <span class="math inline">\(n\)</span>: <span class="math inline">\(D_1, D_2, ..., D_B\)</span>. На каждой подвыборке строится дерево, которе дает прогноз тритмент эффекта <span class="math inline">\(\hat{m}_b(x)\)</span></p></li>
+<li><p>Вывод прогноза ансамбля. Для построения прогноза ансамбля прогнозы отдельных деревьев агрегируются7 В нашем случае считается обычное среднее <span class="math inline">\(\hat{m}_{RF}(x) = \frac{1}{B}\sum_{b=1}^B\hat{m}_b(x)\)</span></p></li>
+</ol>
+<p>Алгоритм случайного леса содержит в себе множество гиперпараметров, которые выбираются экзогенно. Некоторые из них мы уже обсуждали – количество деревьев, их глубина, минимальная величина листа. Есть еще много других гиперпараметров. Для того, чтобы их подобрать, а также проверить точность прогноза деревьев, используется техника похожая на кросс-валидацию, которую мы с вами обсуждали в теме про регуляризацию. В случае случайного леса выборка делится на две части (необязательно равные). На первой части [train] строится ансамбль, на второй [test] – считается ошибка прогноза.</p>
+<p>Иногда, чтобы экономить выборку и не уменьшать её за счет test части, используют Out-of-Bag sample.</p>
+<p><strong>Out-of-Bag (OOB) sample</strong> (“выборка вне мешка”) – часть данных, которая не была включена в обучение конкретного дерева решений в ансамбле.</p>
+<p><strong>Принцип работы OOB-выборки:</strong></p>
+<ul>
+<li><p>Для построения каждого дерева в ансамбле используется случайная подвыборка данных с возвратом (bootstrap sample). Это означает, что некоторые элементы данных могут попасть в эту подвыборку несколько раз, а некоторые вообще не попадут.</p></li>
+<li><p>OOB-выборка для конкретного дерева состоит из тех элементов данных, которые не были включены в подвыборку для этого дерева. Иными словами, это данные, которые “выпали” из “мешка” (bootstrap sample), используемого для обучения дерева.</p></li>
+<li><p>После построения дерева решений можно оценить его качество, используя OOB-выборку.</p></li>
+<li><p>Качество прогнозов на OOB-выборке может быть усреднено или оценено для определения точности модели, не требуя отдельной валидационной выборки. Это позволяет оценить, насколько хорошо дерево решений (или весь ансамбль) обобщает данные и способно делать прогнозы для новых данных.</p></li>
+<li><p>OOB-оценка является важным инструментом для оценки качества случайного леса и других ансамблей деревьев, так как она предоставляет внутреннюю меру качества модели, которая может быть использована без необходимости дополнительного разделения данных на обучение и тестирование.</p></li>
+</ul>
+<p><strong>Out-of-Bag (OOB) sample отличается от использования train и test выборок</strong> следующим образом:</p>
+<ul>
+<li><p>Происхождение данных:</p>
+<ul>
+<li>Train и Test выборки: Train выборка используется для обучения модели, в то время как Test выборка используется для оценки качества модели на независимых данных, которые модель не видела в процессе обучения. Train и Test выборки обычно являются фиксированными подмножествами данных, которые предварительно разделены.</li>
+<li>OOB-выборка: OOB-выборка создается на этапе обучения каждого дерева в ансамбле, путем исключения (выбрасывания) части данных из обучающего набора, которые не включены в bootstrap-подвыборку, используемую для обучения данного дерева. Это означает, что каждое дерево имеет свою собственную OOB-выборку.</li>
+</ul></li>
+<li><p>Назначение данных:</p>
+<ul>
+<li>Train и Test выборки: Train выборка используется для настройки параметров модели и обучения алгоритма. Test выборка используется для оценки качества модели и проверки её обобщающей способности на новых данных.</li>
+<li>OOB-выборка: OOB-выборка используется для оценки качества модели на этапе обучения, без необходимости дополнительного разделения данных на train и test выборки. Каждая часть данных будет использоваться для оценки конкретного дерева в ансамбле.</li>
+</ul></li>
+<li><p>Использование данных:</p>
+<ul>
+<li>Train и Test выборки: Train и Test выборки используются в разные моменты времени. Train выборка используется для обучения модели, а Test выборка - для оценки модели после обучения.</li>
+<li>OOB-выборка: OOB-выборка используется на этапе обучения каждого дерева для оценки качества этого конкретного дерева. Поскольку каждое дерево имеет свою собственную OOB-выборку, результаты оценки могут быть использованы для оценки всего ансамбля.</li>
+</ul></li>
+</ul>
+<p>Важно отметить, что OOB-оценка позволяет измерить качество модели на этапе обучения без необходимости отдельной тестовой выборки. Она особенно полезна в случае использования ансамблей, таких как Random Forest, и может быть использована для оценки обобщающей способности модели и выбора гиперпараметров.</p>
 </section>
-<section id="пример" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="пример"><span class="header-section-number">7.2</span> Пример</h2>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-1_8e3a0fe66c370de77931ee8f1b0b8b9d">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grf)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"table_cian_mos_ecm.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="пример" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="пример"><span class="header-section-number">8.2</span> Пример</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-2_0cddfcf92cda99b1967059c351da21a1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"table_cian_mos_ecm.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Набор данных включает следующие переменные:</p>
 <ul>
@@ -298,276 +412,431 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>repair</code> – бинарная переменная, равная единице, если в квартире сделан ремонт;</li>
 <li><code>four_and_over_rooms</code> – бинарная переменная, равная единице, если в квартире четыре и более комнат.</li>
 </ul>
-<section id="подготовка" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="подготовка"><span class="header-section-number">7.2.1</span> Подготовка</h3>
+<section id="подготовка" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="подготовка"><span class="header-section-number">8.2.1</span> Подготовка</h3>
 <p>Создадим логарифмы площади и цены:</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-2_5d21230fe4ebf95d3fa5e346824ad940">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>log_total_area <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">$</span>total_area)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>log_price <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">$</span>price)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-3_98a963b3ec8cfa370114fcbeb0c339e4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>log_total_area <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">$</span>total_area)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>log_price <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">$</span>price)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Произвольно разделим выборку на 2 части.</p>
 <p>Как и раньше выберем нужные нам строчки, используя двоеточие для создания последовательности чисел. Первая половина датасета будет обучающей выборкой, вторая – тестовой:</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-3_3b0c391de7d64dfd584bcf61e16fbe24">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_train <span class="ot">&lt;-</span> data[<span class="dv">1</span><span class="sc">:</span><span class="dv">13000</span>,] <span class="co"># обучающая выборка</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data_test <span class="ot">&lt;-</span> data[<span class="dv">13001</span><span class="sc">:</span><span class="dv">26041</span>,] <span class="co"># тестовая выборка</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-4_bd7e9afbf7acafd3bac52f40fdf9a5f0">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_train <span class="ot">&lt;-</span> data[<span class="dv">1</span><span class="sc">:</span><span class="dv">13000</span>,] <span class="co"># обучающая выборка</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data_test <span class="ot">&lt;-</span> data[<span class="dv">13001</span><span class="sc">:</span><span class="dv">26041</span>,] <span class="co"># тестовая выборка</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Синтаксис функции, которую мы будем далее использовать, предполагает, что мы должны передавать ей зависимую переменную, контрольные переменные и формулу модели отдельными объектами. Поэтому нам нужно их заранее заготовить.</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-4_77e0192e890a051305e6f14df75d7abe">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>formula <span class="ot">&lt;-</span> log_price <span class="sc">~</span> log_total_area <span class="sc">+</span> Mos_center <span class="sc">+</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  Akimanka_rajon <span class="sc">+</span> Hamovniki_rajon <span class="sc">+</span> Tverskoj_rajon <span class="sc">+</span> Taganskij_rajon <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  Krasnoselskij_rajon <span class="sc">+</span> Mesanskij_rajon <span class="sc">+</span> Zamoskvorece_rajon <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  Basmannyj_rajon <span class="sc">+</span> Arbat_rajon <span class="sc">+</span> first_floor <span class="sc">+</span> one_room <span class="sc">+</span> two_rooms <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  three_rooms <span class="sc">+</span> four_and_over_rooms <span class="sc">+</span> starii_fond <span class="sc">+</span> blochnii <span class="sc">+</span> </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  derevjannii <span class="sc">+</span> kirpichnii <span class="sc">+</span> monolitnii <span class="sc">+</span> panelnii <span class="sc">+</span> stalinskii <span class="sc">+</span> repair </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="at">data=</span>data,formula)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>price, <span class="sc">-</span>log_price, <span class="sc">-</span>total_area, <span class="sc">-</span>discrim_proxy, <span class="sc">-</span>X) <span class="sc">%&gt;%</span>  </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model.matrix</span>( <span class="sc">~</span> ., <span class="at">data =</span> .)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>X</code> матрица контрольных переменных, где первый столбец – константа.</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-5_91c0405b0795c01ae0c11594be30e727">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-6_6d1203a341761500fc5fcdc399410744">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  (Intercept) log_total_area Mos_center Akimanka_rajon Hamovniki_rajon
-1           1       4.812184          0              0               0
-2           1       3.427515          0              0               0
-3           1       3.637586          0              0               0
-4           1       5.075174          1              0               0
-5           1       3.912023          0              0               0
-  Tverskoj_rajon Taganskij_rajon Krasnoselskij_rajon Mesanskij_rajon
-1              0               0                   0               0
-2              0               0                   0               0
-3              0               0                   0               0
-4              1               0                   0               0
-5              0               0                   0               0
-  Zamoskvorece_rajon Basmannyj_rajon Arbat_rajon first_floor one_room two_rooms
-1                  0               0           0           0        0         0
-2                  0               0           0           0        1         0
-3                  0               0           0           0        1         0
-4                  0               0           0           0        0         0
-5                  0               0           0           1        0         1
-  three_rooms four_and_over_rooms starii_fond blochnii derevjannii kirpichnii
-1           1                   0           0        0           0          0
-2           0                   0           0        0           0          0
-3           0                   0           0        0           0          0
-4           1                   0           0        0           0          0
-5           0                   0           0        1           0          0
-  monolitnii panelnii stalinskii repair
-1          0        0          1      0
-2          0        1          0      0
-3          0        1          0      1
-4          0        0          0      0
-5          0        0          0      0</code></pre>
+<pre><code>  (Intercept) Mos_center Akimanka_rajon Hamovniki_rajon Tverskoj_rajon
+1           1          0              0               0              0
+2           1          0              0               0              0
+3           1          0              0               0              0
+4           1          1              0               0              1
+5           1          0              0               0              0
+  Taganskij_rajon Krasnoselskij_rajon Mesanskij_rajon Zamoskvorece_rajon
+1               0                   0               0                  0
+2               0                   0               0                  0
+3               0                   0               0                  0
+4               0                   0               0                  0
+5               0                   0               0                  0
+  Basmannyj_rajon Arbat_rajon first_floor one_room two_rooms three_rooms
+1               0           0           0        0         0           1
+2               0           0           0        1         0           0
+3               0           0           0        1         0           0
+4               0           0           0        0         0           1
+5               0           0           1        0         1           0
+  starii_fond blochnii derevjannii kirpichnii monolitnii panelnii stalinskii
+1           0        0           0          0          0        0          1
+2           0        0           0          0          0        1          0
+3           0        0           0          0          0        1          0
+4           0        0           0          0          0        0          0
+5           0        1           0          0          0        0          0
+  repair four_and_over_rooms log_total_area
+1      0                   0       4.812184
+2      0                   0       3.427515
+3      1                   0       3.637586
+4      0                   0       5.075174
+5      0                   0       3.912023</code></pre>
 </div>
 </div>
 <p>Сохраним все нужные нам объекты отдельно:</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-6_d85d7e6dd2aeb00511e5393dd1744fad">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X_mod <span class="ot">&lt;-</span> X[<span class="dv">1</span><span class="sc">:</span><span class="dv">13000</span>,]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Y_mod <span class="ot">&lt;-</span> data_train<span class="sc">$</span>log_price</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>T_mod <span class="ot">&lt;-</span> data_train<span class="sc">$</span>discrim_proxy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-7_9e9951d64571ace112b613135be99c74">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>X_mod <span class="ot">&lt;-</span> X[<span class="dv">1</span><span class="sc">:</span><span class="dv">13000</span>,]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Y_mod <span class="ot">&lt;-</span> data_train<span class="sc">$</span>log_price</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>T_mod <span class="ot">&lt;-</span> data_train<span class="sc">$</span>discrim_proxy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="причинный-случайный-лес" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="причинный-случайный-лес"><span class="header-section-number">7.2.2</span> Причинный случайный лес</h3>
-<p>Используя заготовленную обучающую выборку строим лес, состоящий из 1000 деревьев:</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-7_e6503218bf45f3521c96251e0e402317">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">causal_forest</span>(<span class="at">X =</span> X_mod, </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Y =</span> Y_mod, </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">W =</span> T_mod,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">num.trees =</span> B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="причинный-случайный-лес" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="причинный-случайный-лес"><span class="header-section-number">8.2.2</span> Причинный случайный лес</h3>
+<p>Используя заготовленную обучающую выборку строим лес, состоящий из 10000 деревьев:</p>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-8_0cc0b91a2dbdc8183adeaee6627805ef">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">causal_forest</span>(<span class="at">X =</span> X_mod, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Y =</span> Y_mod, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">W =</span> T_mod,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">num.trees =</span> B,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">min.node.size =</span> <span class="dv">10</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">honesty =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Считаем оценки на тестовой выборке:</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-8_3de501d33620b5933b743bcc817ade05">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>X.test <span class="ot">&lt;-</span> X[<span class="dv">13001</span><span class="sc">:</span><span class="dv">26041</span>,]</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>tau_forest <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                      X.test, </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">estimate.variance =</span> <span class="cn">TRUE</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-9_e84ccbe8952f7961806f6abe012df266">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>X.test <span class="ot">&lt;-</span> X[<span class="dv">13001</span><span class="sc">:</span><span class="dv">26041</span>,]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tau_forest <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                      X.test, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">estimate.variance =</span> <span class="cn">TRUE</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Посмотрим как распределены оценки:</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-9_7b62c00cd004db3231019f07386749c1">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(tau_forest<span class="sc">$</span>predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-10_18621892543536be0e8dcb4a24744e93">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(tau_forest<span class="sc">$</span>predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tau_forest<span class="sc">$</span>predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tau_forest<span class="sc">$</span>predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
--0.330294 -0.120687 -0.061557 -0.071005 -0.007958  0.090587 </code></pre>
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+-0.25482 -0.12437 -0.05700 -0.06829 -0.00786  0.04752 </code></pre>
 </div>
 </div>
 <p>Посчитаем для каждой оценки доверительный интервал:</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-10_7516198bda6aeab03b7364d26fb505de">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> tau_forest<span class="sc">$</span>predictions <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(tau_forest<span class="sc">$</span>variance.estimates)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>upper <span class="ot">&lt;-</span> tau_forest<span class="sc">$</span>predictions <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(tau_forest<span class="sc">$</span>variance.estimates)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>CI <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">estimation =</span> tau_forest<span class="sc">$</span>predictions, <span class="at">low =</span> low, <span class="at">upper =</span> upper)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CI,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-11_f0d8ff873429aa1378ee0f5eb5238eb8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> tau_forest<span class="sc">$</span>predictions <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(tau_forest<span class="sc">$</span>variance.estimates)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>upper <span class="ot">&lt;-</span> tau_forest<span class="sc">$</span>predictions <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(tau_forest<span class="sc">$</span>variance.estimates)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>CI <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">estimation =</span> tau_forest<span class="sc">$</span>predictions, <span class="at">low =</span> low, <span class="at">upper =</span> upper)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CI,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   estimation          low       upper
-1  0.06194145  0.005284023  0.11859887
-2 -0.02367664 -0.117214051  0.06986076
-3 -0.15582478 -0.254837879 -0.05681168
-4 -0.05883448 -0.140415310  0.02274634
-5  0.02018377 -0.046290165  0.08665770</code></pre>
+<pre><code>   estimation          low        upper
+1  0.04751743  0.001801024  0.093233837
+2 -0.02606190 -0.097200869  0.045077067
+3 -0.14420858 -0.249544981 -0.038872184
+4 -0.05533145 -0.120592367  0.009929472
+5  0.01555146 -0.037544371  0.068647285</code></pre>
 </div>
 </div>
-</section>
-<section id="важность-факторов" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="важность-факторов"><span class="header-section-number">7.2.3</span> Важность факторов</h3>
-<p>Помимо того, что основным посылом для гетерогенных оценок было желание определить тритмент эффект для каждого наблюдения, имеющего уникальный набор характеристик, нам еще может быть интересно исследовать, какой вклад имеют эти характеристики в эффект:</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-11_e2ea4d8e009a99e3c1bc6b5e5dfad8f6">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variable_importance</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>              [,1]
- [1,] 0.000000e+00
- [2,] 4.253223e-01
- [3,] 8.881583e-04
- [4,] 0.000000e+00
- [5,] 0.000000e+00
- [6,] 3.955426e-05
- [7,] 0.000000e+00
- [8,] 8.780927e-06
- [9,] 0.000000e+00
-[10,] 0.000000e+00
-[11,] 0.000000e+00
-[12,] 2.748574e-04
-[13,] 1.702933e-02
-[14,] 1.136934e-02
-[15,] 1.827115e-02
-[16,] 1.037088e-02
-[17,] 6.833166e-04
-[18,] 0.000000e+00
-[19,] 1.404885e-02
-[20,] 0.000000e+00
-[21,] 1.956268e-02
-[22,] 3.874035e-02
-[23,] 8.259465e-02
-[24,] 0.000000e+00
-[25,] 3.607958e-01</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">variable_importance</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Из-за того, что подписаны не все точки, неудобно рассматривать факторы, перерисуем в <code>ggplot</code>. Идейно будет то же самое, но визуально приятнее.</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-12_ee3bde3ac6d5e39633b573866ece7890">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Для ggplot нужен отдельный набор данных, поэтому сохраним важность факторов и их номера в отдельный фрейм данных</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>importance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">n =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(<span class="fu">variable_importance</span>(model))[<span class="dv">1</span>]), </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">variable_importance =</span> <span class="fu">variable_importance</span>(model))</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(importance, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(n), <span class="at">y =</span> variable_importance)) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="co"># если навесить factor() у икса, то подпишутся сразу все точки, если нет, то будет как на прошлом графике</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>CI<span class="sc">$</span>log_total_area <span class="ot">&lt;-</span> data_test<span class="sc">$</span>log_total_area</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>CI <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_total_area, <span class="at">y =</span> estimation)) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Посмотрим что же это за характеристики:</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-13_c312a3fd5cbd5703e887022e09d50855">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X)[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "log_total_area"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X)[<span class="dv">22</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "monolitnii"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X)[<span class="dv">23</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "panelnii"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X)[<span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "repair"</code></pre>
+<p>То же самое, но с доверительными интервалами. Поскольку нанесение доверительных интервалов на облако точек создаст нечитаемый клубок, отвильтруем только большие кватриры более 200 м2, которые мы подозреваем в отрицательном эффекте).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tau_forest<span class="sc">$</span>total_area <span class="ot">&lt;-</span> data_test<span class="sc">$</span>total_area</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>tau_forest <span class="sc">%&gt;%</span> <span class="fu">filter</span>(total_area<span class="sc">&gt;</span><span class="dv">200</span>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> total_area, <span class="at">y =</span> predictions)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>predictions <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(variance.estimates),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax=</span>predictions <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(variance.estimates)), <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">width=</span>.<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Площадь квартиры и ремонт в доме самые важные, меньше вклад типа дома (панельки и монолитные).</p>
-</section>
-<section id="гетерогенность-эффекта-по-характеристикам" class="level3" data-number="7.2.4">
-<h3 data-number="7.2.4" class="anchored" data-anchor-id="гетерогенность-эффекта-по-характеристикам"><span class="header-section-number">7.2.4</span> Гетерогенность эффекта по характеристикам</h3>
-<p>Попробуем понять для каких квартир эффект наибольший.</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-14_dda8043edae30af0b317f41462c087dd">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tau_forest<span class="sc">$</span>predictions <span class="sc">~</span> data_test<span class="sc">$</span>total_area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> total_area)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Эффект отрицательный для примерно 60-100 м2</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-15_65c20b53ab211764a458703bbe389981">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># эффект больше, если был ремонт</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_test) <span class="sc">+</span> </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(repair), tau_forest<span class="sc">$</span>predictions))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</section>
+<section id="важность-факторов" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="важность-факторов"><span class="header-section-number">8.2.3</span> Важность факторов</h3>
+<p>Помимо того, что основным посылом для гетерогенных оценок было желание определить тритмент эффект для каждого наблюдения, имеющего уникальный набор характеристик, нам еще может быть интересно исследовать, какой вклад имеют эти характеристики в эффект:</p>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-15_e2b99cd3060ec1277fa9ce8a137e5abe">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variable_importance</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              [,1]
+ [1,] 0.000000e+00
+ [2,] 4.637717e-04
+ [3,] 0.000000e+00
+ [4,] 0.000000e+00
+ [5,] 3.306280e-06
+ [6,] 0.000000e+00
+ [7,] 0.000000e+00
+ [8,] 0.000000e+00
+ [9,] 0.000000e+00
+[10,] 0.000000e+00
+[11,] 5.882624e-06
+[12,] 1.572820e-02
+[13,] 1.261977e-02
+[14,] 1.807247e-02
+[15,] 1.060841e-02
+[16,] 0.000000e+00
+[17,] 1.252084e-02
+[18,] 0.000000e+00
+[19,] 1.923070e-02
+[20,] 4.270869e-02
+[21,] 8.200168e-02
+[22,] 0.000000e+00
+[23,] 3.604808e-01
+[24,] 2.970592e-04
+[25,] 4.252584e-01</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># эффект больше в центре</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_test) <span class="sc">+</span> </span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(Mos_center), tau_forest<span class="sc">$</span>predictions))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># эффект меньше для панелек</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_test)<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(panelnii), </span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                                   tau_forest<span class="sc">$</span>predictions))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-15-3.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-16_e1190d127914ca2180f4d62c3793989a">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># проверяем по комнатам:</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>data_test<span class="sc">$</span>room_number<span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">*</span>data_test<span class="sc">$</span>one_room <span class="sc">+</span> </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span><span class="sc">*</span>data_test<span class="sc">$</span>two_rooms <span class="sc">+</span> </span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span><span class="sc">*</span> data_test<span class="sc">$</span>three_rooms <span class="sc">+</span> </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span><span class="sc">*</span>data_test<span class="sc">$</span>four_and_over_rooms</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># эффект негативнее для 2-3 комнатных</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_test) <span class="sc">+</span> </span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(room_number), tau_forest<span class="sc">$</span>predictions))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Нарисуем табличку, чтобы удобнее смотреть:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">variable_importance</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="heatmaps" class="level3" data-number="7.2.5">
-<h3 data-number="7.2.5" class="anchored" data-anchor-id="heatmaps"><span class="header-section-number">7.2.5</span> Heatmaps</h3>
-<p>Намного интереснее смотреть вклад сразу нескольких эффектов. Для этого есть тепловые карты. По осям располагаются характеристики, а интенсивность эффекта отражается цветом ячейки, расположенной на пересечении значений характеристик:</p>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-17_0f2f23f6c9237048eeab937a85a1877a">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data_test<span class="sc">$</span>tau <span class="ot">&lt;-</span> tau_forest<span class="sc">$</span>predictions</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_test, <span class="fu">aes</span>(repair, Mos_center)) <span class="sc">+</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill=</span>data_test<span class="sc">$</span>tau))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Из-за того, что подписаны не все точки, неудобно рассматривать факторы, перерисуем в <code>ggplot</code>. Идейно будет то же самое, но визуально приятнее.</p>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-17_2afafb441924791eb9a32a94473c8a0a">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Для ggplot нужен отдельный набор данных, поэтому сохраним важность факторов и их номера в отдельный фрейм данных</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>importance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">n =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(<span class="fu">variable_importance</span>(model))[<span class="dv">1</span>]), </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">variable_importance =</span> <span class="fu">variable_importance</span>(model))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(importance, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(n), <span class="at">y =</span> variable_importance)) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="co"># если навесить factor() у икса, то подпишутся сразу все точки, если нет, то будет как на прошлом графике</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_test, <span class="fu">aes</span>(repair, room_number)) <span class="sc">+</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill=</span>data_test<span class="sc">$</span>tau))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Посмотрим что же это за характеристики:</p>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-18_7c6916e4ac54973a6bdf85efc3385e61">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X)[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Mos_center"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X)[<span class="dv">22</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "stalinskii"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X)[<span class="dv">23</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "repair"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X)[<span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "log_total_area"</code></pre>
+</div>
+</div>
+<p>Площадь квартиры и ремонт в доме самые важные, меньше вклад типа дома (панельки и монолитные).</p>
+<p>Можем также посмотреть на каждое дерево. Для примера возьмем первое и последнее.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">get_tree</span>(model, <span class="at">index=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid" width="672"></p>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-92e324404c1b9900a440" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-92e324404c1b9900a440">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" log_total_area <= 3.53 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\", arrowhead=normal];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\", arrowhead=normal];\n1 [label=\" repair <= 0 \"] ;\n1 -> 3 [ arrowhead=normal];\n1 -> 4 [ arrowhead=normal];\n3 [label=\" log_total_area <= 3.48 \"] ;\n3 -> 7 [ arrowhead=normal];\n3 -> 8 [ arrowhead=normal];\n7 [label=\" log_total_area <= 3.42 \"] ;\n7 -> 13 [ arrowhead=normal];\n7 -> 14 [ arrowhead=normal];\n13  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  40 \n avg_Y = 10.03\navg_W = 0.17 \"];\n14  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  60 \n avg_Y = 10.14\navg_W = 0.25 \"];\n8  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  81 \n avg_Y = 10.15\navg_W = 0.37 \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  63 \n avg_Y = 10.24\navg_W = 0.35 \"];\n2 [label=\" repair <= 0 \"] ;\n2 -> 5 [ arrowhead=normal];\n2 -> 6 [ arrowhead=normal];\n5 [label=\" first_floor <= 0 \"] ;\n5 -> 9 [ arrowhead=normal];\n5 -> 10 [ arrowhead=normal];\n9 [label=\" log_total_area <= 3.91 \"] ;\n9 -> 15 [ arrowhead=normal];\n9 -> 16 [ arrowhead=normal];\n15 [label=\" monolitnii <= 0 \"] ;\n15 -> 23 [ arrowhead=normal];\n15 -> 24 [ arrowhead=normal];\n23 [label=\" log_total_area <= 3.9 \"] ;\n23 -> 35 [ arrowhead=normal];\n23 -> 36 [ arrowhead=normal];\n35 [label=\" kirpichnii <= 0 \"] ;\n35 -> 53 [ arrowhead=normal];\n35 -> 54 [ arrowhead=normal];\n53 [label=\" two_rooms <= 0 \"] ;\n53 -> 65 [ arrowhead=normal];\n53 -> 66 [ arrowhead=normal];\n65 [label=\" log_total_area <= 3.64 \"] ;\n65 -> 73 [ arrowhead=normal];\n65 -> 74 [ arrowhead=normal];\n73 [label=\" log_total_area <= 3.56 \"] ;\n73 -> 77 [ arrowhead=normal];\n73 -> 78 [ arrowhead=normal];\n77  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  31 \n avg_Y = 10.2\navg_W = 0.32 \"];\n78 [label=\" panelnii <= 0 \"] ;\n78 -> 81 [ arrowhead=normal];\n78 -> 82 [ arrowhead=normal];\n81  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  35 \n avg_Y = 10.18\navg_W = 0.29 \"];\n82 [label=\" log_total_area <= 3.61 \"] ;\n82 -> 83 [ arrowhead=normal];\n82 -> 84 [ arrowhead=normal];\n83  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  25 \n avg_Y = 10.23\navg_W = 0.32 \"];\n84  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  39 \n avg_Y = 10.27\navg_W = 0.41 \"];\n74  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  149 \n avg_Y = 10.25\navg_W = 0.3 \"];\n66 [label=\" log_total_area <= 3.82 \"] ;\n66 -> 75 [ arrowhead=normal];\n66 -> 76 [ arrowhead=normal];\n75 [label=\" blochnii <= 0 \"] ;\n75 -> 79 [ arrowhead=normal];\n75 -> 80 [ arrowhead=normal];\n79  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  107 \n avg_Y = 10.44\navg_W = 0.35 \"];\n80  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  27 \n avg_Y = 10.43\navg_W = 0.3 \"];\n76  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  61 \n avg_Y = 10.37\navg_W = 0.3 \"];\n54 [label=\" one_room <= 0 \"] ;\n54 -> 67 [ arrowhead=normal];\n54 -> 68 [ arrowhead=normal];\n67  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  70 \n avg_Y = 10.44\navg_W = 0.26 \"];\n68  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  37 \n avg_Y = 10.3\navg_W = 0.24 \"];\n36  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  44 \n avg_Y = 10.5\navg_W = 0.2 \"];\n24  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  33 \n avg_Y = 10.21\navg_W = 0.21 \"];\n16 [label=\" log_total_area <= 4.23 \"] ;\n16 -> 25 [ arrowhead=normal];\n16 -> 26 [ arrowhead=normal];\n25 [label=\" panelnii <= 0 \"] ;\n25 -> 37 [ arrowhead=normal];\n25 -> 38 [ arrowhead=normal];\n37 [label=\" log_total_area <= 3.99 \"] ;\n37 -> 55 [ arrowhead=normal];\n37 -> 56 [ arrowhead=normal];\n55  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  36 \n avg_Y = 10.46\navg_W = 0.28 \"];\n56 [label=\" log_total_area <= 4.1 \"] ;\n56 -> 69 [ arrowhead=normal];\n56 -> 70 [ arrowhead=normal];\n69  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  76 \n avg_Y = 10.77\navg_W = 0.16 \"];\n70  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  66 \n avg_Y = 10.82\navg_W = 0.21 \"];\n38 [label=\" two_rooms <= 0 \"] ;\n38 -> 57 [ arrowhead=normal];\n38 -> 58 [ arrowhead=normal];\n57  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  50 \n avg_Y = 10.66\navg_W = 0.32 \"];\n58  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  114 \n avg_Y = 10.49\navg_W = 0.23 \"];\n26 [label=\" panelnii <= 0 \"] ;\n26 -> 39 [ arrowhead=normal];\n26 -> 40 [ arrowhead=normal];\n39 [label=\" Mos_center <= 0 \"] ;\n39 -> 59 [ arrowhead=normal];\n39 -> 60 [ arrowhead=normal];\n59 [label=\" kirpichnii <= 0 \"] ;\n59 -> 71 [ arrowhead=normal];\n59 -> 72 [ arrowhead=normal];\n71  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  146 \n avg_Y = 11.53\navg_W = 0.09 \"];\n72  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  30 \n avg_Y = 11.17\navg_W = 0.17 \"];\n60  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  108 \n avg_Y = 12.03\navg_W = 0.02 \"];\n40  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  52 \n avg_Y = 10.77\navg_W = 0.29 \"];\n10 [label=\" log_total_area <= 3.69 \"] ;\n10 -> 17 [ arrowhead=normal];\n10 -> 18 [ arrowhead=normal];\n17  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  27 \n avg_Y = 10.17\navg_W = 0.3 \"];\n18  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  85 \n avg_Y = 10.54\navg_W = 0.2 \"];\n6 [label=\" log_total_area <= 3.83 \"] ;\n6 -> 11 [ arrowhead=normal];\n6 -> 12 [ arrowhead=normal];\n11 [label=\" log_total_area <= 3.69 \"] ;\n11 -> 19 [ arrowhead=normal];\n11 -> 20 [ arrowhead=normal];\n19 [label=\" panelnii <= 0 \"] ;\n19 -> 27 [ arrowhead=normal];\n19 -> 28 [ arrowhead=normal];\n27  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  104 \n avg_Y = 10.48\navg_W = 0.23 \"];\n28 [label=\" log_total_area <= 3.64 \"] ;\n28 -> 41 [ arrowhead=normal];\n28 -> 42 [ arrowhead=normal];\n41  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  34 \n avg_Y = 10.41\navg_W = 0.18 \"];\n42  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  44 \n avg_Y = 10.41\navg_W = 0.14 \"];\n20 [label=\" log_total_area <= 3.74 \"] ;\n20 -> 29 [ arrowhead=normal];\n20 -> 30 [ arrowhead=normal];\n29  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  45 \n avg_Y = 10.61\navg_W = 0.2 \"];\n30 [label=\" panelnii <= 0 \"] ;\n30 -> 43 [ arrowhead=normal];\n30 -> 44 [ arrowhead=normal];\n43  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  77 \n avg_Y = 10.6\navg_W = 0.14 \"];\n44  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  31 \n avg_Y = 10.52\navg_W = 0.19 \"];\n12 [label=\" panelnii <= 0 \"] ;\n12 -> 21 [ arrowhead=normal];\n12 -> 22 [ arrowhead=normal];\n21 [label=\" log_total_area <= 4.15 \"] ;\n21 -> 31 [ arrowhead=normal];\n21 -> 32 [ arrowhead=normal];\n31 [label=\" one_room <= 0 \"] ;\n31 -> 45 [ arrowhead=normal];\n31 -> 46 [ arrowhead=normal];\n45 [label=\" log_total_area <= 4.04 \"] ;\n45 -> 61 [ arrowhead=normal];\n45 -> 62 [ arrowhead=normal];\n61  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  94 \n avg_Y = 10.88\navg_W = 0.14 \"];\n62  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  63 \n avg_Y = 11\navg_W = 0.1 \"];\n46  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  44 \n avg_Y = 10.74\navg_W = 0.2 \"];\n32 [label=\" kirpichnii <= 0 \"] ;\n32 -> 47 [ arrowhead=normal];\n32 -> 48 [ arrowhead=normal];\n47 [label=\" two_rooms <= 0 \"] ;\n47 -> 63 [ arrowhead=normal];\n47 -> 64 [ arrowhead=normal];\n63  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  417 \n avg_Y = 11.81\navg_W = 0.06 \"];\n64  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  143 \n avg_Y = 11.34\navg_W = 0.08 \"];\n48  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  210 \n avg_Y = 11.62\navg_W = 0.07 \"];\n22 [label=\" log_total_area <= 4.12 \"] ;\n22 -> 33 [ arrowhead=normal];\n22 -> 34 [ arrowhead=normal];\n33 [label=\" log_total_area <= 3.97 \"] ;\n33 -> 49 [ arrowhead=normal];\n33 -> 50 [ arrowhead=normal];\n49  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  37 \n avg_Y = 10.66\navg_W = 0.19 \"];\n50  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  75 \n avg_Y = 10.71\navg_W = 0.27 \"];\n34 [label=\" log_total_area <= 4.26 \"] ;\n34 -> 51 [ arrowhead=normal];\n34 -> 52 [ arrowhead=normal];\n51  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  35 \n avg_Y = 10.73\navg_W = 0.17 \"];\n52  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  105 \n avg_Y = 11.14\navg_W = 0.1 \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_test, <span class="fu">aes</span>(Mos_center, room_number)) <span class="sc">+</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill=</span>data_test<span class="sc">$</span>tau))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">get_tree</span>(model, <span class="at">index=</span><span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-17-3.png" class="img-fluid" width="672"></p>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-230c28f560789f73650c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-230c28f560789f73650c">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" log_total_area <= 4.07 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\", arrowhead=normal];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\", arrowhead=normal];\n1 [label=\" repair <= 0 \"] ;\n1 -> 3 [ arrowhead=normal];\n1 -> 4 [ arrowhead=normal];\n3 [label=\" log_total_area <= 3.95 \"] ;\n3 -> 7 [ arrowhead=normal];\n3 -> 8 [ arrowhead=normal];\n7 [label=\" log_total_area <= 3.47 \"] ;\n7 -> 15 [ arrowhead=normal];\n7 -> 16 [ arrowhead=normal];\n15  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  97 \n avg_Y = 10.06\navg_W = 0.27 \"];\n16 [label=\" log_total_area <= 3.74 \"] ;\n16 -> 29 [ arrowhead=normal];\n16 -> 30 [ arrowhead=normal];\n29 [label=\" log_total_area <= 3.68 \"] ;\n29 -> 39 [ arrowhead=normal];\n29 -> 40 [ arrowhead=normal];\n39 [label=\" log_total_area <= 3.53 \"] ;\n39 -> 53 [ arrowhead=normal];\n39 -> 54 [ arrowhead=normal];\n53  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  68 \n avg_Y = 10.12\navg_W = 0.41 \"];\n54 [label=\" panelnii <= 0 \"] ;\n54 -> 61 [ arrowhead=normal];\n54 -> 62 [ arrowhead=normal];\n61 [label=\" blochnii <= 0 \"] ;\n61 -> 69 [ arrowhead=normal];\n61 -> 70 [ arrowhead=normal];\n69 [label=\" log_total_area <= 3.58 \"] ;\n69 -> 77 [ arrowhead=normal];\n69 -> 78 [ arrowhead=normal];\n77  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  38 \n avg_Y = 10.15\navg_W = 0.34 \"];\n78  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  43 \n avg_Y = 10.15\navg_W = 0.33 \"];\n70  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  32 \n avg_Y = 10.3\navg_W = 0.38 \"];\n62 [label=\" log_total_area <= 3.61 \"] ;\n62 -> 71 [ arrowhead=normal];\n62 -> 72 [ arrowhead=normal];\n71  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  62 \n avg_Y = 10.25\navg_W = 0.39 \"];\n72  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  71 \n avg_Y = 10.25\navg_W = 0.35 \"];\n40 [label=\" log_total_area <= 3.69 \"] ;\n40 -> 55 [ arrowhead=normal];\n40 -> 56 [ arrowhead=normal];\n55  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  107 \n avg_Y = 10.29\navg_W = 0.34 \"];\n56 [label=\" panelnii <= 0 \"] ;\n56 -> 63 [ arrowhead=normal];\n56 -> 64 [ arrowhead=normal];\n63  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  39 \n avg_Y = 10.31\navg_W = 0.31 \"];\n64  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  23 \n avg_Y = 10.16\navg_W = 0.3 \"];\n30 [label=\" log_total_area <= 3.78 \"] ;\n30 -> 41 [ arrowhead=normal];\n30 -> 42 [ arrowhead=normal];\n41  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  30 \n avg_Y = 10.28\navg_W = 0.23 \"];\n42 [label=\" blochnii <= 0 \"] ;\n42 -> 57 [ arrowhead=normal];\n42 -> 58 [ arrowhead=normal];\n57 [label=\" kirpichnii <= 0 \"] ;\n57 -> 65 [ arrowhead=normal];\n57 -> 66 [ arrowhead=normal];\n65 [label=\" panelnii <= 0 \"] ;\n65 -> 73 [ arrowhead=normal];\n65 -> 74 [ arrowhead=normal];\n73  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  69 \n avg_Y = 10.37\navg_W = 0.25 \"];\n74 [label=\" log_total_area <= 3.81 \"] ;\n74 -> 79 [ arrowhead=normal];\n74 -> 80 [ arrowhead=normal];\n79  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  50 \n avg_Y = 10.4\navg_W = 0.36 \"];\n80 [label=\" log_total_area <= 3.85 \"] ;\n80 -> 81 [ arrowhead=normal];\n80 -> 82 [ arrowhead=normal];\n81  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  24 \n avg_Y = 10.34\navg_W = 0.5 \"];\n82  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  48 \n avg_Y = 10.43\navg_W = 0.38 \"];\n66  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  68 \n avg_Y = 10.4\navg_W = 0.25 \"];\n58  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  32 \n avg_Y = 10.42\navg_W = 0.44 \"];\n8 [label=\" log_total_area <= 3.99 \"] ;\n8 -> 17 [ arrowhead=normal];\n8 -> 18 [ arrowhead=normal];\n17  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  59 \n avg_Y = 10.58\navg_W = 0.31 \"];\n18  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  109 \n avg_Y = 10.55\navg_W = 0.3 \"];\n4 [label=\" log_total_area <= 3.45 \"] ;\n4 -> 9 [ arrowhead=normal];\n4 -> 10 [ arrowhead=normal];\n9  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  29 \n avg_Y = 10.09\navg_W = 0.45 \"];\n10 [label=\" log_total_area <= 3.83 \"] ;\n10 -> 19 [ arrowhead=normal];\n10 -> 20 [ arrowhead=normal];\n19 [label=\" one_room <= 0 \"] ;\n19 -> 31 [ arrowhead=normal];\n19 -> 32 [ arrowhead=normal];\n31 [label=\" log_total_area <= 3.78 \"] ;\n31 -> 43 [ arrowhead=normal];\n31 -> 44 [ arrowhead=normal];\n43  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  41 \n avg_Y = 10.69\navg_W = 0.2 \"];\n44  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  47 \n avg_Y = 10.73\navg_W = 0.3 \"];\n32 [label=\" monolitnii <= 0 \"] ;\n32 -> 45 [ arrowhead=normal];\n32 -> 46 [ arrowhead=normal];\n45 [label=\" log_total_area <= 3.69 \"] ;\n45 -> 59 [ arrowhead=normal];\n45 -> 60 [ arrowhead=normal];\n59 [label=\" log_total_area <= 3.67 \"] ;\n59 -> 67 [ arrowhead=normal];\n59 -> 68 [ arrowhead=normal];\n67 [label=\" log_total_area <= 3.58 \"] ;\n67 -> 75 [ arrowhead=normal];\n67 -> 76 [ arrowhead=normal];\n75  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  66 \n avg_Y = 10.47\navg_W = 0.23 \"];\n76  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  50 \n avg_Y = 10.43\navg_W = 0.22 \"];\n68  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  74 \n avg_Y = 10.43\navg_W = 0.23 \"];\n60  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  57 \n avg_Y = 10.44\navg_W = 0.21 \"];\n46  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  47 \n avg_Y = 10.39\navg_W = 0.23 \"];\n20 [label=\" panelnii <= 0 \"] ;\n20 -> 33 [ arrowhead=normal];\n20 -> 34 [ arrowhead=normal];\n33 [label=\" log_total_area <= 3.92 \"] ;\n33 -> 47 [ arrowhead=normal];\n33 -> 48 [ arrowhead=normal];\n47  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  66 \n avg_Y = 10.71\navg_W = 0.14 \"];\n48  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  79 \n avg_Y = 10.84\navg_W = 0.08 \"];\n34 [label=\" log_total_area <= 3.95 \"] ;\n34 -> 49 [ arrowhead=normal];\n34 -> 50 [ arrowhead=normal];\n49  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  27 \n avg_Y = 10.61\navg_W = 0.3 \"];\n50  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  58 \n avg_Y = 10.72\navg_W = 0.33 \"];\n2 [label=\" three_rooms <= 0 \"] ;\n2 -> 5 [ arrowhead=normal];\n2 -> 6 [ arrowhead=normal];\n5 [label=\" log_total_area <= 4.16 \"] ;\n5 -> 11 [ arrowhead=normal];\n5 -> 12 [ arrowhead=normal];\n11 [label=\" log_total_area <= 4.12 \"] ;\n11 -> 21 [ arrowhead=normal];\n11 -> 22 [ arrowhead=normal];\n21  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  99 \n avg_Y = 10.74\navg_W = 0.18 \"];\n22  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  72 \n avg_Y = 10.72\navg_W = 0.21 \"];\n12 [label=\" log_total_area <= 4.34 \"] ;\n12 -> 23 [ arrowhead=normal];\n12 -> 24 [ arrowhead=normal];\n23 [label=\" log_total_area <= 4.22 \"] ;\n23 -> 35 [ arrowhead=normal];\n23 -> 36 [ arrowhead=normal];\n35  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  79 \n avg_Y = 10.89\navg_W = 0.16 \"];\n36  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  107 \n avg_Y = 11.19\navg_W = 0.08 \"];\n24  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  385 \n avg_Y = 11.81\navg_W = 0.04 \"];\n6 [label=\" log_total_area <= 4.29 \"] ;\n6 -> 13 [ arrowhead=normal];\n6 -> 14 [ arrowhead=normal];\n13 [label=\" log_total_area <= 4.17 \"] ;\n13 -> 25 [ arrowhead=normal];\n13 -> 26 [ arrowhead=normal];\n25  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  78 \n avg_Y = 10.76\navg_W = 0.21 \"];\n26  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  56 \n avg_Y = 10.96\navg_W = 0.23 \"];\n14 [label=\" panelnii <= 0 \"] ;\n14 -> 27 [ arrowhead=normal];\n14 -> 28 [ arrowhead=normal];\n27 [label=\" log_total_area <= 4.41 \"] ;\n27 -> 37 [ arrowhead=normal];\n27 -> 38 [ arrowhead=normal];\n37  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  92 \n avg_Y = 11.26\navg_W = 0.09 \"];\n38 [label=\" log_total_area <= 4.61 \"] ;\n38 -> 51 [ arrowhead=normal];\n38 -> 52 [ arrowhead=normal];\n51  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  182 \n avg_Y = 11.53\navg_W = 0.04 \"];\n52  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  284 \n avg_Y = 11.92\navg_W = 0.02 \"];\n28  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\"size =  106 \n avg_Y = 10.99\navg_W = 0.14 \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-18_823e35deb03208d65365685e4aeff2e4">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_test<span class="sc">$</span>total_area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="средний-эффект" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="средний-эффект"><span class="header-section-number">8.2.4</span> Средний эффект</h3>
+<p>Также мы можем рассчитать средний эффект:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">average_treatment_effect</span>(model, <span class="at">target.sample =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in average_treatment_effect(model, target.sample = "all"): Estimated
+treatment propensities go as low as 0.015 which means that treatment effects
+for some controls may not be well identified. In this case, using
+`target.sample=treated` may be helpful.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   estimate     std.err 
+-0.06913307  0.01252322 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">average_treatment_effect</span>(model, <span class="at">target.sample =</span> <span class="st">"treated"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   estimate     std.err 
+-0.03511161  0.00688253 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">average_treatment_effect</span>(model, <span class="at">target.sample =</span> <span class="st">"control"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in average_treatment_effect(model, target.sample = "control"):
+Estimated treatment propensities go as low as 0.015 which means that treatment
+effects for some controls may not be well identified. In this case, using
+`target.sample=treated` may be helpful.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   estimate     std.err 
+-0.07693562  0.01356580 </code></pre>
+</div>
+</div>
+<p>Сравним результаты с МНК, если бы наше воздействие было случайным (а мы это проверить не можем, но наверняка нет):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(data_train<span class="sc">$</span>log_price <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> data_train<span class="sc">$</span>discrim_proxy <span class="sc">+</span> ., <span class="at">data=</span><span class="fu">as.data.frame</span>(X_mod))</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = data_train$log_price ~ -1 + data_train$discrim_proxy + 
+    ., data = as.data.frame(X_mod))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.5772 -0.2030  0.0167  0.2166  1.4662 
+
+Coefficients: (2 not defined because of singularities)
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+data_train$discrim_proxy -0.061671   0.008742  -7.055 1.82e-12 ***
+`(Intercept)`             6.678303   0.067011  99.659  &lt; 2e-16 ***
+Mos_center                0.537540   0.018312  29.354  &lt; 2e-16 ***
+Akimanka_rajon           -0.004623   0.028318  -0.163 0.870329    
+Hamovniki_rajon           0.015903   0.036912   0.431 0.666587    
+Tverskoj_rajon            0.027467   0.022470   1.222 0.221583    
+Taganskij_rajon          -0.232980   0.047451  -4.910 9.22e-07 ***
+Krasnoselskij_rajon      -0.164268   0.046210  -3.555 0.000380 ***
+Mesanskij_rajon          -0.053097   0.029898  -1.776 0.075763 .  
+Zamoskvorece_rajon       -0.049622   0.036148  -1.373 0.169858    
+Basmannyj_rajon          -0.192538   0.045903  -4.194 2.75e-05 ***
+Arbat_rajon                     NA         NA      NA       NA    
+first_floor              -0.071009   0.013627  -5.211 1.91e-07 ***
+one_room                 -0.056912   0.019613  -2.902 0.003718 ** 
+two_rooms                -0.058685   0.015903  -3.690 0.000225 ***
+three_rooms              -0.030440   0.013497  -2.255 0.024132 *  
+starii_fond               0.061189   0.051924   1.178 0.238642    
+blochnii                 -0.017460   0.015498  -1.127 0.259920    
+derevjannii              -0.466606   0.186436  -2.503 0.012335 *  
+kirpichnii               -0.027360   0.009756  -2.804 0.005048 ** 
+monolitnii               -0.024390   0.011231  -2.172 0.029905 *  
+panelnii                 -0.118854   0.009233 -12.872  &lt; 2e-16 ***
+stalinskii                0.041272   0.026726   1.544 0.122551    
+repair                    0.156066   0.006975  22.375  &lt; 2e-16 ***
+four_and_over_rooms             NA         NA      NA       NA    
+log_total_area            1.008939   0.013836  72.921  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3723 on 12976 degrees of freedom
+Multiple R-squared:  0.9988,    Adjusted R-squared:  0.9988 
+F-statistic: 4.638e+05 on 24 and 12976 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Можем также посчитать CATE для определенных квартир:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">average_treatment_effect</span>(model, <span class="at">target.sample =</span> <span class="st">"all"</span>, <span class="at">subset =</span> X_mod[ , <span class="st">"Mos_center"</span>] <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in average_treatment_effect(model, target.sample = "all", subset =
+X_mod[, : Estimated treatment propensities go as low as 0.016 which means that
+treatment effects for some controls may not be well identified. In this case,
+using `target.sample=treated` may be helpful.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   estimate     std.err 
+-0.08015048  0.03109921 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">average_treatment_effect</span>(model, <span class="at">target.sample =</span> <span class="st">"all"</span>, <span class="at">subset =</span> X_mod[ , <span class="st">"Mos_center"</span>] <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in average_treatment_effect(model, target.sample = "all", subset =
+X_mod[, : Estimated treatment propensities go as low as 0.015 which means that
+treatment effects for some controls may not be well identified. In this case,
+using `target.sample=treated` may be helpful.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   estimate     std.err 
+-0.06695476  0.01368156 </code></pre>
+</div>
+</div>
+</section>
+<section id="гетерогенность-эффекта-по-характеристикам" class="level3" data-number="8.2.5">
+<h3 data-number="8.2.5" class="anchored" data-anchor-id="гетерогенность-эффекта-по-характеристикам"><span class="header-section-number">8.2.5</span> Гетерогенность эффекта по характеристикам</h3>
+<p>Попробуем понять для каких квартир эффект наибольший.</p>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-27_5cd0ca8b781fc15ef0b4fe5c62294270">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tau_forest<span class="sc">$</span>predictions <span class="sc">~</span> data_test<span class="sc">$</span>total_area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data_test<span class="sc">$</span>cut_area<span class="ot">&lt;-</span><span class="fu">cut</span>(data_test<span class="sc">$</span>total_area,</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">60</span>,<span class="dv">70</span>,<span class="dv">80</span>,<span class="dv">90</span>,<span class="dv">100</span>,<span class="dv">110</span>,<span class="cn">Inf</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-19_28030303748021398443c8de6d9dcf98">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_test, <span class="fu">aes</span>(Mos_center, cut_area)) <span class="sc">+</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill=</span>data_test<span class="sc">$</span>tau))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Эффект отрицательный для примерно 60-100 м2</p>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-28_5605e12fdc9a2af893a47172fba31267">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># эффект больше, если был ремонт</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_test) <span class="sc">+</span> </span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(repair), tau_forest<span class="sc">$</span>predictions))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
-</div>
-<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-20_c90f4bba645d1ce05a2ef35d406caac4">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_test, <span class="fu">aes</span>(room_number, cut_area)) <span class="sc">+</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill=</span>data_test<span class="sc">$</span>tau))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># эффект больше в центре</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_test) <span class="sc">+</span> </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(Mos_center), tau_forest<span class="sc">$</span>predictions))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-28-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># эффект меньше для панелек</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_test)<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(panelnii), </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>                                   tau_forest<span class="sc">$</span>predictions))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-28-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-29_157bcc0171740b02fd50193309b9108a">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># проверяем по комнатам:</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>data_test<span class="sc">$</span>room_number<span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">*</span>data_test<span class="sc">$</span>one_room <span class="sc">+</span> </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span><span class="sc">*</span>data_test<span class="sc">$</span>two_rooms <span class="sc">+</span> </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span><span class="sc">*</span> data_test<span class="sc">$</span>three_rooms <span class="sc">+</span> </span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span><span class="sc">*</span>data_test<span class="sc">$</span>four_and_over_rooms</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co"># эффект негативнее для 2-3 комнатных</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_test) <span class="sc">+</span> </span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(room_number), tau_forest<span class="sc">$</span>predictions))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="heatmaps" class="level3" data-number="8.2.6">
+<h3 data-number="8.2.6" class="anchored" data-anchor-id="heatmaps"><span class="header-section-number">8.2.6</span> Heatmaps</h3>
+<p>Намного интереснее смотреть вклад сразу нескольких эффектов. Для этого есть тепловые карты. По осям располагаются характеристики, а интенсивность эффекта отражается цветом ячейки, расположенной на пересечении значений характеристик:</p>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-30_8582e1dd8adcc920283ffcdc0ff1e480">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>data_test<span class="sc">$</span>tau <span class="ot">&lt;-</span> tau_forest<span class="sc">$</span>predictions</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_test, <span class="fu">aes</span>(repair, Mos_center)) <span class="sc">+</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill=</span>data_test<span class="sc">$</span>tau))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_test, <span class="fu">aes</span>(repair, room_number)) <span class="sc">+</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill=</span>data_test<span class="sc">$</span>tau))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-30-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_test, <span class="fu">aes</span>(Mos_center, room_number)) <span class="sc">+</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill=</span>data_test<span class="sc">$</span>tau))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-30-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-31_3b879e9538dae12daf49bc0314745b3e">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_test<span class="sc">$</span>total_area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>data_test<span class="sc">$</span>cut_area<span class="ot">&lt;-</span><span class="fu">cut</span>(data_test<span class="sc">$</span>total_area,</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">60</span>,<span class="dv">70</span>,<span class="dv">80</span>,<span class="dv">90</span>,<span class="dv">100</span>,<span class="dv">110</span>,<span class="cn">Inf</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-32_aa8712ad5975962589bfbcbd4eaa4e62">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_test, <span class="fu">aes</span>(Mos_center, cut_area)) <span class="sc">+</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill=</span>data_test<span class="sc">$</span>tau))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="heterogenous_treatment_effects_cache/html/unnamed-chunk-33_b25b7e379c0b90751bb0acc1e8e10fba">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_test, <span class="fu">aes</span>(room_number, cut_area)) <span class="sc">+</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill=</span>data_test<span class="sc">$</span>tau))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="heterogenous_treatment_effects_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Итог: больше всего теряют хозяева больших двушек не в центре, до -25% арендной платы.</p>
@@ -928,16 +1197,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./high_dimension_regularization.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Регуляризация и большая размерность</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./regression_discontinuity.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Разрывная регрессия</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Анна Ставнийчук, Прикладная эконометрика, 2023
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 
