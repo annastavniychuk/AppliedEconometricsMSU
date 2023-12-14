@@ -97,6 +97,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -171,14 +173,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./matching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Мэтчинг</span></span></a>
+  <a href="./subclassification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Взвешивание (subclassification)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./subclassification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Постстратификация</span></span></a>
+  <a href="./matching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Мэтчинг</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -240,7 +242,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#напоминание-теории" id="toc-напоминание-теории" class="nav-link active" data-scroll-target="#напоминание-теории"><span class="header-section-number">11.1</span> Напоминание теории</a></li>
-  <li><a href="#пример" id="toc-пример" class="nav-link" data-scroll-target="#пример"><span class="header-section-number">11.2</span> Пример</a></li>
+  <li><a href="#пример" id="toc-пример" class="nav-link" data-scroll-target="#пример"><span class="header-section-number">11.2</span> Пример</a>
+  <ul class="collapse">
+  <li><a href="#предварительный-анализ-данных" id="toc-предварительный-анализ-данных" class="nav-link" data-scroll-target="#предварительный-анализ-данных"><span class="header-section-number">11.2.1</span> Предварительный анализ данных</a></li>
+  <li><a href="#оценка-эффекта" id="toc-оценка-эффекта" class="nav-link" data-scroll-target="#оценка-эффекта"><span class="header-section-number">11.2.2</span> Оценка эффекта</a></li>
+  <li><a href="#диагностика-модели" id="toc-диагностика-модели" class="nav-link" data-scroll-target="#диагностика-модели"><span class="header-section-number">11.2.3</span> Диагностика модели</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -267,13 +274,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="напоминание-теории" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="напоминание-теории"><span class="header-section-number">11.1</span> Напоминание теории</h2>
 <p>in progress…</p>
+<p>Пока посоветовала бы читать <a href="https://mixtape.scunning.com/10-synthetic_control">тут</a> и <a href="https://matheusfacure.github.io/python-causality-handbook/15-Synthetic-Control.html">тут</a>.</p>
 </section>
 <section id="пример" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="пример"><span class="header-section-number">11.2</span> Пример</h2>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-1_2324703753202ed91c57d6b0c4b93388">
+<p>Абади, Даймонд и Хайнмюллер (2010) использовали метод синтетического контроля, чтобы оценить влияние от реализации проекта под названием Proposition 99.</p>
+<p>В 1988 году Калифорния приняла комплексное законодательство по борьбе против табака под названием Proposition 99. Proposition 99 увеличило налоги на сигареты на 0,25 доллара за пачку, стимулировало принятие постановлений о чистоте воздуха по всему штату, финансировало кампании по борьбе с курением в средствах массовой информации, направляло налоговые поступления в бюджеты здравоохранения и борьбы с курением. и зарабатывал более 100 миллионов долларов в год на антитабачных проектах.</p>
+<p>Для оценки эффекта методом синтетического контроля нам понадобится пакет <code>tidysynth</code></p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidysynth'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-2_25b15e165b62f676b529e4b78de48878">
+<p>и набор данных <code>smoking</code> из этого же пакета.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"smoking"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>smoking <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -288,94 +300,141 @@ $ age15to24 &lt;dbl&gt; 0.1831579, 0.1780438, 0.1765159, 0.1615542, 0.1851852, 0
 $ retprice  &lt;dbl&gt; 39.3, 39.9, 30.6, 38.9, 34.3, 38.4, 31.4, 37.3, 36.7, 28.8, …</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-3_17d3682b0ac1dc8cb097a636406a52b7">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="ot">&lt;-</span> smoking <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># initial the synthetic control object</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">synthetic_control</span>(<span class="at">outcome =</span> cigsale, <span class="co"># outcome</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">unit =</span> state, <span class="co"># unit index in the panel data</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">time =</span> year, <span class="co"># time index in the panel data</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">i_unit =</span> <span class="st">"California"</span>, <span class="co"># unit where the intervention occurred</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">i_time =</span> <span class="dv">1988</span>, <span class="co"># time period when the intervention occurred</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">generate_placebos=</span>T <span class="co"># generate placebo synthetic controls (for inference)</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate the aggregate predictors used to fit the weights</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># average log income, retail price of cigarettes, and proportion of the</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># population between 15 and 24 years of age from 1980 - 1988</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1980</span><span class="sc">:</span><span class="dv">1988</span>,</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ln_income =</span> <span class="fu">mean</span>(lnincome, <span class="at">na.rm =</span> T),</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ret_price =</span> <span class="fu">mean</span>(retprice, <span class="at">na.rm =</span> T),</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">youth =</span> <span class="fu">mean</span>(age15to24, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># average beer consumption in the donor pool from 1984 - 1988</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1984</span><span class="sc">:</span><span class="dv">1988</span>,</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                       <span class="at">beer_sales =</span> <span class="fu">mean</span>(beer, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lagged cigarette sales </span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1975</span>,</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cigsale_1975 =</span> cigsale) <span class="sc">%&gt;%</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1980</span>,</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cigsale_1980 =</span> cigsale) <span class="sc">%&gt;%</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1988</span>,</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cigsale_1988 =</span> cigsale) <span class="sc">%&gt;%</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate the fitted weights for the synthetic control</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_weights</span>(<span class="at">optimization_window =</span> <span class="dv">1970</span><span class="sc">:</span><span class="dv">1988</span>, <span class="co"># time to use in the optimization task</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin_ipop =</span> .<span class="dv">02</span>,<span class="at">sigf_ipop =</span> <span class="dv">7</span>,<span class="at">bound_ipop =</span> <span class="dv">6</span> <span class="co"># optimizer options</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate the synthetic control</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_control</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>В набор данных входят следующие переменные:</p>
+<ul>
+<li>state – штат США</li>
+<li>year – год</li>
+<li>cigsale - продажи сигарет на душу населения</li>
+<li>lnincome - логарифм ВВП на душу населения</li>
+<li>beer - потребление пива на душу населения</li>
+<li>age15to24 - доля населения в возрасте 15–24 лет</li>
+<li>retprice - розничная цена на сигареты</li>
+</ul>
+<p>Мы будем считать эффект на переменную <code>cigsale</code>.</p>
+<section id="предварительный-анализ-данных" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="предварительный-анализ-данных"><span class="header-section-number">11.2.1</span> Предварительный анализ данных</h3>
+<p>Для начала посмотрим как изменялись продажи сигарет в Калифорнии и в других шатах, где не было изменения законодательства.</p>
+<p>Для этого нам сначала нужно усреднить значение продаж по штатам, где не было изменения законодательства.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'dplyr'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>California_treated <span class="ot">&lt;-</span> smoking_out[<span class="dv">1</span>,]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>California_control <span class="ot">&lt;-</span> smoking_out[<span class="dv">2</span>,]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>California_treated_outcome <span class="ot">&lt;-</span> California_control<span class="sc">$</span>.outcome[[<span class="dv">1</span>]]</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>California_control_outcome <span class="ot">&lt;-</span> California_treated<span class="sc">$</span>.outcome[[<span class="dv">1</span>]]</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>California <span class="ot">&lt;-</span> <span class="fu">merge</span>(California_control_outcome, California_treated_outcome, <span class="at">by =</span> <span class="st">'time_unit'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>trend <span class="ot">&lt;-</span> smoking <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treatment_unit =</span> state <span class="sc">==</span> <span class="st">"California"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, treatment_unit) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cigsale =</span> <span class="fu">mean</span>(cigsale))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Теперь построим график</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'ggplot2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Потенциальные исходы</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>California <span class="ot">&lt;-</span> smoking_out[<span class="dv">1</span>,]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>California_outcomes <span class="ot">&lt;-</span> California<span class="sc">$</span>.synthetic_control[[<span class="dv">1</span>]]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># График</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>California_outcomes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">time =</span> <span class="fu">c</span>(<span class="fu">rep</span>(California_outcomes<span class="sc">$</span>time_unit,<span class="dv">2</span>)),</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">outcome =</span> <span class="fu">c</span>(California_outcomes<span class="sc">$</span>real_y, California_outcomes<span class="sc">$</span>synth_y), </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">label =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">'real'</span>, <span class="dv">31</span>), <span class="fu">rep</span>(<span class="st">'synth'</span>, <span class="dv">31</span>)))</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>California_outcomes<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(California_outcomes<span class="sc">$</span>label)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(California_outcomes, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> outcome, <span class="at">color =</span> label)) <span class="sc">+</span> </span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(trend, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> cigsale, <span class="at">color =</span> treatment_unit)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1988</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="synthetic_control_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="synthetic_control_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-6_b4126a23fd3413a370241438370c8cd3">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>smoking_out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>На рисунке показаны изменения в продажах сигарет в Калифорнии и остальной части Соединенных Штатов ежегодно с 1970 по 2000 год. Как можно видеть, продажи сигарет упали после Proposition 99, но, поскольку общий тренд и так был нисходящий и в то же время они падали и в остальной части страны, неясно, был ли реально какой-либо эффект от изменения законодательства.</p>
+<p>Раньше для решения подобной ситуации мы применяли метод разности разностей. Но в этот раз претренды (продажи сигарет до 1988 года) не являются параллельными. Поэтому нам нужно использовать метод синтетического контроля.</p>
+</section>
+<section id="оценка-эффекта" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="оценка-эффекта"><span class="header-section-number">11.2.2</span> Оценка эффекта</h3>
+<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-7_1b21f5b694314f551b43ff00d22c9543">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="ot">&lt;-</span> smoking <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Создаем исходный объект, в котором хранится необходимая информация о дизайне эксперимента</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">synthetic_control</span>(<span class="at">outcome =</span> cigsale, <span class="co"># зависимая переменная</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">unit =</span> state, <span class="co"># индекс наблюдения в панельных данных</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">time =</span> year, <span class="co"># индекс времени в панельных данных</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">i_unit =</span> <span class="st">"California"</span>, <span class="co"># наблюдение (шатат), которое подверглось воздействию </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">i_time =</span> <span class="dv">1988</span>, <span class="co"># период времени, когда случилось воздействие </span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">generate_placebos=</span>T <span class="co"># создать плацебо синтетические контроли </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Выбираем / создаем ковариаты для подгонки притренда и подбора весов  </span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># В статье все переменные, за исключением лага продаж сигарет, усреднены за период 1980–1988 годов. </span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Потребление пива усреднено за 1984–1988 годы.</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># average log income, retail price of cigarettes, and proportion of the</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># population between 15 and 24 years of age from 1980 - 1988</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1980</span><span class="sc">:</span><span class="dv">1988</span>, <span class="co"># период до воздействия, в котором подбираем веса (подгоняем претренды)</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ln_income =</span> <span class="fu">mean</span>(lnincome, <span class="at">na.rm =</span> T),</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ret_price =</span> <span class="fu">mean</span>(retprice, <span class="at">na.rm =</span> T),</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                       <span class="at">youth =</span> <span class="fu">mean</span>(age15to24, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># average beer consumption in the donor pool from 1984 - 1988</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1984</span><span class="sc">:</span><span class="dv">1988</span>,</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                       <span class="at">beer_sales =</span> <span class="fu">mean</span>(beer, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lagged cigarette sales </span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1975</span>,</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cigsale_1975 =</span> cigsale) <span class="sc">%&gt;%</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1980</span>,</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cigsale_1980 =</span> cigsale) <span class="sc">%&gt;%</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1988</span>,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cigsale_1988 =</span> cigsale) <span class="sc">%&gt;%</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Считаем оптимальные веса для синтетического контроля</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_weights</span>(<span class="at">optimization_window =</span> <span class="dv">1970</span><span class="sc">:</span><span class="dv">1988</span>, <span class="co"># период, на котором подгоняем претренды</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin_ipop =</span> .<span class="dv">02</span>, <span class="co"># параметр оптимизации: насколько близко мы подходим к ограничениям (подробности см. в ipop)</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sigf_ipop =</span> <span class="dv">7</span>, <span class="co"># параметр оптимизации: количество знаков при округлении (подробности см. в ipop)</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>                     <span class="at">bound_ipop =</span> <span class="dv">6</span> <span class="co"># параметр оптимизации: граница обрезки переменных (подробности см. в ipop)</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Создаем синтетический контроль</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_control</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Посмотрим, что хранится в объекте, который мы создали</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>smoking_out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 78 × 11
-   .id       .plac…¹ .type .outcome .predi…² .synth…³ .unit_…⁴ .predi…⁵ .origi…⁶
-   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;  
- 1 Californ…       0 trea… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;
- 2 Californ…       0 cont… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;
- 3 Rhode Is…       1 trea… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;
- 4 Rhode Is…       1 cont… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;
- 5 Tennessee       1 trea… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;
- 6 Tennessee       1 cont… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;
- 7 Indiana         1 trea… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;
- 8 Indiana         1 cont… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;
- 9 Nevada          1 trea… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;
-10 Nevada          1 cont… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;
-# … with 68 more rows, 2 more variables: .meta &lt;list&gt;, .loss &lt;list&gt;, and
-#   abbreviated variable names ¹​.placebo, ²​.predictors, ³​.synthetic_control,
-#   ⁴​.unit_weights, ⁵​.predictor_weights, ⁶​.original_data</code></pre>
+   .id      .placebo .type .outcome .predictors .synthetic_control .unit_weights
+   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;   &lt;list&gt;      &lt;list&gt;             &lt;list&gt;       
+ 1 Califor…        0 trea… &lt;tibble&gt; &lt;tibble&gt;    &lt;tibble [31 × 3]&gt;  &lt;tibble&gt;     
+ 2 Califor…        0 cont… &lt;tibble&gt; &lt;tibble&gt;    &lt;tibble [31 × 3]&gt;  &lt;tibble&gt;     
+ 3 Rhode I…        1 trea… &lt;tibble&gt; &lt;tibble&gt;    &lt;tibble [31 × 3]&gt;  &lt;tibble&gt;     
+ 4 Rhode I…        1 cont… &lt;tibble&gt; &lt;tibble&gt;    &lt;tibble [31 × 3]&gt;  &lt;tibble&gt;     
+ 5 Tenness…        1 trea… &lt;tibble&gt; &lt;tibble&gt;    &lt;tibble [31 × 3]&gt;  &lt;tibble&gt;     
+ 6 Tenness…        1 cont… &lt;tibble&gt; &lt;tibble&gt;    &lt;tibble [31 × 3]&gt;  &lt;tibble&gt;     
+ 7 Indiana         1 trea… &lt;tibble&gt; &lt;tibble&gt;    &lt;tibble [31 × 3]&gt;  &lt;tibble&gt;     
+ 8 Indiana         1 cont… &lt;tibble&gt; &lt;tibble&gt;    &lt;tibble [31 × 3]&gt;  &lt;tibble&gt;     
+ 9 Nevada          1 trea… &lt;tibble&gt; &lt;tibble&gt;    &lt;tibble [31 × 3]&gt;  &lt;tibble&gt;     
+10 Nevada          1 cont… &lt;tibble&gt; &lt;tibble&gt;    &lt;tibble [31 × 3]&gt;  &lt;tibble&gt;     
+# ℹ 68 more rows
+# ℹ 4 more variables: .predictor_weights &lt;list&gt;, .original_data &lt;list&gt;,
+#   .meta &lt;list&gt;, .loss &lt;list&gt;</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-7_10f17bd2ca5726e8e86be556ea3d9fd6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">grab_synthetic_control</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Из объека <code>smoking_out</code> нам нужно извлечь информацию о продажах сигарет в Калифорнии (первая строчка) – истинное значение и синтетический контроль.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>California <span class="ot">&lt;-</span> smoking_out[<span class="dv">1</span>,]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>California_outcomes <span class="ot">&lt;-</span> California<span class="sc">$</span>.synthetic_control[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Соберем это в таблицу, чтобы нарисовать график</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>California_outcomes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">time =</span> <span class="fu">c</span>(<span class="fu">rep</span>(California_outcomes<span class="sc">$</span>time_unit,<span class="dv">2</span>)),</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">outcome =</span> <span class="fu">c</span>(California_outcomes<span class="sc">$</span>real_y, California_outcomes<span class="sc">$</span>synth_y), </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">label =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">'real'</span>, <span class="dv">31</span>), <span class="fu">rep</span>(<span class="st">'synth'</span>, <span class="dv">31</span>)))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>California_outcomes<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(California_outcomes<span class="sc">$</span>label)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>После создания синтетического контроля нужно сравнить тренды синтетического и наблюдаемого рядов. Главная идея состоит в том, что тренды в период до вмешательства должны быть тесно связаны друг с другом.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(California_outcomes, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> outcome, <span class="at">color =</span> label)) <span class="sc">+</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1988</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="synthetic_control_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Однако для удобства для этого есть специальная функция, чтобы получить значения истинных продаж сигарет и их синтетический контроль</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">grab_synthetic_control</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 31 × 3
    time_unit real_y synth_y
@@ -390,19 +449,44 @@ $ retprice  &lt;dbl&gt; 39.3, 39.9, 30.6, 38.9, 34.3, 38.4, 31.4, 37.3, 36.7, 28
  8      1977   126.    125.
  9      1978   126.    125.
 10      1979   122.    122.
-# … with 21 more rows</code></pre>
+# ℹ 21 more rows</code></pre>
 </div>
 </div>
-<p>После создания синтетического контроля можно легко оценить соответствие, сравнив тенденции синтетического и наблюдаемого временных рядов. Идея состоит в том, что тенденции в период до вмешательства должны быть тесно связаны друг с другом.</p>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-8_29f486a66c5cd0260a5d5cc7f41072cc">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_trends</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>и для построения графика</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_trends</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="synthetic_control_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="synthetic_control_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Сравните распределения предикторов агрегированного уровня для наблюдаемой единицы вмешательства, синтетического контроля и среднего пула доноров.</p>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-9_169bcf63ceaba8a62afc07cd73f2a488">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">grab_balance_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="диагностика-модели" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="диагностика-модели"><span class="header-section-number">11.2.3</span> Диагностика модели</h3>
+<p>В функции <code>synthetic_control()</code> мы указали аргумент <code>generate_placebos=T</code>. Это означает, что пакет автоматически провел плацебо тест и оценил эффект на штатах, на которых не было оказано воздействие. Этот вид плацебо теста называется in space placebo test.</p>
+<p>Можно вывести и контрольные регионы (плацебо) тоже – им соотвествуют строчки placebo = 1 (то есть всё, кроме Калифорнии)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">grab_synthetic_control</span>(<span class="at">placebo =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">40</span>) <span class="co"># это чтобы посмотреть строчки, где видно не только Калифорнию (с 30-й по 40-ю)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 5
+   .id          .placebo time_unit real_y synth_y
+   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1 California          0      1999   47.2    73.4
+ 2 California          0      2000   41.6    67.1
+ 3 Rhode Island        1      1970  124.    153. 
+ 4 Rhode Island        1      1971  123.    157. 
+ 5 Rhode Island        1      1972  134.    155. 
+ 6 Rhode Island        1      1973  142     156. 
+ 7 Rhode Island        1      1974  146.    155. 
+ 8 Rhode Island        1      1975  155.    153. 
+ 9 Rhode Island        1      1976  150.    157. 
+10 Rhode Island        1      1977  149.    157. 
+11 Rhode Island        1      1978  147.    157. </code></pre>
+</div>
+</div>
+<p>В синтетическом контроле тоже можно делать баланс ковариат. Нам хотелось бы, чтобы созданная нами синтетическая контрольная группа была как можно больше похожа на группу воздействия. Для сравнения у нас также есть столбик с исходными средними в пулле доноров (контрольная группа без взвешивания). Как и раньше, было бы гораздо честнее дополнительно провести тест на сравнение средних. В пакеты <code>tidysynth</code> эта функция не реализована, но это можно сделать самому дополнительно в качеству упражения :)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">grab_balance_table</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 4
   variable     California synthetic_California donor_sample
@@ -416,40 +500,108 @@ $ retprice  &lt;dbl&gt; 39.3, 39.9, 30.6, 38.9, 34.3, 38.4, 31.4, 37.3, 36.7, 28
 7 cigsale_1988     90.1                 90.8        114.   </code></pre>
 </div>
 </div>
-<p>Чтобы зафиксировать причинную величину (то есть разницу между наблюдаемым и контрфактическим), можно построить различия, используя plot_differences ()</p>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-10_ba89a0496f108b5cfbb9398f519702f4">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_differences</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Иногда бывает удобнее визуализировать не тренды в тритменте и контроле, а их разницу, то есть фактический эффект (разницу между наблюдаемым и контрфактическим). Это можно сделать, используя <code>plot_differences()</code>. Мы хотели бы, чтобы это отклонение было близко к нулю до воздействия (хорошая подгонка претрендов) и ненулевым после воздействия (наличие эффекта).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_differences</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="synthetic_control_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="synthetic_control_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Кроме того, можно легко проверить взвешивание единиц и переменных в подгонке. Это позволяет увидеть, какие случаи были частично использованы для создания синтетического контроля.</p>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-11_97b287fa95c858edf7e3775b91e37e79">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_weights</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Также мы можем узнать какие наблюдения (штаты) с какими весами вошли в нашу синтетическую контрольную группу и какие предикторы имеют наибольшее значение при формировании контрольной группы.</p>
+<ul>
+<li>W веса наблюдений (юнитов / штатов)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">grab_unit_weights</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 38 × 2
+   unit           weight
+   &lt;chr&gt;           &lt;dbl&gt;
+ 1 Alabama     0.0000135
+ 2 Arkansas    0.0000128
+ 3 Colorado    0.110    
+ 4 Connecticut 0.0511   
+ 5 Delaware    0.0000129
+ 6 Georgia     0.0000109
+ 7 Idaho       0.00150  
+ 8 Illinois    0.0000781
+ 9 Indiana     0.0000122
+10 Iowa        0.0000448
+# ℹ 28 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>V веса предикторов</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">grab_predictor_weights</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  variable       weight
+  &lt;chr&gt;           &lt;dbl&gt;
+1 ln_income    0.000375
+2 ret_price    0.166   
+3 youth        0.158   
+4 beer_sales   0.223   
+5 cigsale_1975 0.158   
+6 cigsale_1980 0.130   
+7 cigsale_1988 0.164   </code></pre>
+</div>
+</div>
+<p>Вместе в виде гистограмм</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_weights</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="synthetic_control_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="synthetic_control_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-12_0e9c0ce5f1a4b2f2e8a021e76926478c">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_placebos</span>(<span class="at">prune =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Для оценки качества синтетического контроля используется MSPE ratio – соотношение среднеквадратического отклонения истинного игрека от синтетического после воздействия к этой же величине до воздействия. Соотвественно, чем больше эффект, тем больше числитель, тем больше MSPE ratio. Чем лучше подгонка претрендов, тем меньше знаменатель, тем больше MSPE ratio. Для тритмент наблюдения чем больше MSPE ratio, тем лучше. Особенно на фоне пулла доноров.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_mspe_ratio</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="synthetic_control_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="synthetic_control_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-13_edd3331df691b9e38299401f052d973a">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_placebos</span>() <span class="co"># выкидываем с плохой подгонкой</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Для синтетического контроля есть способ проверки совокупного (на протяжении всех периодов после воздействия) эффекта после оказания воздействия. Об этом способе расчета p-value можно прочитать <a href="https://mixtape.scunning.com/10-synthetic_control#fig-scm4">тут</a>.</p>
+<p>Фактически <span class="math inline">\(p-value = \frac{1}{n-rank}\)</span>, где n число штатов, а rank место в рейтинге Калифорнии после сортировки (R)MSPE ratio по убыванию. Это седьмой столбик в таблице ниже. Видим, что наш эффект значим на 1% уровне.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">grab_significance</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 39 × 8
+   unit_name     type   pre_mspe post_mspe mspe_ratio  rank fishers_exact_pvalue
+   &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;                &lt;dbl&gt;
+ 1 California    Treat…     3.94     390.       99.0      1               0.0256
+ 2 Georgia       Donor      3.48     174.       49.8      2               0.0513
+ 3 Virginia      Donor      5.86     171.       29.2      3               0.0769
+ 4 Indiana       Donor     18.4      415.       22.6      4               0.103 
+ 5 West Virginia Donor     14.3      287.       20.1      5               0.128 
+ 6 Connecticut   Donor     27.3      335.       12.3      6               0.154 
+ 7 Nebraska      Donor      6.47      54.3       8.40     7               0.179 
+ 8 Missouri      Donor      9.19      77.0       8.38     8               0.205 
+ 9 Texas         Donor     24.5      160.        6.54     9               0.231 
+10 Idaho         Donor     53.2      340.        6.39    10               0.256 
+# ℹ 29 more rows
+# ℹ 1 more variable: z_score &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Далее посмотрим на in space плацебо тест. На графике розовой линией обозначена разница между наблюдаемыми и контрольными продажами в Калифорнии, серым – в остальных штатах. Фактически это много графиков аналогичных <code>plot_differences()</code>, но для всех штатов.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_placebos</span>(<span class="at">prune =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="synthetic_control_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="synthetic_control_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="synthetic_control_cache/html/unnamed-chunk-14_087d5aae591a859aec8e21050e049e00">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_mspe_ratio</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>В таком пучке линий сложно что-то рассмотреть, кроме того, есть регионы, у которых откровенно плохо подогнаны претренды, то есть даже с помощю синтетического контроля претренды получилось аппроксимировать не очень качественно. Мы можем выкинуть такие линии по критерию MSPE ratio &gt; 2 и сделать наш график более читабельным.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>smoking_out <span class="sc">%&gt;%</span> <span class="fu">plot_placebos</span>(<span class="at">prune =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="synthetic_control_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="synthetic_control_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Видим, что тот эффект, который мы нашли, найден неслучайно. Общей тенденции на снижении продаж в штатах, которые не подвергались аоздействию, нет.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -814,6 +966,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Анна Ставнийчук, Прикладная эконометрика, 2023
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

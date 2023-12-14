@@ -789,7 +789,7 @@ repair               0.146070488  0.006971480 .           .          .      </co
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>model_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.01299894</code></pre>
+<pre><code>[1] 0.03002925</code></pre>
 </div>
 </div>
 <p>Мы также можем сравнить коэффициенты в двух моделях с вышеуказанными лямбдами:</p>
@@ -832,21 +832,21 @@ repair               0.1441384544</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>27 x 1 sparse Matrix of class "dgCMatrix"
                              s1
-(Intercept)          6.50826092
+(Intercept)          6.55019416
 (Intercept)          .         
-log_total_area       1.03670531
-discrim_proxy       -0.04528514
-Mos_center           0.49361870
+log_total_area       1.02704039
+discrim_proxy       -0.01564148
+Mos_center           0.47857861
 Akimanka_rajon       .         
 Hamovniki_rajon      .         
-Tverskoj_rajon       0.04236198
-Taganskij_rajon     -0.06999387
+Tverskoj_rajon       .         
+Taganskij_rajon      .         
 Krasnoselskij_rajon  .         
 Mesanskij_rajon      .         
 Zamoskvorece_rajon   .         
 Basmannyj_rajon      .         
 Arbat_rajon          .         
-first_floor         -0.01300153
+first_floor          .         
 one_room             .         
 two_rooms            .         
 three_rooms          .         
@@ -856,9 +856,9 @@ blochnii             .
 derevjannii          .         
 kirpichnii           .         
 monolitnii           .         
-panelnii            -0.08397409
+panelnii            -0.06304135
 stalinskii           .         
-repair               0.12813136</code></pre>
+repair               0.10603505</code></pre>
 </div>
 </div>
 </section>
@@ -1112,13 +1112,13 @@ four_and_over_rooms         starii_fond            blochnii         derevjannii
 <div class="cell-output cell-output-stdout">
 <pre><code>26 x 1 sparse Matrix of class "dgCMatrix"
                              s1
-(Intercept)          6.50654463
+(Intercept)          6.55075564
 (Intercept)          .         
-log_total_area       1.03594098
-Mos_center           0.48603593
+log_total_area       1.02650307
+Mos_center           0.47526660
 Akimanka_rajon       .         
 Hamovniki_rajon      .         
-Tverskoj_rajon       0.01793005
+Tverskoj_rajon       .         
 Taganskij_rajon      .         
 Krasnoselskij_rajon  .         
 Mesanskij_rajon      .         
@@ -1135,9 +1135,9 @@ blochnii             .
 derevjannii          .         
 kirpichnii           .         
 monolitnii           .         
-panelnii            -0.07360519
+panelnii            -0.05993709
 stalinskii           .         
-repair               0.11702770</code></pre>
+repair               0.10267275</code></pre>
 </div>
 </div>
 <p>Остались log_total_area, Mos_center, panelnii, repair</p>
