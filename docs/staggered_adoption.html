@@ -240,7 +240,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#напоминание-теории" id="toc-напоминание-теории" class="nav-link active" data-scroll-target="#напоминание-теории"><span class="header-section-number">12.1</span> Напоминание теории</a></li>
-  <li><a href="#пример" id="toc-пример" class="nav-link" data-scroll-target="#пример"><span class="header-section-number">12.2</span> Пример</a></li>
+  <li><a href="#пример" id="toc-пример" class="nav-link" data-scroll-target="#пример"><span class="header-section-number">12.2</span> Пример</a>
+  <ul class="collapse">
+  <li><a href="#предварительный-анализ-данных" id="toc-предварительный-анализ-данных" class="nav-link" data-scroll-target="#предварительный-анализ-данных"><span class="header-section-number">12.2.1</span> Предварительный анализ данных</a></li>
+  <li><a href="#оценка-эффекта" id="toc-оценка-эффекта" class="nav-link" data-scroll-target="#оценка-эффекта"><span class="header-section-number">12.2.2</span> Оценка эффекта</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -266,14 +270,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="напоминание-теории" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="напоминание-теории"><span class="header-section-number">12.1</span> Напоминание теории</h2>
-<p>https://bcallaway11.github.io/did/articles/index.html https://github.com/naoki-egami/DIDdesign#Staggered-Adoption-Design</p>
+<p>https://bcallaway11.github.io/did/articles/index.html</p>
+<p>https://github.com/naoki-egami/DIDdesign#Staggered-Adoption-Design</p>
 </section>
 <section id="пример" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="пример"><span class="header-section-number">12.2</span> Пример</h2>
-<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-1_1936be71729ec773b3ea0904f648e6a4">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(did)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mpdta)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mpdta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-1_8409f651f2119f66aceec76bddd70819">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(did)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Используем данные о влиянии минимальной заработной платы на занятость молодежи из (Callaway, Sant’Anna, 2020). Это набор данных, который содержит уровень занятости подростков на уровне округа за 2003-2007 годы. Импортируем данные:</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-2_557428fda3f67df6c0e5b29a5c978f6b">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mpdta, <span class="at">package =</span> <span class="st">'did'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mpdta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    year countyreal     lpop     lemp first.treat treat
 866 2003       8001 5.896761 8.461469        2007     1
@@ -284,135 +292,302 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 937 2003       8019 2.232377 4.997212        2007     1</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-2_0bc2f8938b7877e43f838660bf3a4cc7">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate group-time average treatment effects without covariates</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mw.attgt <span class="ot">&lt;-</span> <span class="fu">att_gt</span>(<span class="at">yname =</span> <span class="st">"lemp"</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">gname =</span> <span class="st">"first.treat"</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">idname =</span> <span class="st">"countyreal"</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tname =</span> <span class="st">"year"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xformla =</span> <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> mpdta,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                   )</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize the results</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mw.attgt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>год</strong> – год наблюдения</li>
+<li><strong>countyreal</strong> – уникальный идентификатор округа</li>
+<li><strong>lpop</strong> – логарифм населения округа (в тыс. чел.)</li>
+<li><strong>lemp</strong> – логарифм занятости подростков в округе</li>
+<li><strong>first.treat</strong> – год, когда штат, в котором расположен округ, повысил минимальную заработную плату. Он устанавливается равным 0 для округов, в которых минимальная заработная плата равна федеральной минимальной заработной плате за весь период.</li>
+<li><strong>treat</strong> – будет ли конкретный округ повышать МРОТ в этом году или нет</li>
+</ul>
+<section id="предварительный-анализ-данных" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="предварительный-анализ-данных"><span class="header-section-number">12.2.1</span> Предварительный анализ данных</h3>
+<p>Предварительно посмотрим как устроены наши данные. В особенности на распределение наступления тритмента.</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-3_ece2c1a33444e9c784819c867d9368f2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Посмотрим частоту введения тритмента в штатах по годам</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-4_815cda3fc913eeb8c0b5b61ef8ee0070">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(<span class="at">data =</span> mpdta, <span class="at">x =</span> <span class="fu">as.factor</span>(first.treat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(mpdta, treat <span class="sc">==</span> <span class="dv">1</span>), <span class="at">x =</span> <span class="fu">as.factor</span>(first.treat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Посмотрим на тип матрицы тритмента:</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-5_b3391f1cb45c389ec9cdba4edc157990">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'panelView'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-6_cb0687e49ef3ea5091a13e44b2a89195">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mpdta <span class="ot">&lt;-</span> mpdta <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(treat <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treatment =</span> <span class="fu">case_when</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">&lt;</span> first.treat <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">&gt;=</span> first.treat <span class="sc">~</span> <span class="dv">1</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-7_cbbdce38207016f0da4e4ec3f37d2f5f">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">panelview</span>(lemp <span class="sc">~</span> treatment, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> mpdta,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"countyreal"</span>,<span class="st">"year"</span>), </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">"Year"</span>, <span class="at">ylab =</span> <span class="st">"County"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">by.timing =</span> <span class="cn">TRUE</span>, <span class="co"># сортировка штатов на графике в порядке наступления тритмента для ступенчатого вида</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.lab =</span> <span class="st">"time"</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="co"># минималистичная тема приятная взгляду </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Заметим, что воздействие началось в 2004 году, а в 2005 году никто не добавлялся в тритмент группу.</p>
+</section>
+<section id="оценка-эффекта" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="оценка-эффекта"><span class="header-section-number">12.2.2</span> Оценка эффекта</h3>
+<section id="group-time-average-treatment-effects" class="level4" data-number="12.2.2.1">
+<h4 data-number="12.2.2.1" class="anchored" data-anchor-id="group-time-average-treatment-effects"><span class="header-section-number">12.2.2.1</span> group-time average treatment effects</h4>
+<p>Оценим средние эффекты воздействия в разрезе групп наступления тритмента по годам.</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-8_ba43e7a217b1bd27ff49fdf6c65105fe">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mw.attgt <span class="ot">&lt;-</span> did<span class="sc">::</span><span class="fu">att_gt</span>(<span class="at">yname =</span> <span class="st">"lemp"</span>, <span class="co"># зависимая</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">gname =</span> <span class="st">"first.treat"</span>, <span class="co"># период, когда наступает тритмент</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">idname =</span> <span class="st">"countyreal"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tname =</span> <span class="st">"year"</span>, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xformla =</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">control_group =</span> <span class="st">"notyettreated"</span>, <span class="co"># кого считать контрольной группой</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> mpdta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Посмотрим саммари модели:</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-9_ed5b0886c37c28357dfbcc10f46ba8dc">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mw.attgt) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-att_gt(yname = "lemp", tname = "year", idname = "countyreal", 
-    gname = "first.treat", xformla = ~1, data = mpdta)
+did::att_gt(yname = "lemp", tname = "year", idname = "countyreal", 
+    gname = "first.treat", xformla = ~1, data = mpdta, control_group = "notyettreated")
 
 Reference: Callaway, Brantly and Pedro H.C. Sant'Anna.  "Difference-in-Differences with Multiple Time Periods." Journal of Econometrics, Vol. 225, No. 2, pp. 200-230, 2021. &lt;https://doi.org/10.1016/j.jeconom.2020.12.001&gt;, &lt;https://arxiv.org/abs/1803.09015&gt; 
 
 Group-Time Average Treatment Effects:
  Group Time ATT(g,t) Std. Error [95% Simult.  Conf. Band]  
-  2004 2004  -0.0105     0.0246       -0.0781      0.0570  
-  2004 2005  -0.0704     0.0308       -0.1548      0.0140  
-  2004 2006  -0.1373     0.0360       -0.2359     -0.0387 *
-  2004 2007  -0.1008     0.0326       -0.1900     -0.0116 *
-  2006 2004   0.0065     0.0238       -0.0588      0.0719  
-  2006 2005  -0.0028     0.0207       -0.0594      0.0539  
-  2006 2006  -0.0046     0.0176       -0.0528      0.0436  
-  2006 2007  -0.0412     0.0199       -0.0956      0.0132  
-  2007 2004   0.0305     0.0148       -0.0100      0.0710  
-  2007 2005  -0.0027     0.0161       -0.0469      0.0415  
-  2007 2006  -0.0311     0.0174       -0.0786      0.0165  
-  2007 2007  -0.0261     0.0175       -0.0740      0.0219  
+  2004 2004  -0.0354     0.0230       -0.0911      0.0203  
+  2004 2005  -0.0926     0.0349       -0.1771     -0.0080 *
+  2004 2006  -0.1340     0.0418       -0.2353     -0.0326 *
+  2006 2004  -0.0240     0.0247       -0.0838      0.0359  
+  2006 2005   0.0000     0.0234       -0.0568      0.0567  
+  2006 2006   0.0265     0.0192       -0.0199      0.0729  
 ---
 Signif. codes: `*' confidence band does not cover 0
 
-P-value for pre-test of parallel trends assumption:  0.16812
-Control Group:  Never Treated,  Anticipation Periods:  0
+P-value for pre-test of parallel trends assumption:  0.60722
+Control Group:  Not Yet Treated,  Anticipation Periods:  0
 Estimation Method:  Doubly Robust</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Внизу тест Вальда на параллельность трендов -- совместная значимость коэффициентов до воздейтсвия</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-3_92ae1124148fce5bb49b45145840572e">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the results</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># set ylim so that all plots have the same scale along y-axis</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdid</span>(mw.attgt, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">3</span>,.<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Нарисуем оценки:</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-10_1107c9e139908566b02ccc041c815b5c">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>did<span class="sc">::</span><span class="fu">ggdid</span>(mw.attgt, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">3</span>,.<span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Установите ylim так, чтобы все графики имели одинаковый масштаб по оси Y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-4_05a6d8fb2fcc65c8efac4cb2531a3fcd">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># aggregate the group-time average treatment effects</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mw.dyn <span class="ot">&lt;-</span> <span class="fu">aggte</span>(mw.attgt, <span class="at">type =</span> <span class="st">"dynamic"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mw.dyn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Красные свечи – оценки эффекта до воздействия (претритмент), де факто претренды. Эффекта до наступления тритмента быть не должно.</p>
+<p>Синие свечи – динамический эффект после воздействия (посттритмент) в разрезе календарных годов.</p>
+<p>Видим негативное воздействие минимальной заработной платы на занятость среди молодежи в когорте наступления тритмента в 2004 году. Для вступивших в тритмент в 2006 году эффект незначим.</p>
+<p>Неоднозначность полученных результатов позволяют предположить, что может быть полезно агрегировать средние эффекты воздействия в разрезе групп или периодов, чем мы займемся дальше.</p>
+<p>Гораздо интереснее смотреть на агрегированные эффекты. Существует несколько способов агрегировать эффекты:</p>
+<ul>
+<li>Динамические – в разрезе количества периодов после наступления воздействия (смешиваются разные календарные года и когорты наступления тритмента)</li>
+<li>Групповые – в разрезе групп по году наступления тритмента (смешиваются разные календарные года)</li>
+<li>Календарные – в разрезе календарного года (смешиваются разные когорты наступления тритмента)</li>
+<li>Простой эффект – усредняем вообще всё в одно число (смешиваются разные календарные года и когорты наступления тритмента)</li>
+</ul>
+</section>
+<section id="динамические-эффекты-dynamic-treatment-effects" class="level4" data-number="12.2.2.2">
+<h4 data-number="12.2.2.2" class="anchored" data-anchor-id="динамические-эффекты-dynamic-treatment-effects"><span class="header-section-number">12.2.2.2</span> Динамические эффекты (dynamic treatment effects)</h4>
+<p>Динамический эффект – в разрезе количества периодов после наступления воздействия (смешиваются разные календарные года и когорты наступления тритмента). По оси икс t-g (год минус тритмент).</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-11_c5450aa2c803e897aefdb8e86980980a">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mw.dyn <span class="ot">&lt;-</span> did<span class="sc">::</span><span class="fu">aggte</span>(mw.attgt, <span class="at">type =</span> <span class="st">"dynamic"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mw.dyn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-aggte(MP = mw.attgt, type = "dynamic")
+did::aggte(MP = mw.attgt, type = "dynamic")
 
 Reference: Callaway, Brantly and Pedro H.C. Sant'Anna.  "Difference-in-Differences with Multiple Time Periods." Journal of Econometrics, Vol. 225, No. 2, pp. 200-230, 2021. &lt;https://doi.org/10.1016/j.jeconom.2020.12.001&gt;, &lt;https://arxiv.org/abs/1803.09015&gt; 
 
 
 Overall summary of ATT's based on event-study/dynamic aggregation:  
      ATT    Std. Error     [ 95%  Conf. Int.]  
- -0.0772        0.0213     -0.119     -0.0355 *
+ -0.0736        0.0268     -0.126     -0.0211 *
 
 
 Dynamic Effects:
  Event time Estimate Std. Error [95% Simult.  Conf. Band]  
-         -3   0.0305     0.0147       -0.0075      0.0685  
-         -2  -0.0006     0.0137       -0.0360      0.0349  
-         -1  -0.0245     0.0142       -0.0612      0.0123  
-          0  -0.0199     0.0114       -0.0494      0.0095  
-          1  -0.0510     0.0169       -0.0947     -0.0072 *
-          2  -0.1373     0.0382       -0.2361     -0.0385 *
-          3  -0.1008     0.0377       -0.1982     -0.0034 *
+         -2  -0.0240     0.0254       -0.0859      0.0379  
+         -1   0.0000     0.0228       -0.0557      0.0557  
+          0   0.0059     0.0155       -0.0321      0.0438  
+          1  -0.0926     0.0349       -0.1778     -0.0074 *
+          2  -0.1340     0.0420       -0.2365     -0.0314 *
 ---
 Signif. codes: `*' confidence band does not cover 0
 
-Control Group:  Never Treated,  Anticipation Periods:  0
+Control Group:  Not Yet Treated,  Anticipation Periods:  0
 Estimation Method:  Doubly Robust</code></pre>
 </div>
-</div>
-<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-5_aa15badae608dc24ac9d0758951d5317">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdid</span>(mw.dyn, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">3</span>,.<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>did<span class="sc">::</span><span class="fu">ggdid</span>(mw.dyn, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">3</span>,.<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-6_ea722e0b55b85f2ee49e9b7ce7a75c3c">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mw.dyn.balance <span class="ot">&lt;-</span> <span class="fu">aggte</span>(mw.attgt, <span class="at">type =</span> <span class="st">"dynamic"</span>, <span class="at">balance_e=</span><span class="dv">1</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mw.dyn.balance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="групповые-эффекты-group-treatment-effects" class="level4" data-number="12.2.2.3">
+<h4 data-number="12.2.2.3" class="anchored" data-anchor-id="групповые-эффекты-group-treatment-effects"><span class="header-section-number">12.2.2.3</span> Групповые эффекты (group treatment effects)</h4>
+<p>Групповые – в разрезе групп по году наступления тритмента (смешиваются разные календарные года)</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-12_2dfb696db104511115116d3e3958d815">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mw.group <span class="ot">&lt;-</span> did<span class="sc">::</span><span class="fu">aggte</span>(mw.attgt, <span class="at">type =</span> <span class="st">"group"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mw.group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-aggte(MP = mw.attgt, type = "dynamic", balance_e = 1)
+did::aggte(MP = mw.attgt, type = "group")
 
 Reference: Callaway, Brantly and Pedro H.C. Sant'Anna.  "Difference-in-Differences with Multiple Time Periods." Journal of Econometrics, Vol. 225, No. 2, pp. 200-230, 2021. &lt;https://doi.org/10.1016/j.jeconom.2020.12.001&gt;, &lt;https://arxiv.org/abs/1803.09015&gt; 
 
 
-Overall summary of ATT's based on event-study/dynamic aggregation:  
-     ATT    Std. Error     [ 95%  Conf. Int.]  
- -0.0288        0.0145    -0.0571      -4e-04 *
+Overall summary of ATT's based on group/cohort aggregation:  
+     ATT    Std. Error     [ 95%  Conf. Int.] 
+ -0.0114        0.0162    -0.0431      0.0203 
 
 
-Dynamic Effects:
- Event time Estimate Std. Error [95% Simult.  Conf. Band]  
-         -2   0.0065     0.0235       -0.0499      0.0629  
-         -1  -0.0028     0.0197       -0.0500      0.0445  
-          0  -0.0066     0.0139       -0.0400      0.0269  
-          1  -0.0510     0.0182       -0.0947     -0.0072 *
+Group Effects:
+ Group Estimate Std. Error [95% Simult.  Conf. Band]  
+  2004  -0.0873     0.0295       -0.1513     -0.0233 *
+  2006   0.0265     0.0205       -0.0180      0.0710  
 ---
 Signif. codes: `*' confidence band does not cover 0
 
-Control Group:  Never Treated,  Anticipation Periods:  0
+Control Group:  Not Yet Treated,  Anticipation Periods:  0
 Estimation Method:  Doubly Robust</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>did<span class="sc">::</span><span class="fu">ggdid</span>(mw.group, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">3</span>,.<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-7_554911e00d40152f484930d6088de82f">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mw.attgt.X <span class="ot">&lt;-</span> <span class="fu">att_gt</span>(<span class="at">yname =</span> <span class="st">"lemp"</span>,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">gname =</span> <span class="st">"first.treat"</span>,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">idname =</span> <span class="st">"countyreal"</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tname =</span> <span class="st">"year"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xformla =</span> <span class="sc">~</span>lpop,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> mpdta,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                   )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="календарные-эффекты-calendar-treatment-effects" class="level4" data-number="12.2.2.4">
+<h4 data-number="12.2.2.4" class="anchored" data-anchor-id="календарные-эффекты-calendar-treatment-effects"><span class="header-section-number">12.2.2.4</span> Календарные эффекты (calendar treatment effects)</h4>
+<p>Календарные – в разрезе календарного года (смешиваются разные когорты наступления тритмента)</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-13_f3412fc9cf398a322e5d0896147f33e0">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mw.calendar <span class="ot">&lt;-</span> did<span class="sc">::</span><span class="fu">aggte</span>(mw.attgt, <span class="at">type =</span> <span class="st">"calendar"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mw.calendar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+did::aggte(MP = mw.attgt, type = "calendar")
+
+Reference: Callaway, Brantly and Pedro H.C. Sant'Anna.  "Difference-in-Differences with Multiple Time Periods." Journal of Econometrics, Vol. 225, No. 2, pp. 200-230, 2021. &lt;https://doi.org/10.1016/j.jeconom.2020.12.001&gt;, &lt;https://arxiv.org/abs/1803.09015&gt; 
+
+
+Overall summary of ATT's based on calendar time aggregation:  
+     ATT    Std. Error     [ 95%  Conf. Int.]  
+ -0.0517        0.0213    -0.0935     -0.0099 *
+
+
+Time Effects:
+ Time Estimate Std. Error [95% Simult.  Conf. Band]  
+ 2004  -0.0354     0.0235       -0.0872      0.0164  
+ 2005  -0.0926     0.0340       -0.1676     -0.0175 *
+ 2006  -0.0270     0.0215       -0.0744      0.0204  
+---
+Signif. codes: `*' confidence band does not cover 0
+
+Control Group:  Not Yet Treated,  Anticipation Periods:  0
+Estimation Method:  Doubly Robust</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>did<span class="sc">::</span><span class="fu">ggdid</span>(mw.calendar, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">3</span>,.<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="простой-эффект-simple-treatment-effects" class="level4" data-number="12.2.2.5">
+<h4 data-number="12.2.2.5" class="anchored" data-anchor-id="простой-эффект-simple-treatment-effects"><span class="header-section-number">12.2.2.5</span> Простой эффект (simple treatment effects)</h4>
+<p>Простой эффект – усредняем вообще всё в одно число (смешиваются разные календарные года и когорты наступления тритмента)</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-14_487e5023d99bca17d2e1dade34cafe76">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mw.simple <span class="ot">&lt;-</span> did<span class="sc">::</span><span class="fu">aggte</span>(mw.attgt, <span class="at">type =</span> <span class="st">"simple"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mw.simple)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+did::aggte(MP = mw.attgt, type = "simple")
+
+Reference: Callaway, Brantly and Pedro H.C. Sant'Anna.  "Difference-in-Differences with Multiple Time Periods." Journal of Econometrics, Vol. 225, No. 2, pp. 200-230, 2021. &lt;https://doi.org/10.1016/j.jeconom.2020.12.001&gt;, &lt;https://arxiv.org/abs/1803.09015&gt; 
+
+     ATT    Std. Error     [ 95%  Conf. Int.]  
+ -0.0418        0.0208    -0.0825      -0.001 *
+
+
+---
+Signif. codes: `*' confidence band does not cover 0
+
+Control Group:  Not Yet Treated,  Anticipation Periods:  0
+Estimation Method:  Doubly Robust</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># графика нет, нет смысла рисовать одну цифру </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="эффект-с-контрольными-переменными-treatment-effects-with-controls" class="level4" data-number="12.2.2.6">
+<h4 data-number="12.2.2.6" class="anchored" data-anchor-id="эффект-с-контрольными-переменными-treatment-effects-with-controls"><span class="header-section-number">12.2.2.6</span> Эффект с контрольными переменными (treatment effects with controls)</h4>
+<p>Можно делать все то же самое, но с добавлением контрольных переменных.</p>
+<div class="cell" data-hash="staggered_adoption_cache/html/unnamed-chunk-15_0336d029cbfc88a0c9b26ccd7e35bdb6">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mw.attgt2 <span class="ot">&lt;-</span> did<span class="sc">::</span><span class="fu">att_gt</span>(<span class="at">yname =</span> <span class="st">"lemp"</span>,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">gname =</span> <span class="st">"first.treat"</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">idname =</span> <span class="st">"countyreal"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">tname =</span> <span class="st">"year"</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">xformla =</span> <span class="sc">~</span> lpop,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">control_group =</span> <span class="st">"notyettreated"</span>, </span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> mpdta)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mw.attgt2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+did::att_gt(yname = "lemp", tname = "year", idname = "countyreal", 
+    gname = "first.treat", xformla = ~lpop, data = mpdta, control_group = "notyettreated")
+
+Reference: Callaway, Brantly and Pedro H.C. Sant'Anna.  "Difference-in-Differences with Multiple Time Periods." Journal of Econometrics, Vol. 225, No. 2, pp. 200-230, 2021. &lt;https://doi.org/10.1016/j.jeconom.2020.12.001&gt;, &lt;https://arxiv.org/abs/1803.09015&gt; 
+
+Group-Time Average Treatment Effects:
+ Group Time ATT(g,t) Std. Error [95% Simult.  Conf. Band]  
+  2004 2004  -0.0354     0.0231       -0.0926      0.0218  
+  2004 2005  -0.0918     0.0318       -0.1705     -0.0131 *
+  2004 2006  -0.1340     0.0387       -0.2299     -0.0382 *
+  2006 2004  -0.0241     0.0248       -0.0855      0.0374  
+  2006 2005  -0.0019     0.0206       -0.0529      0.0492  
+  2006 2006   0.0274     0.0171       -0.0149      0.0696  
+---
+Signif. codes: `*' confidence band does not cover 0
+
+P-value for pre-test of parallel trends assumption:  0.57909
+Control Group:  Not Yet Treated,  Anticipation Periods:  0
+Estimation Method:  Doubly Robust</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>did<span class="sc">::</span><span class="fu">ggdid</span>(mw.attgt2, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">3</span>,.<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="staggered_adoption_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
